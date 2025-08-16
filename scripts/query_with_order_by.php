@@ -1,0 +1,1 @@
+Query::select('users')->orderBy('name')->get(); 

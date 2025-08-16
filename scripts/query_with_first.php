@@ -1,0 +1,1 @@
+Query::select('users')->first()->get();  

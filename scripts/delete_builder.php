@@ -1,0 +1,1 @@
+Query::delete('users')->where('id', 10)->get();

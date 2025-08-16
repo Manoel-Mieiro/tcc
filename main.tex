@@ -1,0 +1,52 @@
+% Definições do Documento
+\input{preamble}
+
+% Informações do trabalho
+\input{text/cover}
+
+% Definição de acronimos
+\input{text/acronym }
+
+\begin{document}
+\pagenumbering{gobble}
+\pagenumbering{roman}
+
+\dcover
+\dcoverback
+\includepdf{ficha.pdf}
+% \dlibrary{FOLHA_APROVACAO_CAIO.pdf}
+
+\input{text/acknowledgment}
+\input{text/abstract}
+
+
+%\dtables
+\renewcommand\lstlistingname{Lista de \textit{Scripts}}
+\renewcommand\lstlistlistingname{Lista de \textit{Scripts}}
+
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+\lstlistoflistings
+
+\pagenumbering{arabic}
+\justifying
+
+\input{text/chapters/introduction/introduction}
+\input{text/chapters/theory/theory}
+\input{text/chapters/methodology/methodologyTools}
+% \input{text/chapters/study/study}
+% \input{text/conclusion}
+% \input{text/futureEndeavors}
+
+\label{bibpage}
+\addcontentsline{toc}{section}{Referências Bibliográficas}
+\bibliography{references}
+\bibliographystyle{plainnat}
+\label{bibfinalpage}
+
+\label{lastpage}
+\end{document}

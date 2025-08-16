@@ -1,0 +1,1 @@
+Query::select('users')->whereIsNotNull('deleted_at')->get();

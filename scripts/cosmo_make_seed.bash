@@ -1,0 +1,1 @@
+php cosmo make:seed "SeedClassName"

@@ -1,0 +1,1 @@
+php cosmo make:command "CommandCLassName"

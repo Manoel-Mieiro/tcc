@@ -1,0 +1,1 @@
+composer create-project vortex-framework/vortex "APP_NAME"
