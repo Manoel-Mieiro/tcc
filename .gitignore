@@ -14,9 +14,6 @@
 *.snm
 *.vrb
 
-# Arquivos de compilação PDF
-*.pdf
-
 # Arquivos de cache de pacotes (ex: minted)
 *.pyg
 _minted*
