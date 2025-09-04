@@ -36,3 +36,7 @@ _minted*
 # Outros arquivos temporários do sistema
 Thumbs.db
 .DS_Store
+
+# Para a presente branch
+.gitignore 
+*.md
