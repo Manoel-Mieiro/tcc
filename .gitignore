@@ -13,6 +13,7 @@
 *.nav
 *.snm
 *.vrb
+*.lol
 
 # Arquivos de compilação PDF
 *.pdf
