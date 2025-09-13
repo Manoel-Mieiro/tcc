@@ -175,7 +175,7 @@
 	\end{flushright}
 	\vfill	
 	{\bfseries \large Rio de Janeiro,\\
-	 Junho de 2025}
+	 Setembro de 2025}
 }
 
 %dcoverback
@@ -210,7 +210,7 @@
 	\end{flushright}
 	\vfill	
 	{\bfseries \large Rio de Janeiro,\\
-        Junho de 2025 }
+        Setembro de 2025 }
 	 % \DTMtoday}  
      
 }
