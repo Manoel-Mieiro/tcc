@@ -1,0 +1,31 @@
+name: Build LaTeX PDF
+
+on:
+  push:
+     branches:
+      - ${{ env.TARGET_BRANCH }}
+  pull_request:
+
+env:
+  TARGET_BRANCH: "chapter/teoria"
+
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install LaTeX
+        run: sudo apt-get update && sudo apt-get install -y texlive-full latexmk
+
+      - name: Compile LaTeX
+        run: |
+          latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+
+      - name: Upload PDF as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: tcc-pdf
+          path: main.pdf
