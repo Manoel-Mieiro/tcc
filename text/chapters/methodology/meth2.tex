@@ -1,0 +1,69 @@
+\section{Tipo de Pesquisa}
+É chamada pesquisa aplicada aquela que gera conhecimento visando aplicação prática, direcionada para a solução de problemas específicos \cite{sienaMetodologiaPesquisaCientifica2024}. Assim, o presente trabalho busca investigar o desempenho, no que diz respeito à atenção e engajamento dos alunos submentidos a aulas expositivas em ambiente remoto; aplicando e validando o sistema de informação ESPEON, para que,- por meio de relatórios quantitativos - seja possível fundamentar argumentos contrários ao uso da metodologia expositiva, sobretudo em sala de aula remota.
+
+\section{Objetivos da Pesquisa}
+Trata-se de uma pesquisa descritiva explicativa, que busca, por meio da observação sistemática, descrever comportamentalmente a população (alunos) submetida à metodologia expositiva em ambiente remoto. Pretende-se, com o auxílio do sistema ESPEON para coleta e análise de dados, evidenciar o baixo desempenho dos alunos expostos a esse tipo de abordagem, de forma a corroborar a presente tese.
+
+É descritiva porque objetiva, primeiramente, caracterizar uma população submetida a um fenômeno (aula expositiva remota), utilizando técnicas padronizadas de coleta de dados (\textit{payload} da API), conforme prescrito por \cite{sienaMetodologiaPesquisaCientifica2024}.
+
+Também é considerada explicativa porque busca, por meio das evidências (relatórios de aula), indicar os principais comportamentos demonstrados pelos alunos, relacionando-os à falta de atenção e engajamento nesse tipo de metodologia. Nesse sentido, reforça-se que:
+
+\begin{quote}
+    ``A pesquisa explicativa visa explicar a razão dos fatos, por meio da identificação e
+    análise das relações de causa e efeito dos fenômenos. Nas ciências sociais, para a coleta de
+    dados pode ser utilizado o método observacional ou outros métodos aplicáveis, a depender do
+    desenho da pesquisa, dos objetivos e das hipóteses ou suposições formuladas pelo pesquisador.''
+    \cite{sienaMetodologiaPesquisaCientifica2024}
+\end{quote}
+
+\section{Abordagem da Pesquisa}
+No que se refere à abordagem do problema, Ribeiro et al. (2015) \cite{ribeiroManagementAccountingAnalysis2015} destaca que uma pesquisa quantitativa é aquela que emprega a quantificação tanto na coleta quanto no tratamento dos dados, por meio de técnicas estatísticas. Neste trabalho, serão utilizadas ferramentas de estatística descritiva, como a média aritmética (medida de tendência central), o desvio-padrão (indicador de dispersão) e a moda (valor de maior frequência), de forma a caracterizar a população estudada. Os cálculos serão processados pelo ESPEON no \textit{backend} e consolidados em gráficos, visando facilitar a interpretação dos resultados e possibilitar análises mais claras.
+
+A escolha da estatística descritiva justifica-se pelo fato de que ela permite sintetizar e interpretar grandes volumes de dados de maneira objetiva, fornecendo subsídios para a comparação entre diferentes comportamentos observados durante as aulas remotas.
+
+% Talvez caiba colocar uma definição desses caras na literatura, e um parágrafo final justificando sua escolha
+
+\section{Método de Pesquisa}
+Buscando averiguar a problemática do emprego da metodologia expositiva no ambiente remoto de ensino, parte-se da hipótese de que alunos submetidos a esse tipo de aula, seja no EAD ou no ERE, tendem a apresentar dispersão de foco e baixo engajamento.
+
+Para testar essa hipótese, a pesquisa será conduzida por meio de experimentos controlados com alunos do curso de Sistemas de Informação do CEFET/RJ, campus Maria da Graça. Os participantes serão submetidos às condições mencionadas e terão seu comportamento monitorado pelo sistema ESPEON, mediante consentimento prévio, de forma a possibilitar a coleta de dados para posterior análise estatística.
+
+O método adotado é caracterizado como hipotético-dedutivo, visto que, conforme Ribeiro et al. (2015) \cite{ribeiroManagementAccountingAnalysis2015}, fundamenta-se na experimentação para verificar a validade de uma teoria — neste caso, a de que aulas expositivas em ambientes remotos se mostram ineficazes.
+
+\section{Procedimentos e Instrumentos de Coleta de Dados}
+A coleta dos dados ocorre de forma passiva durante aulas remotas ministradas no CEFET/RJ, campus Maria da Graça, mediante consentimento dos envolvidos, utilizando o sistema ESPEON. O diagrama abaixo ilustra o processo de coleta, armazenamento e processamento dos dados comportamentais.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.7\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{espeon/Monitoring.drawio.png}
+        \caption{Emissão de relatório de atenção e engajamento}
+        \label{fig:figura1}
+    \end{minipage}\hfill
+\end{figure}
+
+Ao final das aulas, os dados serão compilados em um relatório, que apresenta numericamente as principais métricas de atenção e engajamento, oferecendo uma avaliação do desempenho da aula ministrada. As métricas avaliadas nesse relatório estão descritas na Tabela \ref{tab:metrics}.
+
+\begin{table}[ht]
+    \centering
+    \vspace{0.5cm}
+    \begin{tabular}{|c|c|}
+        \hline
+        Métrica                  & Descrição                                                                 \\
+        \hline
+        Tempo de Inatividade     & Tempo total gasto fora da guia onde ocorre a aula.                        \\
+        Tab Swap                 & Número de vezes que o estudante trocou de abas durante a aula.            \\
+        Área do Conhecimento     & Segmentação dos dados por área do conhecimento da disciplina ministrada.  \\
+        Tempo de Foco            & Tempo máximo de foco contínuo na guia onde ocorre a aula.                 \\
+        Aba Silenciada           & Tempo máximo em que a aba da aula permaneceu silenciada.                  \\
+        Permissionamento         & Verificação de permissionamento para uso de periféricos de áudio e vídeo. \\
+        Streaming de Periféricos & Verificação de uso ativo (streaming) dos periféricos de áudio e vídeo.    \\
+        \hline
+    \end{tabular}
+    \caption{Métricas utilizadas para avaliação de atenção e engajamento}
+    \label{tab:metrics}
+\end{table}
+
+
+% \section{Análise de Dados}
