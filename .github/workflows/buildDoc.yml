@@ -31,4 +31,15 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: tcc-pdf
-          path: main.pdf
+          path: main.
+          
+      - name: Publish Release(latest)
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: PDF gerado
+          body: |
+            PDF do TCC gerado automaticamente a partir do commit ${{ github.sha }}
+          files: main.pdf
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
