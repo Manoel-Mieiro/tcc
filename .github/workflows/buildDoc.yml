@@ -1,6 +1,9 @@
 name: Build LaTeX PDF
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
     inputs:
       target_branch:
@@ -11,7 +14,8 @@ on:
 jobs:
   build_latex:
     runs-on: ubuntu-latest
-    if: github.ref_name == inputs.target_branch   
+    # roda sempre no push para main, e manualmente só se o branch escolhido for igual ao branch atual
+    if: github.event_name == 'push' || github.ref_name == inputs.target_branch   
 
     steps:
       - name: Checkout repository
@@ -31,9 +35,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: tcc-pdf
-          path: main.
+          path: main.pdf
           
-      - name: Publish Release(latest)
+      - name: Publish Release (latest)
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
