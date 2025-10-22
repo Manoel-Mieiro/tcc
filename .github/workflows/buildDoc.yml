@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - main   # branch de testes (gera "latest")
+      - main   # branch de testes (gera "pre-release")
   workflow_dispatch:
     inputs:
       target_branch:
@@ -38,11 +38,11 @@ jobs:
           path: main.pdf
 
       # ===== RELEASE STABLE =====
-      - name: Publish Release (stable)
+      - name: Publish Release (latest)
         if: github.ref_name == 'main'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: stable
+          tag_name: latest
           name: TCC [PDF] (Stable)
           body: |
             PDF do TCC gerado automaticamente a partir do commit ${{ github.sha }}
@@ -52,11 +52,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.Publish_Release }}
 
       # ===== RELEASE LATEST =====
-      - name: Publish Release (latest)
+      - name: Publish Release (pre-release)
         if: github.ref_name == 'main'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: latest
+          tag_name: pre-release
           name: TCC [PDF] (Latest)
           body: |
             PDF do TCC gerado automaticamente a partir do commit ${{ github.sha }}
