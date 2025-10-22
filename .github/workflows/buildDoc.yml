@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - main   # branch de testes (gera "latest")
   workflow_dispatch:
     inputs:
       target_branch:
@@ -14,8 +15,7 @@ on:
 jobs:
   build_latex:
     runs-on: ubuntu-latest
-    # roda sempre no push para main, e manualmente só se o branch escolhido for igual ao branch atual
-    if: github.event_name == 'push' || github.ref_name == inputs.target_branch   
+    if: github.event_name == 'push' || github.ref_name == inputs.target_branch
 
     steps:
       - name: Checkout repository
@@ -36,14 +36,32 @@ jobs:
         with:
           name: tcc-pdf
           path: main.pdf
-          
+
+      # ===== RELEASE STABLE =====
+      - name: Publish Release (stable)
+        if: github.ref_name == 'main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: stable
+          name: TCC [PDF] (Stable)
+          body: |
+            PDF do TCC gerado automaticamente a partir do commit ${{ github.sha }}
+            Corresponde à última versão estável do documento.
+          files: main.pdf
+        env:
+          GITHUB_TOKEN: ${{ secrets.Publish_Release }}
+
+      # ===== RELEASE LATEST =====
       - name: Publish Release (latest)
+        if: github.ref_name == 'main'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
-          name: TCC [PDF]
+          name: TCC [PDF] (Latest)
           body: |
             PDF do TCC gerado automaticamente a partir do commit ${{ github.sha }}
+            Corresponde à versão de testes (pré-release).
+          prerelease: true
           files: main.pdf
         env:
           GITHUB_TOKEN: ${{ secrets.Publish_Release }}
