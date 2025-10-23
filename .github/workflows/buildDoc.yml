@@ -1,28 +1,32 @@
-name: Build LaTeX PDF (pre-release)
+name: Build LaTeX PDF
 
 on:
   push:
     branches:
       - main
-      - main   # branch de testes (gera "pre-release")
   workflow_dispatch:
     inputs:
       target_branch:
-        description: "Branch para compilar o PDF"
+        description: "Branch para compilar o PDF (pre-release)"
         required: true
-        default: "main"
+        default: "stable"
 
 jobs:
   build_latex:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' || github.ref_name == inputs.target_branch
 
     steps:
+      # ===============================
+      # CHECKOUT
+      # ===============================
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.ref_name }}
+          ref: ${{ github.event.inputs.target_branch || github.ref_name }}
 
+      # ===============================
+      # BUILD LATEX
+      # ===============================
       - name: Install LaTeX and Pygments
         run: |
           sudo apt-get update
@@ -37,30 +41,34 @@ jobs:
           name: tcc-pdf
           path: main.pdf
 
-      # ===== RELEASE STABLE =====
-      - name: Publish Release (latest)
-        if: github.ref_name == 'main'
+      # ===============================
+      # RELEASE ESTÁVEL (LATEST)
+      # ===============================
+      - name: Publish Stable Release (latest)
+        if: github.event_name == 'push' && github.ref_name == 'main'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
           name: TCC [PDF] (Stable)
           body: |
             PDF do TCC gerado automaticamente a partir do commit ${{ github.sha }}
-            Corresponde à última versão estável do documento.
+            Corresponde à última versão **estável** do documento.
           files: main.pdf
         env:
           GITHUB_TOKEN: ${{ secrets.Publish_Release }}
 
-      # ===== RELEASE LATEST =====
-      - name: Publish Release (pre-release)
-        if: github.ref_name == 'main'
+      # ===============================
+      # PRÉ-RELEASE MANUAL
+      # ===============================
+      - name: Publish Pre-release (manual)
+        if: github.event_name == 'workflow_dispatch'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: pre-release
-          name: TCC [PDF] (Latest)
+          tag_name: pre-release-${{ github.event.inputs.target_branch }}
+          name: TCC [PDF] (Pré-release - ${{ github.event.inputs.target_branch }})
           body: |
-            PDF do TCC gerado automaticamente a partir do commit ${{ github.sha }}
-            Corresponde à versão de testes (pré-release).
+            PDF do TCC gerado **manualmente** a partir da branch **${{ github.event.inputs.target_branch }}**.
+            Commit: ${{ github.sha }}
           prerelease: true
           files: main.pdf
         env:
