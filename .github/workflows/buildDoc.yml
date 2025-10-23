@@ -1,4 +1,4 @@
-name: Build LaTeX PDF
+name: Build LaTeX PDF (pre-release)
 
 on:
   push:
