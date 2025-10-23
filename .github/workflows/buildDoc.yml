@@ -49,7 +49,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
-          name: TCC [PDF] (Stable)
+          name: TCC [PDF] (latest)
           body: |
             PDF do TCC gerado automaticamente a partir do commit ${{ github.sha }}
             Corresponde à última versão **estável** do documento.
@@ -65,7 +65,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: pre-release-${{ github.event.inputs.target_branch }}
-          name: TCC [PDF] (Pré-release - ${{ github.event.inputs.target_branch }})
+          name: TCC [PDF] (Pre-release':' ${{ github.event.inputs.target_branch }})
           body: |
             PDF do TCC gerado **manualmente** a partir da branch **${{ github.event.inputs.target_branch }}**.
             Commit: ${{ github.sha }}
