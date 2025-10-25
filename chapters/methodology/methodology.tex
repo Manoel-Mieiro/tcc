@@ -50,4 +50,13 @@ Ao final das aulas, os dados serão compilados em um relatório, que apresenta n
 
 \input{tables/metrics.tex}
 
-% \section{Análise de Dados}
+
+\section{Ferramentas Utilizadas}\label{sec:tools}
+A coleta de dados será feita pelo \textit{software} ESPEON, durante condução do estudo em laboratório. A ferramenta armazena o conteúdo das guias em um banco NoSQL com formato dos dados disposto no Script \ref{script:logs.json} a seguir.
+
+\spaceH{}
+\lstinputlisting[
+  language=json,
+  caption={Exemplo de \textit{log}}
+]{scripts/mongo.dump.json}
+\label{script:logs.json}
