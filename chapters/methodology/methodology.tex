@@ -52,36 +52,36 @@ Ao final das aulas, os dados serão compilados em um relatório, que apresenta n
 
 
 \section{Ferramentas Utilizadas}\label{sec:tools}
-A coleta de dados será feita pelo \textit{software} ESPEON, durante condução do estudo em laboratório. A ferramenta armazena o conteúdo das guias em um banco NoSQL com formato dos dados disposto no Script \ref{script:logs.json} a seguir.
+
+A coleta de dados será realizada por meio do \textit{software} ESPEON, durante a condução do estudo em laboratório. A ferramenta armazena as informações das guias em um banco de dados NoSQL, com os dados estruturados no formato mostrado no Script~\ref{script:logs.json} a seguir.
 
 \spaceH{}
 \lstinputlisting[
     language=json,
-    caption={Exemplo de \textit{log}}
+    caption={Exemplo de \textit{log}},
+    label={script:logs.json}
 ]{scripts/mongo.dump.json}
-\label{script:logs.json}
 
-A análise dos dados será feita usando PDFs emitidos pelo ESPEON (ver Figura ), que listam de forma objetiva as métricas de estatística descritiva, bastando apenas visualizá-las.
+A análise dos dados será realizada com base nos relatórios em PDF emitidos pelo ESPEON (Figura~\ref{fig:report}), que apresentam, de forma objetiva, métricas de estatística descritiva, bastando apenas sua visualização para interpretação inicial dos resultados.
 
 \begin{figure}[ht]
     \centering
     \begin{minipage}{0.8\textwidth}
         \centering
         \includegraphics[width=.9\textwidth]{espeon/pdf.png}
-        \caption{Exemplo de Relatório Emitido}
+        \caption{Exemplo de relatório emitido pelo ESPEON}
         \label{fig:report}
     \end{minipage}\hfill
 \end{figure}
 
-Também será usado o Power BI para visualização graficamente mais amigável, de forma a compor uma análise macro dos dados coletados. A Figura ilustra o \textit{dashboard} desenvolvido pelo consumo da \textit{API} de relatórios.
+Adicionalmente, será utilizado o \textit{Power BI} para uma visualização mais intuitiva e interativa dos dados, de modo a compor uma análise de caráter macro sobre o conjunto coletado. A Figura~\ref{fig:dashboard} ilustra o \textit{dashboard} desenvolvido a partir do consumo da \textit{API} de relatórios.
 
-
-\begin{figure}[H]
+\begin{figure}[ht]
     \centering
     \begin{minipage}{0.999\textwidth}
         \centering
         \includegraphics[width=.9\textwidth]{espeon/relatório.png}
-        \caption{\textit{Dashboard} Macro}
+        \caption{\textit{Dashboard} macro de análise}
         \label{fig:dashboard}
     \end{minipage}\hfill
 \end{figure}
