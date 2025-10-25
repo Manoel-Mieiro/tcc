@@ -1,1 +1,0 @@
-Query::select('users')->whereNot('id', 10, '<')->get();

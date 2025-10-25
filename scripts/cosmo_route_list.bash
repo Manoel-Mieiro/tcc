@@ -1,1 +1,0 @@
-php cosmo route:list
