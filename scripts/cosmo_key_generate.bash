@@ -1,1 +1,0 @@
-php cosmo key:generate

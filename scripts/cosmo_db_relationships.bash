@@ -1,1 +1,0 @@
-php cosmo db:relationships
