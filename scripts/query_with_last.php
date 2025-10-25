@@ -1,1 +1,0 @@
-Query::select('users')->last('id')->get();  

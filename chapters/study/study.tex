@@ -1,0 +1,29 @@
+\chapter{Estudo de Caso}
+\label{sec:estudo_de_caso}
+Para a condução do estudo de caso da aplicação, com ênfase na identificação dos pontos de incremento de produtividade, o \textit{framework} Laravel foi selecionado como referência para comparação. Esta escolha se fundamenta em sua ampla disseminação, especialmente entre os \textit{frameworks} que satisfazem os critérios estabelecidos para comparação neste trabalho, a saber: ser direcionado ao desenvolvimento \textit{web}, possuir uma arquitetura claramente definida e oferecer suporte à utilização de um ORM, seja de forma nativa ou preparado para receber um ORM externo. Como ilustração, uma base de dados foi empregada como exemplificação, contendo relacionamentos entre entidades, a saber, usuários (\textit{users}), empresas (\textit{teams}) e postagens (\textit{posts}), representado pela figura . Destaca-se que a relação entre usuários e postagens foi estabelecida mediante o emprego de uma tabela intermediária. Uma representação visual das tabelas que constituem esta base de dados é apresentada na Figura~\ref{fig:enter-label}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{figures/caso_de_uso_der.jpeg}
+    \caption{Estudo de caso construído usando o GenDBM Tool~\citep{alexandre23}.}
+    \label{fig:enter-label}
+\end{figure}
+
+Para ilustrar dois cenários potenciais, inicialmente considerando a premissa de que a base de dados já tenha sido estabelecida, o que pode ocorrer em projetos migrados de outras tecnologias ou ser a preferência de desenvolvedores que optam pela criação direta no gerenciador de banco de dados, procederemos à execução do comando responsável pela engenharia reversa da base de dados. Esse comando tem por finalidade traduzir a estrutura da base de dados em classes de migrações, as quais possibilitam o versionamento das tabelas e afins da aplicação no que tange a base de dados relacional. Dessa maneira, ao empregar um comando específico, é factível obter uma economia de tempo e recursos, cujo alcance é exponencialmente proporcional à complexidade da base de dados. Abaixo está o comando executado e o resultado das migrações geradas relativo a base de dados determinada para o estudo de caso.
+
+\spaceH{}
+\lstinputlisting[language=bash,caption=Comando para engenharia reversa da base de dados]{scripts/cosmo_db_reverse.bash}
+
+\spaceH{}
+\lstinputlisting[language=bash,caption=Exemplo criação de rotas]{scripts/db_reverse_example_result.php}
+\label{scripts/db_reverse_example_result.php}
+
+Em situações em que projetos são concebidos a partir do zero, essas classes necessitam ser construídas manualmente, um procedimento análogo ao adotado no contexto do Laravel. Progredindo para a etapa subsequente, relativo à representação das entidades por meio de classes modelo e seus respectivos relacionamentos, os quais são gerenciados e interpretados pelo ORM, tanto no ambiente do Vortex quanto no Laravel. No caso do Vortex, é possível empregar o comando de tradução, o qual realiza de maneira automática o mapeamento citado. Em contraste, no Laravel, não está disponível uma tecnologia equivalente de mapeamento automático de modelos e relacionamentos. Tal processo de mapeamento proporciona uma economia significativa de tempo e conhecimento, com impacto proporcional ao número de entidades relacionais, particularmente quando comparado a um projeto no Laravel, onde a criação manual de todos os modelos e relacionamentos é imperativa. Abaixo é exibido o exemplo do resultado da utilização deste comando com as entidades deste caso de uso.
+
+\spaceH{}
+\lstinputlisting[language=php,caption=Comando para tradução automatica das entidades relacionais em modelos]{scripts/db_translate_result_example.php}
+\label{scripts/db_translate_result_example.php}
+
+\input{chapters/study/environment}
+\input{chapters/study/experiments}
+\input{chapters/study/outcome}
