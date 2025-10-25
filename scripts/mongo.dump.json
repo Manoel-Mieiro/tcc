@@ -1,0 +1,24 @@
+{
+  "_id": {
+    "$oid": "68f125b5750b9e6150705aae"
+  },
+  "lectureId": "c71aa476-6612-4c5d-90b6-bada47220c38",
+  "onlineClass": "https://teams.microsoft.com/l/meetup-join/19%3ameeting_ZDFmNTAyMzAtYTNhZC00MjVhLTg1MDItOTQ2Mjg5NDdlOWJl%40thread.v2/0?context=%7b%22Tid%22%3a%228eeca404-a47d-4555-a2d4-0f3619041c9c%22%2c%22Oid%22%3a%229fbf687f-3780-4069-93ad-9d06a44df17f%22%7d",
+  "classTitle": "[c71aa476-6612-4c5d-90b6-bada47220c38] engenharia_economico_financeira: manoeljorgemieiro@gmail.com | Microsoft Teams",
+  "user": "blindreview10@gmail.com",
+  "url": "https://docs.reportlab.com/reportlab/userguide/ch1_intro/",
+  "title": "Chapter 1: Introduction - ReportLab Docs",
+  "muted": false,
+  "cameraEnabled": false,
+  "microphoneEnabled": false,
+  "cameraStreaming": false,
+  "microphoneStreaming": false,
+  "lastAccessed": "14:04:53",
+  "timestamp": "14:04:53",
+  "event": "onActivated",
+  "lectureMuted": false,
+  "lectureTabState": "inactive",
+  "lectureTabLastAccessed": "14:04:51",
+  "lectureAudible": false,
+  "lectureMutedInfoReason": "user"
+}
