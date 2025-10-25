@@ -1,0 +1,36 @@
+\usemintedstyle{borland}
+
+\newboolean{showcomments}
+\setboolean{showcomments}{true}
+\ifthenelse{\boolean{showcomments}}
+{ \newcommand{\mynote}[3]{
+    \fbox{\bfseries\sffamily\scriptsize#1}
+    {\small$\blacktriangleright$\textsf{\textcolor{#3}{{\em #2}\bf }}$\blacktriangleleft$}}}
+{ \newcommand{\mynote}[2]{}}
+\newcommand{\pantoja}[1]{\mynote{Pantoja}{#1}{blue}}
+\newcommand{\attention}[1]{\mynote{Atenção}{#1}{red}}
+\newcommand{\modify}[1]{\mynote{Ajustes}{#1}{orange}}
+\newcommand{\john}[1]{\mynote{Jonh}{#1}{brown}}
+
+% Desenho de X
+\newcommand{\tikzcmark}{
+  \tikz[scale=0.23] {
+    \draw[line width=0.7,line cap=round] (0.25,0) to [bend left=10] (1,1);
+    \draw[line width=0.8,line cap=round] (0,0.35) to [bend right=1] (0.23,0);
+  }}
+
+% Definições.
+\newtheorem{definition}{Definição}
+
+% Algoritmo
+\newcommand{\spaceH}[1]{\ \ \ \ \ }
+\newcommand{\spaceAction}[1]{\- \spaceH \spaceH \spaceH }
+
+% Caminho de figuras
+\graphicspath{{./figures/}}
+
+% Estilo de data
+\DTMnewdatestyle{mesAnoBrasil}{%
+  \renewcommand{\DTMdisplaydate}[4]{\DTMmonthname{##2} de ##1}%
+}
+\DTMsetdatestyle{mesAnoBrasil}
