@@ -34,3 +34,19 @@
   \renewcommand{\DTMdisplaydate}[4]{\DTMmonthname{##2} de ##1}%
 }
 \DTMsetdatestyle{mesAnoBrasil}
+
+% Citação Direta Longa
+\newenvironment{customquote}
+{%
+  \vspace{1.5ex} % espaço antes da citação
+  \begin{flushleft}
+  \hspace{4cm} % recuo da margem esquerda
+  \fontsize{10}{12}\selectfont % fonte tamanho 10, altura da linha 12pt
+  \setstretch{1} % espaçamento simples
+  \begin{minipage}{0.6\textwidth} % largura da citação
+}
+{%
+  \end{minipage}
+  \end{flushleft}
+  \vspace{1ex} % espaço depois da citação (opcional)
+}
