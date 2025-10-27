@@ -230,14 +230,7 @@
 	\vspace*{15em}%
 	\begin{flushright}
 		\begin{minipage}{0.5\textwidth}
-            Dedico este trabalho a Deus, por ter me dado a oportunidade de viver este sonho; 
-            aos meus pais, por me proporcionarem a oportunidade de estudar integralmente e chegar até aqui; 
-            e à minha irmã, por ser meu porto seguro e fonte de motivação. 
-            Agradeço também aos demais membros de minha família pelo incentivo e exemplo a serem seguidos, 
-            bem como aos grandes amigos que fiz ao longo dessa jornada. 
-            Finalmente, gostaria de dedicar este trabalho ao meu grande amigo Bryan, 
-            que olha por mim, junto a meus avós, lá de cima. 
-            Meu muito obrigado a todos.
+			#1
 		\end{minipage}\\[1.5cm]
 	\end{flushright}
 	\pagebreak
