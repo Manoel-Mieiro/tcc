@@ -15,12 +15,20 @@
 
 \dcover
 \dcoverback
-\ddedicatory
+\ddedicatory{
+    \input{pretext/dedicatory.tex}
+}
 % \includepdf{ficha.pdf}
 % \dlibrary{FOLHA_APROVACAO_CAIO.pdf}
 
-\input{pretext/acknowledgment}
-\input{pretext/abstract}
+\dacknowledgment{
+    \input{pretext/acknowledgment.tex}
+}
+
+% \input{pretext/abstract.tex}
+\dresumo{
+    \input{pretext/resumo.tex}
+}{\input{pretext/palavras-chave.tex}}
 
 
 %\dtables
