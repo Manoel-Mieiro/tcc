@@ -6,12 +6,14 @@ ESPEON é um \textit{software} de monitoramento comportamental não invasivo vol
 
 A ferramenta faz uso majoritariamente da \textit{API chrome.tabs} para extrair dados de navegação do discente. Basicamente, mediante concessão de acesso o \textit{software}, ilustrada no \textit{Script} \ref{scripts/manifest.json} consegue acessar o objeto \textit{tab}, que é uma dada aba do navegador. Conforme o conceito de objeto, na Programação Orientada a Objetos (POO), trata-se de uma abstração de algum elemento real, com atributos e métodos \cite{kimObjectorientedDatabasesDefinition1990}. O ESPEON faz a leitura desse objeto e processa seus valores em um \textit{backend} para construir relatórios de aula, parametrizados por tempo e estado. O tempo se transcreve em métricas de atenção, enquanto o estado está mais associado às métricas de engajamento, que são medidas pelo estado de periféricos de áudio e vídeo do aluno e o estado da atributos da aba, todos valores booleanos. 
 
-% \spaceH{}
-% % \lstinputlisting[
-% %   language=json,
-% %   caption={Manifest do ESPEON}
-% % ]{scripts/manifest.json}
-% \label{scripts/manifest.json}
+\spaceH{}
+\lstinputlisting[
+  language=json,
+  caption={\textit{Manifest} do ESPEON},
+  firstline=1,
+  lastline=15
+]{scripts/manifest.json}
+\label{scripts/manifest.json}
 
 O processo de leitura das abas ocorre quando há o disparo do gatilho, que é a troca de abas. Para definir a aba desejada, ou seja, a aula, o \textit{Service Worker} da extensão busca uma Expressão Regular (\textit{regex}) na propriedade \text{title} do objeto \textit{tab}; a Figura \ref{fig:regex} ilustra a composição da \textit{regex}.
 
