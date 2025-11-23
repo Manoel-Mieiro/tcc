@@ -50,10 +50,7 @@ Ao final das aulas, os dados serão compilados em um relatório, que apresenta n
 
 \input{tables/metrics.tex}
 
-
-\section{Ferramentas Utilizadas}\label{sec:tools}
-
-A coleta de dados será realizada por meio do \textit{software} ESPEON, durante a condução do estudo em laboratório. A ferramenta armazena as informações das guias em um banco de dados NoSQL, com os dados estruturados no formato mostrado no Script~\ref{script:logs.json} a seguir.
+Essas métricas são construídas pelo processamento de \textit{snapshots} das guias, armazenadas em banco NoSQL, no \textit{backend} Flask. Pode-se observar o formato do \textit{payload} no Script~\ref{script:logs.json} a seguir.
 
 \spaceH{}
 \lstinputlisting[
@@ -62,7 +59,7 @@ A coleta de dados será realizada por meio do \textit{software} ESPEON, durante 
     label={script:logs.json}
 ]{scripts/mongo.dump.json}
 
-A análise dos dados será realizada com base nos relatórios em PDF emitidos pelo ESPEON (Figura~\ref{fig:report}), que apresentam, de forma objetiva, métricas de estatística descritiva, bastando apenas sua visualização para interpretação inicial dos resultados.
+A análise dos dados é realizada com base nos relatórios em PDF emitidos pelo ESPEON (Figura~\ref{fig:report}), que apresentam de forma objetiva métricas de estatística descritiva, bastando apenas sua visualização para interpretação inicial dos resultados.
 
 \begin{figure}[ht]
     \centering
@@ -85,6 +82,9 @@ Adicionalmente, será utilizado o \textit{Power BI} para uma visualização mais
         \label{fig:dashboard}
     \end{minipage}\hfill
 \end{figure}
+
+\section{Ferramentas Utilizadas}\label{sec:tools}
+
 
 \section{Mecanismo de Análise de Dados}\label{sec:data_analysis}
 Visando obter conclusões válidas, deve-se interpretar os dados do experimento \cite{wohlinAnalysisInterpretation2000}. A interpretação dos dados deve ocorrer em três etapas, conforme ilustra a Figura \ref{fig:steps-data}.
