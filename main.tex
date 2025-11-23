@@ -4,10 +4,10 @@
 \input{preamble}
 
 % Informações do trabalho
-\input{text/cover}
+\input{pretext/cover}
 
 % Definição de acronimos
-\input{text/acronym }
+\input{pretext/acronym }
 
 \begin{document}
 \pagenumbering{gobble}
@@ -15,11 +15,23 @@
 
 \dcover
 \dcoverback
-\includepdf{ficha.pdf}
+\ddedicatory{
+    \input{pretext/dedicatory.tex}
+}
+% \includepdf{ficha.pdf}
 % \dlibrary{FOLHA_APROVACAO_CAIO.pdf}
 
-\input{text/acknowledgment}
-\input{text/abstract}
+\dacknowledgment{
+    \input{pretext/acknowledgment.tex}
+}
+
+\dresumo{
+    \input{pretext/resumo.tex}
+}{\input{pretext/palavras-chave.tex}}
+
+\dabstract{
+    \input{pretext/abstract.tex}
+}{\input{pretext/keywords.tex}}
 
 
 %\dtables
@@ -37,12 +49,12 @@
 \pagenumbering{arabic}
 \justifying
 
-\input{text/chapters/introduction/introduction}
-\input{text/chapters/theory/theory}
-\input{text/chapters/methodology/methodologyTools}
-% \input{text/chapters/study/study}
-% \input{text/conclusion}
-% \input{text/futureEndeavors}
+\input{chapters/introduction/introduction}
+\input{chapters/theory/theory.tex}
+\input{chapters/espeon/espeon.tex}
+\input{chapters/methodology/methodology.tex}
+\input{chapters/results/results.tex}
+\input{chapters/conclusion/conclusion.tex}
 
 \label{bibpage}
 \addcontentsline{toc}{section}{Referências Bibliográficas}

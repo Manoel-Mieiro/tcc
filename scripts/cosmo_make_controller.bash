@@ -1,1 +1,0 @@
-php cosmo make:controller "ControllerClassName" --api

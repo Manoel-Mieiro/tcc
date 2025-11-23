@@ -1,0 +1,63 @@
+% 1. Apresentação geral da ferramenta  
+% Definir o Espeon -> Falar do seu ativo principal (guias) -> Falar de propriedades do objeto importantes -> Puxar para os relatórios
+% 4. Aplicação no contexto do estudo  
+%    → mostra brevemente como o ESPEON foi utilizado nesta pesquisa, mas sem detalhes técnicos.
+ESPEON é um \textit{software} de monitoramento comportamental não invasivo voltado para sala de aula virtual. O produto possui baixa barreira de entrada, necessitando apenas de um navegador com suporte ao \textit{Chrome API} para sua execução, o que o torna fácil de distribuir (\textit{Chrome WebStore}) e consumir (baixo uso de recursos computacionais), sendo portanto ideal para testes em sala descomplicados e eficientes.
+
+A ferramenta faz uso majoritariamente da \textit{API chrome.tabs} para extrair dados de navegação do discente. Basicamente, mediante concessão de acesso o \textit{software}, ilustrada no \textit{Script} \ref{scripts/manifest.json} consegue acessar o objeto \textit{tab}, que é uma dada aba do navegador. Conforme o conceito de objeto, na Programação Orientada a Objetos (POO), trata-se de uma abstração de algum elemento real, com atributos e métodos \cite{kimObjectorientedDatabasesDefinition1990}. O ESPEON faz a leitura desse objeto e processa seus valores em um \textit{backend} para construir relatórios de aula, parametrizados por tempo e estado. O tempo se transcreve em métricas de atenção, enquanto o estado está mais associado às métricas de engajamento, que são medidas pelo estado de periféricos de áudio e vídeo do aluno e o estado da atributos da aba, todos valores booleanos. 
+
+\spaceH{}
+\lstinputlisting[
+  language=json,
+  caption={\textit{Manifest} do ESPEON},
+  firstline=1,
+  lastline=15
+]{scripts/manifest.json}
+\label{scripts/manifest.json}
+
+O processo de leitura das abas ocorre quando há o disparo do gatilho, que é a troca de abas. Para definir a aba desejada, ou seja, a aula, o \textit{Service Worker} da extensão busca uma Expressão Regular (\textit{regex}) na propriedade \text{title} do objeto \textit{tab}; a Figura \ref{fig:regex} ilustra a composição da \textit{regex}.
+
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.7\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{espeon/regex.drawio.png}
+        \caption{Composição da \textit{Regex}}
+        \label{fig:regex}
+    \end{minipage}\hfill
+\end{figure}
+
+Para garantir a conformidade com essa expressão, o docente faz um cadastro prévio de sua aula no Banco de Dados, por meio do formulário disposto na Figura \ref{fig:formulario-aula}, no qual será gerada uma \textit{string} (ver Figura \ref{fig:clipboard}) com essa máscara, para que o docente, ao acessar a plataforma de \textit{Webconference} de sua escolha, preencha o título da reunião com essa expressão.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.7\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{espeon/formulario.aula.png}
+        \caption{Formulário de Aula}
+        \label{fig:formulario-aula}
+    \end{minipage}\hfill
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.7\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{espeon/clipboard.png}
+        \caption{Expressão Reguar Gerada}
+        \label{fig:clipboard}
+    \end{minipage}\hfill
+\end{figure}
+
+Então, quando o aluno acessa essa reunião por meio da extensão e o \textit{Service Worker} validar o título, ele estará sendo monitorado, sem qualquer necessidade de interação adicional. Suas interações com a guia e o estado dos periféricos serão armazenados em um banco de \textit{logs} para posterior composição dos relatórios.
+
+% colocar figura com as permissões do manifest
+
+%propriedades
+
+%falar do armazenamento
+
+Munido desses \textit{logs}, o \textit{backend} faz seu processamento em métricas fundamentadas em estatística descritiva e os serve via \textit{API} nas formas de \textit{Javascript Object Notation (JSON)} e PDF. A primeira opção é particularmente versátil porque permite que docentes consumam as métricas em outras aplicações ou até mesmo em \textit{Software} Proprietário, como será abordado na seção <ainda não existe>, usando o Power BI para melhor visualizar os dados. Já as \textit{responses} em PDF foram projetadas pensando no usuário menos especialista, em um formato estático. 
+
+Em suma, é um ferramental de baixo custo e fácil implementação, sendo ideal para a condução da investigação do interesse discente.

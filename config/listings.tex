@@ -1,0 +1,136 @@
+% -----------------------------------------------------------------
+% Configuração de estilos e linguagens para listings
+% -----------------------------------------------------------------
+% Pré-requisitos: xcolor, listings, e color.tex já carregados
+% -----------------------------------------------------------------
+
+% === ESTILO PADRÃO ===========================================================
+\lstdefinestyle{mystyle}{
+  basicstyle=\normalfont\ttfamily,
+  numbers=left,
+  numberstyle=\scriptsize,
+  stepnumber=1,
+  numbersep=1pt,
+  showstringspaces=false,
+  breaklines=true,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+  frame=lines,
+  backgroundcolor=\color{background}
+}
+
+% === PHP =====================================================================
+\lstdefinelanguage{php}{
+  morekeywords={
+    __halt_compiler, abstract, and, array, as, break, callable, case,
+    catch, class, clone, const, continue, declare, default, die, do,
+    echo, else, elseif, empty, enddeclare, endfor, endforeach, endif,
+    endswitch, endwhile, eval, exit, extends, final, finally, for,
+    foreach, function, global, goto, if, implements, include,
+    include_once, instanceof, insteadof, interface, isset, list,
+    namespace, new, or, print, private, protected, public, require,
+    require_once, return, static, switch, throw, trait, try, unset,
+    use, var, while, xor, yield, string, int, object, closure
+  },
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  identifierstyle=\color{OliveGreen},
+  commentstyle=\color{gray},
+  emph=[1]{php},
+  emphstyle=[1]\color{violet},
+  emph=[2]{if,and,or,else,bool,null},
+  emphstyle=[2]\color{blue},
+  emph=[3]{Core,Abstractions,Model,App,User,Database,Query,SelectBuilder,JoinBuilder},
+  emphstyle=[3]\color{orange},
+  numbers=left,
+  numberstyle=\footnotesize,
+  upquote=true,
+  captionpos=b,
+  basicstyle=\small\ttfamily
+}
+
+% === BASH ====================================================================
+\lstdefinelanguage{bash}{
+  morekeywords={__halt_compiler},
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  identifierstyle=\color{black},
+  commentstyle=\color{gray},
+  emph=[1]{git,composer,php,cosmo,APP_NAME,APP_ENV,APP_URL,DB_CONNECTION,DB_HOST,DB_PORT,DB_DATABASE,DB_USERNAME,DB_PASSWORD},
+  emphstyle=[1]\color{bash_main_commands},
+  emph=[2]{help,api,step,filename},
+  emphstyle=[2]\color{orange},
+  numbers=left,
+  numberstyle=\footnotesize,
+  upquote=true,
+  captionpos=b,
+  basicstyle=\small\ttfamily
+}
+
+% === JSON ====================================================================
+\lstdefinelanguage{json}{
+    basicstyle=\ttfamily\small\color{vscText},
+    backgroundcolor=\color{vscBackground},
+    stringstyle=\color{vscString},
+    commentstyle=\color{vscComment},
+    numberstyle=\color{vscNumber},
+    morestring=[b]",
+    morecomment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    literate=
+     *{:}{{{\color{vscPunctuation}{:}}}}{1}
+      {,}{{{\color{vscPunctuation}{,}}}}{1}
+      {\{}{{{\color{vscPunctuation}{\{}}}}{1}
+      {\}}{{{\color{vscPunctuation}{\}}}}}{1}
+      {[}{{{\color{vscPunctuation}{[}}}}{1}
+      {]}{{{\color{vscPunctuation}{]}}}}{1},
+}
+
+% Configuração padrão para exibir código
+\lstset{
+    language=json,
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{gray},
+    tabsize=2,
+    keepspaces=true,
+}
+
+% Realce especial: propriedades (antes dos :)
+\makeatletter
+\lst@AddToHook{OutputOther}{%
+  \ifnum\lst@mode=\lst@Pmode
+    \ifx\lst@token\lst@output
+      \edef\lst@temp{\the\lst@token}%
+      \ifnum\pdfstrcmp{\lst@temp}{\"}=0
+        \def\lst@thestyle{\color{vscProperty}}%
+      \fi
+    \fi
+  \fi
+}
+\makeatother
+% === JAVA ====================================================================
+\lstdefinelanguage{Java}{
+  literate=
+   *{0}{{{\color{numb}0}}}{1}
+    {1}{{{\color{numb}1}}}{1}
+    {2}{{{\color{numb}2}}}{1}
+    {3}{{{\color{numb}3}}}{1}
+    {4}{{{\color{numb}4}}}{1}
+    {5}{{{\color{numb}5}}}{1}
+    {6}{{{\color{numb}6}}}{1}
+    {7}{{{\color{numb}7}}}{1}
+    {8}{{{\color{numb}8}}}{1}
+    {9}{{{\color{numb}9}}}{1}
+    {:}{{{\color{punct}{:}}}}{1}
+    {;}{{{\color{punct}{;}}}}{1}
+    {,}{{{\color{punct}{,}}}}{1}
+    {\{}{{{\color{delim}{\{}}}}{1}
+    {\}}{{{\color{delim}{\}}}}}{1}
+    {[}{{{\color{delim}{[}}}}{1}
+    {]}{{{\color{delim}{]}}}}{1}
+    {.}{{{\color{punct}{.}}}}{1},
+}
+
+% === ESTILO GLOBAL ===========================================================
+\lstset{style=mystyle}
