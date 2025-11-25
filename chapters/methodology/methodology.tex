@@ -50,14 +50,7 @@ Ao final das aulas, os dados serão compilados em um relatório, que apresenta n
 
 \input{tables/metrics.tex}
 
-Essas métricas são construídas pelo processamento de \textit{snapshots} das guias, armazenadas em banco NoSQL, no \textit{backend} Flask. Pode-se observar o formato do \textit{payload} no Script~\ref{script:logs.json} a seguir.
-
-\spaceH{}
-\lstinputlisting[
-    language=json,
-    caption={Exemplo de \textit{log}},
-    label={script:logs.json}
-]{scripts/mongo.dump.json}
+Essas métricas são construídas pelo processamento de \textit{snapshots} das guias, armazenadas em banco NoSQL, no \textit{backend} Flask.
 
 A análise dos dados é realizada com base nos relatórios em PDF emitidos pelo ESPEON (Figura~\ref{fig:report}), que apresentam de forma objetiva métricas de estatística descritiva, bastando apenas sua visualização para interpretação inicial dos resultados.
 
