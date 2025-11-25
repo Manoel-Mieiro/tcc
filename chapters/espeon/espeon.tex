@@ -4,14 +4,17 @@ Este capítulo tem como objetivo detalhar a solução Engajamento e Supervisão 
 
 \section{Extensão Chrome}\label{sec:espeon_chrome}
 \section{Modelagem de Dados}\label{sec:espeon_data}
-Os dados brutos que compôem um \textit{trace} são similares a um \textit{snapshot}, isto é, uma representação pontual do estado de um sistema. Dessa forma, para a facilitar a ingestão de dados, livre de \textit{constraints} relacionais, optou-se pelo banco MongoDB para armazenamento e consulta dos \textit{logs} de atividade. Para o caso do ESPEON, foi criado o banco TRACES, com os dados sendo estocados na \textit{collection} \textit{logs}. Os registros são estruturados conforme o Script~\ref{script:logs.json}, a seguir. 
+Os dados brutos que compôem um \textit{trace} são similares a um \textit{snapshot}, isto é, uma representação pontual do estado de um sistema. Dessa forma, para a facilitar a ingestão de dados, livre de \textit{constraints} relacionais, optou-se pelo banco MongoDB para armazenamento e consulta dos \textit{logs} de atividade. Para o caso do ESPEON, foi criado o banco TRACES, com os dados sendo estocados na \textit{collection} \textit{logs}. Os registros são estruturados conforme a Figura~\ref{fig:logs_example}, a seguir. 
 
-\spaceH{}
-\lstinputlisting[
-    language=json,
-    caption={Exemplo de \textit{log}},
-    label={script:logs.json}
-]{scripts/mongo.dump.json}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.9\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{espeon/exemplo.log.png}
+        \caption{Exemplo de \textit{log}}
+        \label{fig:logs_example}
+    \end{minipage}\hfill
+\end{figure}
 
 \section{ESPEON API}\label{sec:espeon_api}
 \section{Implantação}\label{sec:espeon_deploy}
