@@ -16,6 +16,74 @@ Os dados brutos que compôem um \textit{trace} são similares a um \textit{snaps
     \end{minipage}\hfill
 \end{figure}
 
+Para demais componentes da solução, dada a necessidade de cruzar referências e estabelecer relacionamentos entre entidades, foi escolhido um banco relacional: PostgreSQL. Sua escolha se deu pelas facilidades que o banco possui e pelo suporte que o serviço de hospedagem escolhido para implantação o confere. O banco é composto por seis tabelas distintas, cujas especificidades estão dispostas a seguir.
+
+\subsection{Users}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.7\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{espeon/table.users.png}
+        \caption{Tabela Usuários}
+        \label{fig:pg_users}
+    \end{minipage}\hfill
+\end{figure}
+
+\subsection{Login}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.7\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{espeon/table.login.png}
+        \caption{Tabela Login}
+        \label{fig:pg_login}
+    \end{minipage}\hfill
+\end{figure}
+
+\subsection{Subject}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.7\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{espeon/table.subject.png}
+        \caption{Tabela Subject}
+        \label{fig:pg_subject}
+    \end{minipage}\hfill
+\end{figure}
+
+\subsection{Lecture}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.7\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{espeon/table.lecture.png}
+        \caption{Tabela Lecture}
+        \label{fig:pg_lecture}
+    \end{minipage}\hfill
+\end{figure}
+
+\subsection{Report}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.7\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{espeon/table.report.png}
+        \caption{Tabela Report}
+        \label{fig:pg_report}
+    \end{minipage}\hfill
+\end{figure}
+
+\subsection{Report Student}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.7\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{espeon/table.report_student.png}
+        \caption{Tabela Report Student}
+        \label{fig:pg_rpt_stdt}
+    \end{minipage}\hfill
+\end{figure}
+
 \section{ESPEON API}\label{sec:espeon_api}
 \section{Implantação}\label{sec:espeon_deploy}
 
