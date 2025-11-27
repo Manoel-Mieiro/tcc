@@ -95,85 +95,21 @@ Sistema de banco de dados objeto-relacional e \textit{open-source}, o PostgreSQL
 Para viabilizar a realização de testes em sala de aula, tornou-se necessário realizar o \textit{deploy} do ESPEON, de modo a disponibilizá-lo de forma centralizada aos alunos e professores. Considerando as tecnologias adotadas — \textit{backend} em Flask e os bancos de dados —, foi provisionado um ambiente na \textit{web} por meio dos serviços Render (para a aplicação) e MongoDB Atlas (para o banco de dados), utilizando planos gratuitos de hospedagem em ambos os casos.
 
 \subsubsection{Render}
-A Render é um serviço de hospedagem que oferece planos gratuitos para uma variedade de tipos de projeto. Ela é especialmente interessante para este trabalho por permitir o \textit{deploy} contínuo da aplicação Flask (Figura \ref{fig:render_backend}) a partir da conclusão de um \textit{Pull Request}, além de realizar o \textit{hosting} do banco de dados PostgreSQL (Figura \ref{fig:render_postgres}).
-
-\begin{figure}[ht]
-    \centering
-    \begin{minipage}{0.999\textwidth}
-        \centering
-        \includegraphics[width=.9\textwidth]{espeon/render_backend.png}
-        \caption{Instância \textit{backend}}
-        \label{fig:render_backend}
-    \end{minipage}\hfill
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \begin{minipage}{0.999\textwidth}
-        \centering
-        \includegraphics[width=.9\textwidth]{espeon/render_postgres.png}
-        \caption{Instância PostgreSQL}
-        \label{fig:render_postgres}
-    \end{minipage}\hfill
-\end{figure}
-
-Dessa forma, a Render fornece a conectividade remota necessária para o ESPEON, viabilizando os testes em sala de aula propostos de maneira acessível e descomplicada.
+A Render é um serviço de hospedagem que oferece planos gratuitos para uma variedade de tipos de \textit{stacks}. Ela é especialmente interessante para este trabalho por permitir o \textit{deploy} contínuo da aplicação Flask a partir da conclusão de um \textit{Pull Request}, além de realizar o \textit{hosting} do banco de dados PostgreSQL. Dessa forma, a Render fornece a conectividade remota necessária para o ESPEON, viabilizando os testes em sala de aula propostos de maneira acessível e descomplicada.
 
 \subsubsection{AtlasDB}
-O AtlasDB é um serviço \textit{multi-cloud} de \textit{hosting} para bancos de dados MongoDB. Similar ao Render, destaca-se pela acessibilidade no que diz respeito a custos e implantação, sendo um serviço que facilita a migração de bancos de dados locais para a nuvem. Neste projeto, foi utilizada a instância \textit{basic}, que oferece 512 MB de armazenamento, além de RAM e CPU compartilhadas. Abaixo, na Figura \ref{fig:atlasdb}, pode-se observar o \textit{dashboard} do \textit{cluster} ESPEON.
-
-\begin{figure}[ht]
-    \centering
-    \begin{minipage}{0.999\textwidth}
-        \centering
-        \includegraphics[width=.9\textwidth]{espeon/atlasdb.png}
-        \caption{\textit{Cluster} ESPEON}
-        \label{fig:atlasdb}
-    \end{minipage}\hfill
-\end{figure}
+O AtlasDB é um serviço \textit{multi-cloud} de \textit{hosting} para bancos de dados MongoDB. Similar ao Render, destaca-se pela acessibilidade no que diz respeito a custos e implantação, sendo um serviço que facilita a migração de bancos de dados locais para a nuvem. Neste projeto, foi utilizada a instância \textit{basic}, que oferece 512 MB de armazenamento, além de RAM e CPU compartilhadas. 
 
 \subsection{LaTeX e MiKTeX}\label{sub:latex}
 O \LaTeX\ é uma linguagem de marcação que segue a filosofia WYSIWYM (\textit{What You See Is What You Mean}) \cite{alvesIntroducaoAoLaTeX}. Sua escolha para a construção textual desta pesquisa deu-se pelas possibilidades de criar componentes reutilizáveis e pelo amplo suporte a \textit{templates} institucionais. Considerando que a plataforma principal de desenvolvimento foi o Sistema Operacional Windows, optou-se pela distribuição TeX MiKTeX para compilação do projeto.
 
 \subsection{Zotero}\label{sub:zotero}
-O Zotero é um \textit{software} gerenciador de referências bibliográficas, destinado à coleta, organização, anotação, citação e compartilhamento de fontes de pesquisa. A ferramenta foi utilizada em conjunto com a extensão Zotero Connector para organizar as referências bibliográficas desta pesquisa, facilitando sua categorização e garantindo alto acesso às fontes a partir de qualquer dispositivo (\textit{desktop}, \textit{web} e \textit{mobile}). Outra facilidade relevante é a exportação direta das referências para o formato BibTeX, funcionalidade utilizada neste trabalho. A Figura \ref{fig:zotero} ilustra o ambiente da aplicação, com as referências segmentadas na barra lateral esquerda e os detalhes de uma fonte selecionada exibidos à direita.
-
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.8\textwidth}
-        \centering
-        \includegraphics[width=.9\textwidth]{espeon/zotero.png}
-        \caption{Aplicação Zotero}
-        \label{fig:zotero}
-    \end{minipage}\hfill
-\end{figure}
+O Zotero é um \textit{software} gerenciador de referências bibliográficas, destinado à coleta, organização, anotação, citação e compartilhamento de fontes de pesquisa. A ferramenta foi utilizada em conjunto com a extensão Zotero Connector para organizar as referências bibliográficas desta pesquisa, facilitando sua categorização e garantindo alto acesso às fontes a partir de qualquer dispositivo (\textit{desktop}, \textit{web} e \textit{mobile}). Outra facilidade relevante é a exportação direta das referências para o formato BibTeX, funcionalidade utilizada neste trabalho.
 
 \subsection{Git, Github e Actions}\label{sub:git}
 Para centralizar e distribuir o \textit{software} ESPEON e esta monografia, mantendo o controle de versão e a consistência do código, adotou-se o sistema Git. Visando garantir a disponibilidade do projeto, o GitHub foi escolhido como plataforma de \textit{hosting}. A estrutura foi dividida em dois repositórios distintos devido à natureza das operações: um para o \textit{software} e outro para a monografia.
 
-A gestão dos dois projetos foi realizada com o GitHub Projects, que oferece uma estrutura de \textit{cards} similar ao Kanban. Essa ferramenta proporciona funcionalidades como documentação de tarefas, acompanhamento do andamento do projeto e organização geral dos \textit{cards}, conforme ilustrado na Figura \ref{fig:github_board}.
-
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.8\textwidth}
-        \centering
-        \includegraphics[width=.99\textwidth]{espeon/github.boards.jpeg}
-        \caption{\textit{Board} para Monografia}
-        \label{fig:github_board}
-    \end{minipage}\hfill
-\end{figure}
-
-Adicionalmente, foi implementada uma \textit{pipeline} de entrega contínua para eventuais \textit{releases} da monografia utilizando o GitHub Actions, como demonstrado na Figura \ref{fig:github_actions}.
-
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.8\textwidth}
-        \centering
-        \includegraphics[width=.99\textwidth]{espeon/actions.releases.png}
-        \caption{\textit{Releases} da Monografia}
-        \label{fig:github_actions}
-    \end{minipage}\hfill
-\end{figure}
+A gestão dos dois projetos foi realizada com o GitHub Projects, que oferece uma estrutura de \textit{cards} similar ao Kanban. Essa ferramenta proporciona funcionalidades como documentação de tarefas, acompanhamento do andamento do projeto e organização geral dos \textit{cards}. Adicionalmente, foi implementada uma \textit{pipeline} de entrega contínua para eventuais \textit{releases} da monografia utilizando o GitHub Actions.
 
 \section{Mecanismo de Análise de Dados}\label{sec:data_analysis}
 Visando obter conclusões válidas, deve-se interpretar os dados do experimento \cite{wohlinAnalysisInterpretation2000}. A interpretação dos dados deve ocorrer em três etapas, conforme ilustra a Figura \ref{fig:steps-data}.
