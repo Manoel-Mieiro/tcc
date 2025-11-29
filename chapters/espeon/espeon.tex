@@ -3,6 +3,8 @@
 Este capítulo tem como objetivo detalhar a solução Engajamento e Supervisão do Porcesso de Ensino Online (ESPEON), sendo divido em quatro seções. Chrome API (Seção ~\ref{sec:espeon_chrome}) descreve a extensão construída, detalhando dependências, permissionamento cliente e a comunicação com o \textit{backend}. Na Seção ~\ref{sec:espeon_data} e descrito o \textit{dataset} recebido no MongoDB, bem como o modelo conceitual do banco de dados relacional PostgreSQL. A Seção ~\ref{sec:espeon_api} traz detalhamento à estrutura arquitetural do \textit{backend}, bem como as rotas da API ESPEON. Detalhes sobre a hospedagem dos serviços podem ser encontrados na Seção ~\ref{sec:espeon_deploy}, enquanto o funcionamento é descrito na Seção ~\ref{sec:espeon_operation}.
 
 \section{Extensão Chrome}\label{sec:espeon_chrome}
+Visando facilidade na distribuição e reprodução do ESPEON, optou-se pela criação de uma extensão para navegadores de \textit{internet}, uma extensão Chrome. A escolha se deu pelo suporte ofertado pela Chrome API, que permite, mediante consentimento, fazer o monitoramento discente, com acesso à permissões de mídia e conteúdo acessado. A extensão é escrita em JavaScript e tem como componente indispensável o arquivo de manifesto, que contém metadados sobre a extensão, permissões necessárias e \textit{scripts} usados.
+
 \section{Modelagem de Dados}\label{sec:espeon_data}
 Os dados brutos que compôem um \textit{trace} são similares a um \textit{snapshot}, isto é, uma representação pontual do estado de um sistema. Dessa forma, para a facilitar a ingestão de dados, livre de \textit{constraints} relacionais, optou-se pelo banco MongoDB para armazenamento e consulta dos \textit{logs} de atividade. Para o caso do ESPEON, foi criado o banco TRACES, com os dados sendo estocados na \textit{collection} \textit{logs}. Os registros são estruturados conforme a Figura~\ref{fig:logs_example}, a seguir. 
 
@@ -92,6 +94,29 @@ A tabela \textbf{Report Student} estabelece a relação entre um relatório e os
 
 \section{ESPEON API}\label{sec:espeon_api}
 \section{Implantação}\label{sec:espeon_deploy}
+De forma a distribuir o ESPEON e executar os testes em sala de aula remota, faz-se necessário o \textit{deploy} da aplicação em ambiente produtivo, acessível pela \textit{internet}. Para fazer isso foram escolhidas dois serviços de hospedagem gratuitos, Render e AtlasDB. O Render contempla o \textit{backend} ESPEON e o banco PostgreSQL, conforme indicado na Figura \ref{fig:render_stacks}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.7\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{espeon/suporte.render.png}
+        \caption{Suporte Render. \textbf{Disponível em: \href{https://render.com/docs/faq}}{Render.com}} 
+        \label{fig:render_stacks}
+    \end{minipage}\hfill
+\end{figure}
+
+Ainda que seja possível implantar o banco MongoDB, não é um processo gerenciado nativamente pelo serviço \textit{web}, então - para evitar enventuais complicações - optou-se pela hospedagem AtlasDB, com suporte nativo para o banco NoSQL que pretendemos implantar. No entanto, Atlas possui controle de acesso por lista de IPs, que limita conexões que não sejam da sua máquina, inicalmente. Então, para possibilitar a comunicação entre Render e Atlas, que ocorre quando o ESPEON API tenta gravar um \textit{log} de atividade do aluno, deve-se incluir os IPs de saída da instância Render na \textit{whitelist} do Atlas, conforme indicado na Figura \ref{fig:atlas_whitelist}.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.9\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{espeon/atlas.whitelist.png}
+        \caption{Habilitando acesso da origem Render} 
+        \label{fig:atlas_whitelist}
+    \end{minipage}\hfill
+\end{figure}
 
 \section{Funcionamento}\label{sec:espeon_operation}
 ESPEON é uma ferramenta que faz uso majoritariamente da \textit{API chrome.tabs} para extrair dados de navegação do discente. Basicamente, mediante concessão de acesso, ilustrada no \textit{Script} \ref{scripts/manifest.json}, o \textit{software} consegue acessar o objeto \textit{tab}, que é uma dada aba do navegador. Conforme o conceito de objeto, na Programação Orientada a Objetos (POO), trata-se de uma abstração de algum elemento real, com atributos e métodos \cite{kimObjectorientedDatabasesDefinition1990}. O ESPEON faz a leitura desse objeto e processa seus valores no \textit{backend} - quando solicitada emissão de relatório - para construir relatórios de aula, parametrizados por tempo e estado. O tempo se transcreve em métricas de atenção, enquanto o estado está mais associado às métricas de engajamento, que são medidas pelo estado de periféricos de áudio e vídeo do aluno e o estado da atributos da aba, todos valores booleanos.
