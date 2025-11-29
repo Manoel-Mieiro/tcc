@@ -197,7 +197,8 @@
 		\begin{minipage}{0.5\textwidth}
 			\normalsize
 			\raggedleft
-			Projeto final apresentado em cumprimento às normas do Departamento de Educação Superior do Centro Federal de Educação Tecnológica Celso Suckow da Fonseca, CEFET/RJ, como parte dos requisitos para obtenção do título de Bacharel em Sistemas de Informação.			
+			\justifying
+			\textit{Trabalho de Conclusão de Curso em cumprimento às normas do Departamento de Educação Superior do Centro Federal de Educação Tecnológica Celso Suckow da Fonseca, CEFET/RJ, como parte dos requisitos para obtenção do título de Bacharel em Sistemas de Informação.}
 		\end{minipage}\\[6em]
 	\end{flushright}
 	
