@@ -3,7 +3,46 @@
 Este capítulo tem como objetivo detalhar a solução Engajamento e Supervisão do Porcesso de Ensino Online (ESPEON), sendo divido em quatro seções. Chrome API (Seção ~\ref{sec:espeon_chrome}) descreve a extensão construída, detalhando dependências, permissionamento cliente e a comunicação com o \textit{backend}. Na Seção ~\ref{sec:espeon_data} e descrito o \textit{dataset} recebido no MongoDB, bem como o modelo conceitual do banco de dados relacional PostgreSQL. A Seção ~\ref{sec:espeon_api} traz detalhamento à estrutura arquitetural do \textit{backend}, bem como as rotas da API ESPEON. Detalhes sobre a hospedagem dos serviços podem ser encontrados na Seção ~\ref{sec:espeon_deploy}, enquanto o funcionamento é descrito na Seção ~\ref{sec:espeon_operation}.
 
 \section{Extensão Chrome}\label{sec:espeon_chrome}
-Visando facilidade na distribuição e reprodução do ESPEON, optou-se pela criação de uma extensão para navegadores de \textit{internet}, uma extensão Chrome. A escolha se deu pelo suporte ofertado pela Chrome API, que permite, mediante consentimento, fazer o monitoramento discente, com acesso à permissões de mídia e conteúdo acessado. A extensão é escrita em JavaScript e tem como componente indispensável o arquivo de manifesto, que contém metadados sobre a extensão, permissões necessárias e \textit{scripts} usados.
+Visando facilidade na distribuição e reprodução do ESPEON, optou-se pela criação de uma extensão para navegadores de \textit{internet}, uma extensão Chrome. A escolha se deu pelo suporte ofertado pela Chrome API, que permite - mediante consentimento - fazer o monitoramento discente, com acesso à permissões de mídia e conteúdo acessado. A extensão é escrita em JavaScript e tem como componente indispensável o arquivo de manifesto, que contém metadados sobre a extensão, permissões necessárias e \textit{scripts} usados.
+A publicação do pacote de \textit{software} deve ser feita por uma conta de desenvolvedor, que custa USD \$5,00 (Figura \ref{fig:chrome_pay}).
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.9\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{espeon/chrome.dev.requirements.png}
+        \caption{Funcionalidades da Conta de Desenvolvedor. \textbf{Disponível em: }\href{https://developer.chrome.com/docs/webstore/register}{Chrome for Developers}}
+        \label{fig:chrome_pay}
+    \end{minipage}\hfill
+\end{figure}
+
+Apesar da possibilidade de publicação do ESPEON na Chrome Web Store, optou-se pela distribuição por pacote local para evitar acessos maliciosos ao \textit{software} que a exposição pela \textit{internet} causaria.
+\subsection{Distribuição Local}\label{sub:espeon_distro}
+A estratégia de distribuição local consiste na aquisição do código-fonte pelo usuário, seguida do carregamento do pacote descompactado na aba de extensões do navegador, usando o modo desenvolvedor.
+
+Primeiramente, o usuário acessa o código-fonte no repositório GitHub e faz uma cópia local a partir da \textit{branch} main, seja por clone ou \textit{download}. Depois disso, deve-se acessar o navegador na aba de extensões e carregar o pacote, conforme indicado na Figura \ref{fig:load_unpacked}.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.9\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{espeon/load.unpacked.png}
+        \caption{Carregando o Pacote}
+        \label{fig:load_unpacked}
+    \end{minipage}\hfill
+\end{figure}
+
+Carregada a extensão, pode-se habilitá-la no \textit{checkbox} do canto superior direito e depois acessá-la na aba correlata, como ilustrado na Figura \ref{fig:start_extension}.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.9\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{espeon/iniciar.extensao.png}
+        \caption{Iniciando Extensão}
+        \label{fig:start_extension}
+    \end{minipage}\hfill
+\end{figure}
 
 \section{Modelagem de Dados}\label{sec:espeon_data}
 Os dados brutos que compôem um \textit{trace} são similares a um \textit{snapshot}, isto é, uma representação pontual do estado de um sistema. Dessa forma, para a facilitar a ingestão de dados, livre de \textit{constraints} relacionais, optou-se pelo banco MongoDB para armazenamento e consulta dos \textit{logs} de atividade. Para o caso do ESPEON, foi criado o banco TRACES, com os dados sendo estocados na \textit{collection} \textit{logs}. Os registros são estruturados conforme a Figura~\ref{fig:logs_example}, a seguir. 
