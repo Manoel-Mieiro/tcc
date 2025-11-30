@@ -138,3 +138,28 @@ O cálculo é realizado pela função \textbf{calculate\_distraction\_frequency(
     \item \textbf{is\_distraction()}: Classifica se o \textit{trace} representa atividade em site distrator
     \item \textbf{get\_time\_diff\_minutes()}: Calcula diferença temporal entre \textbf{timestamps}
 \end{itemize}
+
+\subsection{Engajamento}\label{sub:espeon_engajement}
+
+\subsection{Multitarefa}\label{sub:espeon_multitask}
+\subsubsection{Frequência de Troca de Aba}
+
+A Frequência de Troca de Aba (\textit{Tab Switch Frequency}) mede a taxa média de alternância entre diferentes abas do navegador durante ao longo de uma aula. Esta métrica serve como indicador de comportamento multitarefa, capturando a tendência dos alunos em alternar entre diferentes conteúdos, denotando dispersão de foco.
+
+O cálculo é realizado pela função \textbf{calculate\_tab\_switch\_frequency(traces)} que implementa a seguinte fórmula:
+
+\begin{equation}
+\text{Frequência de Troca de Aba} = \frac{\text{Número Total de Trocas de URL}}{\text{Tempo Total de Sessão (horas)}}
+\end{equation}
+
+\lstinputlisting[
+    language=python,
+    caption={Cálculo da Frequência de Troca de Aba},
+    firstline=11,
+    lastline=69,
+    label={lst:calculate_tab_switch_frequency}
+]{scripts/metricsCalc/multitasking.py}
+
+\subsection{Padrões Temporais}\label{sub:espeon_tempo}
+
+\subsection{Scores}\label{sub:espeon_scores}
