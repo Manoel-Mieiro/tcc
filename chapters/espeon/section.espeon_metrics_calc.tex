@@ -16,61 +16,13 @@ O tempo médio real de sessão por aluno é calculado com base nos \textit{trace
     \item \textbf{Média agregada}: A métrica final é obtida através da média aritmética simples de todas as durações individuais de sessão.
 \end{enumerate}
 
-% \begin{lstlisting}[language=python, caption=Cálculo do Tempo Médio Real de Sessão]
-% def calculate_real_avg_session_per_student(traces):
-%     """
-%     Calcula o tempo REAL médio que cada aluno ficou ativo na aula
-%     Baseado nos timestamps dos traces
-%     """
-%     try:
-%         student_sessions = {}
-        
-%         # Agrupa traces por aluno
-%         for trace in traces:
-%             user = trace.get('user')
-%             timestamp = trace.get('timestamp')
-            
-%             if user not in student_sessions:
-%                 student_sessions[user] = []
-            
-%             student_sessions[user].append(timestamp)
-        
-%         session_durations = []
-        
-%         for user, timestamps in student_sessions.items():
-%             if len(timestamps) < 2:
-%                 # Se só tem um registro, considera tempo mínimo (ex: 1 minuto)
-%                 session_durations.append(1.0)
-%                 continue
-                
-%             try:
-%                 # Converte e ordena timestamps
-%                 time_objects = [datetime.strptime(ts, '%H:%M:%S') for ts in timestamps]
-%                 time_objects.sort()
-                
-%                 # Tempo ativo = diferença entre primeiro e último registro
-%                 active_duration = (time_objects[-1] - time_objects[0]).total_seconds() / 60
-                
-%                 # Garante que pelo menos 1 minuto
-%                 active_duration = max(active_duration, 1.0)
-%                 session_durations.append(active_duration)
-                
-%             except Exception as e:
-%                 print(f"Erro ao processar aluno {user}: {e}")
-%                 session_durations.append(1.0)  # tempo mínimo
-%                 continue
-        
-%         if not session_durations:
-%             return 0.0
-        
-%         avg_real_session = sum(session_durations) / len(session_durations)
-        
-%         return round(avg_real_session, 2)
-        
-%     except Exception as e:
-%         print(f"[SERVICE] Erro ao calcular tempo real médio: {e}")
-%         return 0.0
-% \end{lstlisting}
+\lstinputlisting[
+    language=python,
+    caption={Cálculo do Tempo Médio Real de Sessão},
+    firstline=4,
+    lastline=62,
+    label={lst:calculate_real_avg_session_per_student}
+]{scripts/metricsCalc/base.py}
 
 
 
@@ -87,38 +39,21 @@ Esta métrica fornece uma estimativa do tempo real que cada aluno dedicou à aul
 \subsubsection{Taxa de Presença}
 A Taxa de Presença (\textit{Attendance Ratio}) representa a proporção entre o tempo médio real de participação dos alunos e a duração total oficial da aula. Esta métrica quantifica o nível de engajamento temporal da turma como um todo, indicando qual porcentagem da aula os alunos permaneceram ativos em média.
 
-O cálculo é realizado pela função \textbf{calculate\_attendance\_ratio} conforme a seguinte fórmula:
+O cálculo é realizado pela função \textbf{calculate\_attendance\_ratio} (Script~\ref{lst:calculate_attendance_ratio}) conforme a seguinte fórmula:
 
 \begin{equation}
 \text{Taxa de Presença} = \min\left(1, \max\left(0, \frac{\text{Tempo Médio Real de Sessão}}{\text{Duração Oficial da Aula}}\right)\right)
 \end{equation}
 
-% \begin{lstlisting}[language=Python, caption=Cálculo da Taxa de Presença]
-% def calculate_attendance_ratio(traces, lecture_id):
-%     """
-%     Calcula a % do tempo que os alunos ficaram vs duração total da aula
-%     """
-%     try:
-%         # Tempo real médio que alunos ficaram
-%         avg_real_session = calculate_real_avg_session_per_student(traces)
-        
-%         # Duração oficial da aula
-%         lecture_duration = calculateTotalTimeWatched(lecture_id)
-        
-%         if lecture_duration <= 0:
-%             return 0.0
-        
-%         attendance_ratio = avg_real_session / lecture_duration
-        
-%         # Limita entre 0 e 1 (100%)
-%         attendance_ratio = max(0.0, min(attendance_ratio, 1.0))
-        
-%         return round(attendance_ratio, 3)
-        
-%     except Exception as e:
-%         print(f"[SERVICE] Erro ao calcular attendance_ratio: {e}")
-%         return 0.0
-% \end{lstlisting}
+
+\lstinputlisting[
+    language=python,
+    caption={Cálculo da Taxa de Presença},
+    firstline=104,
+    lastline=129,
+    label={lst:calculate_attendance_ratio}
+]{scripts/metricsCalc/base.py}
+
 
 \textbf{Etapas do cálculo}:
 \begin{enumerate}
@@ -141,62 +76,14 @@ O cálculo é realizado pela função \textbf{calculate\_distraction\_ratio} que
 \text{Taxa de Distração} = \frac{\text{Tempo Total em Distração}}{\text{Tempo Total de Sessão}}
 \end{equation}
 
-% \begin{lstlisting}[language=Python, caption=Cálculo da Taxa de Distração]
-% def calculate_distraction_ratio(traces):
-%     """
-%     Calcula a % do tempo que os alunos passaram em sites de distração
-%     vs tempo total de sessão
-%     """
-%     try:
-%         student_sessions = {}
-%         for trace in traces:
-%             user = trace.get('user')
-%             if user not in student_sessions:
-%                 student_sessions[user] = []
-%             student_sessions[user].append(trace)
+\lstinputlisting[
+    language=python,
+    caption={Cálculo da Taxa de Distração},
+    firstline=7,
+    lastline=65,
+    label={lst:calculate_attendance_ratio}
+]{scripts/metricsCalc/disturb.py}
 
-%         distraction_ratios = []
-
-%         for user, user_traces in student_sessions.items():
-%             if len(user_traces) < 2:
-%                 continue
-
-%             sorted_traces = sorted(
-%                 user_traces, key=lambda x: x.get('timestamp', ''))
-
-%             total_distraction_time = 0.0
-%             total_session_time = 0.0
-
-%             for i in range(1, len(sorted_traces)):
-%                 prev_trace = sorted_traces[i-1]
-%                 curr_trace = sorted_traces[i]
-
-%                 time_diff = get_time_diff_minutes(
-%                     prev_trace.get('timestamp'),
-%                     curr_trace.get('timestamp')
-%                 )
-
-%                 if time_diff > 0:
-%                     total_session_time += time_diff
-
-%                     # Se estava em distração no trace anterior, conta como tempo distraído
-%                     if is_distraction(prev_trace):
-%                         total_distraction_time += time_diff
-
-%             if total_session_time > 0:
-%                 distraction_ratio = total_distraction_time / total_session_time
-%                 distraction_ratios.append(distraction_ratio)
-
-%         if not distraction_ratios:
-%             return 0.0
-
-%         avg_distraction_ratio = sum(distraction_ratios) / len(distraction_ratios)
-%         return round(avg_distraction_ratio, 3)
-
-%     except Exception as e:
-%         print(f"[SERVICE] Erro ao calcular distraction_ratio: {e}")
-%         return 0.0
-% \end{lstlisting}
 
 \textbf{Etapas do cálculo}:
 \begin{enumerate}
