@@ -302,3 +302,48 @@ O tempo médio real de sessão por aluno é calculado com base nos \textit{trace
 
 Esta métrica fornece uma estimativa do tempo real que cada aluno dedicou à aula, considerando sua presença em sala de aula virtual.
 
+\subsubsection{Taxa de Presença}
+A Taxa de Presença (\textit{Attendance Ratio}) representa a proporção entre o tempo médio real de participação dos alunos e a duração total oficial da aula. Esta métrica quantifica o nível de engajamento temporal da turma como um todo, indicando qual porcentagem da aula os alunos permaneceram ativos em média.
+
+O cálculo é realizado pela função \textbf{calculate\_attendance\_ratio} conforme a seguinte fórmula:
+
+\begin{equation}
+\text{Taxa de Presença} = \min\left(1, \max\left(0, \frac{\text{Tempo Médio Real de Sessão}}{\text{Duração Oficial da Aula}}\right)\right)
+\end{equation}
+
+% \begin{lstlisting}[language=Python, caption=Cálculo da Taxa de Presença]
+% def calculate_attendance_ratio(traces, lecture_id):
+%     """
+%     Calcula a % do tempo que os alunos ficaram vs duração total da aula
+%     """
+%     try:
+%         # Tempo real médio que alunos ficaram
+%         avg_real_session = calculate_real_avg_session_per_student(traces)
+        
+%         # Duração oficial da aula
+%         lecture_duration = calculateTotalTimeWatched(lecture_id)
+        
+%         if lecture_duration <= 0:
+%             return 0.0
+        
+%         attendance_ratio = avg_real_session / lecture_duration
+        
+%         # Limita entre 0 e 1 (100%)
+%         attendance_ratio = max(0.0, min(attendance_ratio, 1.0))
+        
+%         return round(attendance_ratio, 3)
+        
+%     except Exception as e:
+%         print(f"[SERVICE] Erro ao calcular attendance_ratio: {e}")
+%         return 0.0
+% \end{lstlisting}
+
+\textbf{Etapas do cálculo}:
+\begin{enumerate}
+    \item \textbf{Entrada}: Recebe os \textit{traces} de interação e o identificador da aula
+    \item \textbf{Tempo médio real}: Calcula o tempo médio de sessão usando a função anterior
+    \item \textbf{Duração oficial}: Obtém o tempo total da aula do sistema de registros
+    \item \textbf{Razão}: Divide o tempo médio real pela duração oficial
+    \item \textbf{Normalização}: Limita o resultado entre 0 (0\%) e 1 (100\%)
+    \item \textbf{Arredondamento}: Retorna o valor com 3 casas decimais de precisão
+\end{enumerate}
