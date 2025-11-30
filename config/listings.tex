@@ -48,6 +48,28 @@
   basicstyle=\small\ttfamily
 }
 
+% === PYTHON ===================================================================
+\lstdefinelanguage{python}{
+  morekeywords={
+    False, None, True, and, as, assert, async, await, break, class, continue,
+    def, del, elif, else, except, finally, for, from, global, if, import, in,
+    is, lambda, nonlocal, not, or, pass, raise, return, try, while, with, yield
+  },
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  identifierstyle=\color{OliveGreen},
+  commentstyle=\color{gray},
+  emph=[1]{self},
+  emphstyle=[1]\color{violet},
+  emph=[2]{int,str,float,list,dict,tuple,set,object,classmethod,staticmethod},
+  emphstyle=[2]\color{orange},
+  numbers=left,
+  numberstyle=\footnotesize,
+  upquote=true,
+  captionpos=b,
+  basicstyle=\small\ttfamily
+}
+
 % === BASH ====================================================================
 \lstdefinelanguage{bash}{
   morekeywords={__halt_compiler},
