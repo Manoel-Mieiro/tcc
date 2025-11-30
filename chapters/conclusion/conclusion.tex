@@ -23,6 +23,20 @@
 % a percepção de engajamento coletivo, especialmente em turmas com alta variância
 % de participação entre alunos.
 
+% \subsubsection{Taxa de Distração}
+% AMEAÇA À VALIDADE: Classificação Binária de Distração
+% A função is_distraction() opera com classificação binária (distração/não-distração),
+% podendo não capturar nuances em sites que podem ser tanto educacionais quanto
+% distractores dependendo do contexto de uso.
+
+% AMEAÇA À VALIDADE: Atribuição Temporal Proximal
+% O algoritmo atribui todo o intervalo entre dois traces ao estado do trace anterior,
+% o que pode superestimar tempos de distração se a mudança de estado ocorrer
+% no meio do intervalo.
+
+% AMEAÇA À VALIDADE: Sensibilidade à Frequência de Traces
+% Métrica altamente dependente da frequência de emissão de traces - baixa frequência
+% pode levar a estimativas imprecisas dos períodos de distração.
 
 \section{Trabalhos Futuros}\label{sec:future_endeavor}
 \input{chapters/conclusion/futureEndeavors.tex}

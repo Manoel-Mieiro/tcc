@@ -1,0 +1,219 @@
+\subsection{Métricas Base}\label{sub:espeon_base_metrics}
+\subsubsection{Duração de Aula}
+\subsubsection{Tempo Médio Real de Sessão}
+
+O tempo médio real de sessão por aluno é calculado com base nos \textit{traces} de interação coletados pela extensão durante a aula. O algoritmo implementado no Script segue as seguintes etapas:
+
+\begin{enumerate}
+    \item \textbf{Agrupamento por aluno}: Todos os \textit{traces} são organizados por identificador único de usuário, criando uma lista temporal de interações para cada participante.
+    
+    \item \textbf{Processamento individual}: Para cada aluno, os \textit{timestamps} são convertidos para objetos de tempo e ordenados cronologicamente.
+    
+    \item \textbf{Cálculo de duração}: A diferença entre o primeiro e último registro de interação representa o tempo total de sessão do aluno, convertido para minutos.
+    
+    \item \textbf{Valores mínimos}: Casos com apenas um registro recebem duração mínima de 1,0 minuto, enquanto sessões calculadas com menos de 1 minuto são ajustadas para este piso.
+    
+    \item \textbf{Média agregada}: A métrica final é obtida através da média aritmética simples de todas as durações individuais de sessão.
+\end{enumerate}
+
+% \begin{lstlisting}[language=python, caption=Cálculo do Tempo Médio Real de Sessão]
+% def calculate_real_avg_session_per_student(traces):
+%     """
+%     Calcula o tempo REAL médio que cada aluno ficou ativo na aula
+%     Baseado nos timestamps dos traces
+%     """
+%     try:
+%         student_sessions = {}
+        
+%         # Agrupa traces por aluno
+%         for trace in traces:
+%             user = trace.get('user')
+%             timestamp = trace.get('timestamp')
+            
+%             if user not in student_sessions:
+%                 student_sessions[user] = []
+            
+%             student_sessions[user].append(timestamp)
+        
+%         session_durations = []
+        
+%         for user, timestamps in student_sessions.items():
+%             if len(timestamps) < 2:
+%                 # Se só tem um registro, considera tempo mínimo (ex: 1 minuto)
+%                 session_durations.append(1.0)
+%                 continue
+                
+%             try:
+%                 # Converte e ordena timestamps
+%                 time_objects = [datetime.strptime(ts, '%H:%M:%S') for ts in timestamps]
+%                 time_objects.sort()
+                
+%                 # Tempo ativo = diferença entre primeiro e último registro
+%                 active_duration = (time_objects[-1] - time_objects[0]).total_seconds() / 60
+                
+%                 # Garante que pelo menos 1 minuto
+%                 active_duration = max(active_duration, 1.0)
+%                 session_durations.append(active_duration)
+                
+%             except Exception as e:
+%                 print(f"Erro ao processar aluno {user}: {e}")
+%                 session_durations.append(1.0)  # tempo mínimo
+%                 continue
+        
+%         if not session_durations:
+%             return 0.0
+        
+%         avg_real_session = sum(session_durations) / len(session_durations)
+        
+%         return round(avg_real_session, 2)
+        
+%     except Exception as e:
+%         print(f"[SERVICE] Erro ao calcular tempo real médio: {e}")
+%         return 0.0
+% \end{lstlisting}
+
+
+
+\textbf{Premissas do cálculo}:
+\begin{itemize}
+    \item A extensão permanece ativa continuamente durante a participação do aluno
+    \item Os \textit{traces} são emitidos regularmente durante a sessão
+    \item O primeiro registro representa o início efetivo da participação
+    \item O último registro representa o término da sessão do aluno
+\end{itemize}
+
+Esta métrica fornece uma estimativa do tempo real que cada aluno dedicou à aula, considerando sua presença em sala de aula virtual.
+
+\subsubsection{Taxa de Presença}
+A Taxa de Presença (\textit{Attendance Ratio}) representa a proporção entre o tempo médio real de participação dos alunos e a duração total oficial da aula. Esta métrica quantifica o nível de engajamento temporal da turma como um todo, indicando qual porcentagem da aula os alunos permaneceram ativos em média.
+
+O cálculo é realizado pela função \textbf{calculate\_attendance\_ratio} conforme a seguinte fórmula:
+
+\begin{equation}
+\text{Taxa de Presença} = \min\left(1, \max\left(0, \frac{\text{Tempo Médio Real de Sessão}}{\text{Duração Oficial da Aula}}\right)\right)
+\end{equation}
+
+% \begin{lstlisting}[language=Python, caption=Cálculo da Taxa de Presença]
+% def calculate_attendance_ratio(traces, lecture_id):
+%     """
+%     Calcula a % do tempo que os alunos ficaram vs duração total da aula
+%     """
+%     try:
+%         # Tempo real médio que alunos ficaram
+%         avg_real_session = calculate_real_avg_session_per_student(traces)
+        
+%         # Duração oficial da aula
+%         lecture_duration = calculateTotalTimeWatched(lecture_id)
+        
+%         if lecture_duration <= 0:
+%             return 0.0
+        
+%         attendance_ratio = avg_real_session / lecture_duration
+        
+%         # Limita entre 0 e 1 (100%)
+%         attendance_ratio = max(0.0, min(attendance_ratio, 1.0))
+        
+%         return round(attendance_ratio, 3)
+        
+%     except Exception as e:
+%         print(f"[SERVICE] Erro ao calcular attendance_ratio: {e}")
+%         return 0.0
+% \end{lstlisting}
+
+\textbf{Etapas do cálculo}:
+\begin{enumerate}
+    \item \textbf{Entrada}: Recebe os \textit{traces} de interação e o identificador da aula
+    \item \textbf{Tempo médio real}: Calcula o tempo médio de sessão usando a função anterior
+    \item \textbf{Duração oficial}: Obtém o tempo total da aula do sistema de registros
+    \item \textbf{Razão}: Divide o tempo médio real pela duração oficial
+    \item \textbf{Normalização}: Limita o resultado entre 0 (0\%) e 1 (100\%)
+    \item \textbf{Arredondamento}: Retorna o valor com 3 casas decimais de precisão
+\end{enumerate}
+
+\subsection{Distração}\label{sub:espeon_disturb_metrics}
+
+\subsubsection{Taxa de Distração}
+A Taxa de Distração (\textit{Distraction Ratio}) mede a proporção do tempo total de sessão que os alunos passaram em sites classificados como distractores em relação ao tempo total de participação na aula. Esta métrica permite quantificar o nível de foco dos estudantes durante as sessões de aprendizagem.
+
+O cálculo é realizado pela função \textbf{calculate\_distraction\_ratio} que implementa a seguinte lógica:
+
+\begin{equation}
+\text{Taxa de Distração} = \frac{\text{Tempo Total em Distração}}{\text{Tempo Total de Sessão}}
+\end{equation}
+
+% \begin{lstlisting}[language=Python, caption=Cálculo da Taxa de Distração]
+% def calculate_distraction_ratio(traces):
+%     """
+%     Calcula a % do tempo que os alunos passaram em sites de distração
+%     vs tempo total de sessão
+%     """
+%     try:
+%         student_sessions = {}
+%         for trace in traces:
+%             user = trace.get('user')
+%             if user not in student_sessions:
+%                 student_sessions[user] = []
+%             student_sessions[user].append(trace)
+
+%         distraction_ratios = []
+
+%         for user, user_traces in student_sessions.items():
+%             if len(user_traces) < 2:
+%                 continue
+
+%             sorted_traces = sorted(
+%                 user_traces, key=lambda x: x.get('timestamp', ''))
+
+%             total_distraction_time = 0.0
+%             total_session_time = 0.0
+
+%             for i in range(1, len(sorted_traces)):
+%                 prev_trace = sorted_traces[i-1]
+%                 curr_trace = sorted_traces[i]
+
+%                 time_diff = get_time_diff_minutes(
+%                     prev_trace.get('timestamp'),
+%                     curr_trace.get('timestamp')
+%                 )
+
+%                 if time_diff > 0:
+%                     total_session_time += time_diff
+
+%                     # Se estava em distração no trace anterior, conta como tempo distraído
+%                     if is_distraction(prev_trace):
+%                         total_distraction_time += time_diff
+
+%             if total_session_time > 0:
+%                 distraction_ratio = total_distraction_time / total_session_time
+%                 distraction_ratios.append(distraction_ratio)
+
+%         if not distraction_ratios:
+%             return 0.0
+
+%         avg_distraction_ratio = sum(distraction_ratios) / len(distraction_ratios)
+%         return round(avg_distraction_ratio, 3)
+
+%     except Exception as e:
+%         print(f"[SERVICE] Erro ao calcular distraction_ratio: {e}")
+%         return 0.0
+% \end{lstlisting}
+
+\textbf{Etapas do cálculo}:
+\begin{enumerate}
+    \item \textbf{Agrupamento por aluno}: Organiza todos os \textit{traces} por usuário
+    \item \textbf{Ordenação temporal}: Ordena os registros de cada aluno por \textit{timestamp}
+    \item \textbf{Cálculo incremental}: Para cada intervalo entre \textit{traces} consecutivos:
+    \begin{itemize}
+        \item Calcula a diferença de tempo em minutos entre registros
+        \item Adiciona ao tempo total de sessão
+        \item Se o \textit{trace} anterior foi classificado como distração, adiciona ao tempo de distração
+    \end{itemize}
+    \item \textbf{Razão individual}: Calcula a proporção de distração para cada aluno
+    \item \textbf{Média agregada}: Computa a média aritmética de todas as taxas individuais
+\end{enumerate}
+
+\textbf{Funções auxiliares}:
+\begin{itemize}
+    \item \texttt{get\_time\_diff\_minutes()}: Calcula diferença temporal entre \textit{timestamps}
+    \item \texttt{is\_distraction()}: Classifica se um \textit{trace} representa atividade em site distrator
+\end{itemize}
