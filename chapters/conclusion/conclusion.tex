@@ -38,5 +38,19 @@
 % Métrica altamente dependente da frequência de emissão de traces - baixa frequência
 % pode levar a estimativas imprecisas dos períodos de distração.
 
+
+% \subsubsection{Frequência de Distração}
+% AMEAÇA À VALIDADE: Sensibilidade à Granularidade Temporal
+% A detecção de transições depende criticamente da frequência de amostragem dos traces.
+% Baixa frequência pode subestimar transições rápidas, enquanto alta frequência
+% pode capturar flutuações irrelevantes.
+
+% AMEAÇA À VALIDADE: Definição de Transição Válida
+% O algoritmo considera apenas transições diretas da aula para distração, ignorando
+% padrões complexos como: aula → neutro → distração, que também representam perda de foco.
+
+% AMEAÇA À VALIDADE: Viés de Duração de Sessão
+% Alunos com sessões muito curtas podem ter frequências artificialmente infladas
+% devido ao efeito de borda temporal.
 \section{Trabalhos Futuros}\label{sec:future_endeavor}
 \input{chapters/conclusion/futureEndeavors.tex}
