@@ -79,19 +79,21 @@ Adicionalmente, será utilizado o \textit{Power BI} para uma visualização mais
 \section{Ferramentas Utilizadas}\label{sec:tools}
 A confecção desta pesquisa foi possibilitada por um leque de ferramentas e tecnologias. Esta seção busca elucidar o leitor acerca de todo o aparato utilizado para a construção do trabalho, de forma a permitir a futura reprodução do estudo.
 
-\subsection{Chrome API}\label{sub:chrome_api}
+\subsection{ESPEON}\label{sub:tools_espeon}
+
+\subsection{Chrome API}\label{sub:tools_chrome_api}
 De acordo com a documentação oficial do Chrome for Developers, as Chrome APIs são estruturas do tipo namespace que agrupam métodos e propriedades projetados para capacitar as extensões em suas funcionalidades. No contexto do ESPEON, a implementação faz uso intensivo do \textit{namespace tabs}  e de suas propriedades.
 
-\subsection{Python Flask}\label{sub:flask}
+\subsection{Python Flask}\label{sub:tools_flask}
 Flask é um \textit{micro-framework} de desenvolvimento \textit{web} que permite a criação de \textit{APIs lightweight} de maneira ágil. Sua escolha para o \textit{backend} foi motivada também pelas facilidades inerentes ao Python, como a vasta gama de bibliotecas para tratamento de dados. Essa combinação se mostrou eficiente e produtiva para os propósitos da pesquisa, justificando a decisão ao longo do desenvolvimento.
 
-\subsection{MongoDB e Compass}\label{sub:mongodb}
+\subsection{MongoDB e Compass}\label{sub:tools_mongodb}
 O MongoDB é um banco de dados não relacional orientado a documentos. Foi escolhido pelo caráter não estruturado dos \textit{traces} do ESPEON. Como Sistema Gerenciador de Banco de Dados (SGBD) foi usado o MongoDB Compass, que é um cliente local, pelo qual podemos conectar e gerenciar as instâncias locais e remotas do banco.
 
-\subsection{PostgreSQL e DBeaver}\label{sub:postgres}
+\subsection{PostgreSQL e DBeaver}\label{sub:tools_postgres}
 Sistema de banco de dados objeto-relacional e \textit{open-source}, o PostgreSQL foi escolhido como banco relacional, em detrimento ao MongoDB, usado meramente para armazenamento de \textit{traces}. Para o gerenciamento do banco, foi empregado o SGBD DBeaver, que consege se conectar às instâncias locais e remotas (Render) do ESPEON.
 
-\subsection{Hosting}\label{sub:hosting}
+\subsection{Hosting}\label{sub:tools_hosting}
 Para viabilizar a realização de testes em sala de aula, tornou-se necessário realizar o \textit{deploy} do ESPEON, de modo a disponibilizá-lo de forma centralizada aos alunos e professores. Considerando as tecnologias adotadas — \textit{backend} em Flask e os bancos de dados —, foi provisionado um ambiente na \textit{web} por meio dos serviços Render (para a aplicação) e MongoDB Atlas (para o banco de dados), utilizando planos gratuitos de hospedagem em ambos os casos.
 
 \subsubsection{Render}
@@ -100,13 +102,13 @@ A Render é um serviço de hospedagem que oferece planos gratuitos para uma vari
 \subsubsection{AtlasDB}
 O AtlasDB é um serviço \textit{multi-cloud} de \textit{hosting} para bancos de dados MongoDB. Similar ao Render, destaca-se pela acessibilidade no que diz respeito a custos e implantação, sendo um serviço que facilita a migração de bancos de dados locais para a nuvem. Neste projeto, foi utilizada a instância \textit{basic}, que oferece 512 MB de armazenamento, além de RAM e CPU compartilhadas. 
 
-\subsection{LaTeX e MiKTeX}\label{sub:latex}
+\subsection{LaTeX e MiKTeX}\label{sub:tools_latex}
 O \LaTeX\ é uma linguagem de marcação que segue a filosofia WYSIWYM (\textit{What You See Is What You Mean}) \cite{alvesIntroducaoAoLaTeX}. Sua escolha para a construção textual desta pesquisa deu-se pelas possibilidades de criar componentes reutilizáveis e pelo amplo suporte a \textit{templates} institucionais. Considerando que a plataforma principal de desenvolvimento foi o Sistema Operacional Windows, optou-se pela distribuição TeX MiKTeX para compilação do projeto.
 
-\subsection{Zotero}\label{sub:zotero}
+\subsection{Zotero}\label{sub:tools_zotero}
 O Zotero é um \textit{software} gerenciador de referências bibliográficas, destinado à coleta, organização, anotação, citação e compartilhamento de fontes de pesquisa. A ferramenta foi utilizada em conjunto com a extensão Zotero Connector para organizar as referências bibliográficas desta pesquisa, facilitando sua categorização e garantindo alto acesso às fontes a partir de qualquer dispositivo (\textit{desktop}, \textit{web} e \textit{mobile}). Outra facilidade relevante é a exportação direta das referências para o formato BibTeX, funcionalidade utilizada neste trabalho.
 
-\subsection{Git, Github e Actions}\label{sub:git}
+\subsection{Git, Github e Actions}\label{sub:tools_git}
 Para centralizar e distribuir o \textit{software} ESPEON e esta monografia, mantendo o controle de versão e a consistência do código, adotou-se o sistema Git. Visando garantir a disponibilidade do projeto, o GitHub foi escolhido como plataforma de \textit{hosting}. A estrutura foi dividida em dois repositórios distintos devido à natureza das operações: um para o \textit{software} e outro para a monografia.
 
 A gestão dos dois projetos foi realizada com o GitHub Projects, que oferece uma estrutura de \textit{cards} similar ao Kanban. Essa ferramenta proporciona funcionalidades como documentação de tarefas, acompanhamento do andamento do projeto e organização geral dos \textit{cards}. Adicionalmente, foi implementada uma \textit{pipeline} de entrega contínua para eventuais \textit{releases} da monografia utilizando o GitHub Actions.
