@@ -78,5 +78,22 @@
 % AMEAÇA À VALIDADE: Estado Inicial Não Contabilizado
 % O primeiro segmento de foco não é contado se o aluno já iniciar na aula,
 % subestimando levemente a fragmentação real.
+
+
+% \subsubsection{Engajamento por Câmera}
+% AMEAÇA À VALIDADE: Atribuição Temporal Proximal
+% O algoritmo atribui todo o intervalo entre dois traces ao estado do trace anterior,
+% o que pode superestimar tempos de câmera ativa se a desativação ocorrer
+% no meio do intervalo entre amostras.
+
+% AMEAÇA À VALIDADE: Presença sem Engajamento
+% Câmera ativa não garante engajamento cognitivo - alunos podem manter câmera
+% ligada enquanto realizam outras atividades fora do campo visual.
+
+% AMEAÇA À VALIDADE: Fatores Contextuais Externos
+% Decisão de ativar câmera pode ser influenciada por fatores como qualidade de
+% internet, privacidade doméstica, normas culturais ou políticas institucionais,
+% não refletindo necessariamente nível de participação.
+
 \section{Trabalhos Futuros}\label{sec:future_endeavor}
 \input{chapters/conclusion/futureEndeavors.tex}
