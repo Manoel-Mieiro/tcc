@@ -1,0 +1,71 @@
+\subsubsection{Taxa de Distração}
+A Taxa de Distração (\textit{Distraction Ratio}) mede a proporção do tempo total de sessão que os alunos passaram em sites classificados como distractores em relação ao tempo total de participação na aula. Esta métrica permite quantificar o nível de foco dos estudantes durante as sessões de aprendizagem.
+
+O cálculo é realizado pela função \textbf{calculate\_distraction\_ratio} que implementa a seguinte lógica:
+
+\begin{equation}
+\text{Taxa de Distração} = \frac{\text{Tempo Total em Distração}}{\text{Tempo Total de Sessão}}
+\end{equation}
+
+\lstinputlisting[
+    language=python,
+    caption={Cálculo da Taxa de Distração},
+    firstline=7,
+    lastline=65,
+    label={lst:calculate_attendance_ratio}
+]{scripts/metricsCalc/disturb.py}
+
+
+\textbf{Etapas do cálculo}:
+\begin{enumerate}
+    \item \textbf{Agrupamento por aluno}: Organiza todos os \textit{traces} por usuário
+    \item \textbf{Ordenação temporal}: Ordena os registros de cada aluno por \textit{timestamp}
+    \item \textbf{Cálculo incremental}: Para cada intervalo entre \textit{traces} consecutivos:
+    \begin{itemize}
+        \item Calcula a diferença de tempo em minutos entre registros
+        \item Adiciona ao tempo total de sessão
+        \item Se o \textit{trace} anterior foi classificado como distração, adiciona ao tempo de distração
+    \end{itemize}
+    \item \textbf{Razão individual}: Calcula a proporção de distração para cada aluno
+    \item \textbf{Média agregada}: Computa a média aritmética de todas as taxas individuais
+\end{enumerate}
+
+\textbf{Funções auxiliares}:
+\begin{itemize}
+    \item \texttt{get\_time\_diff\_minutes()}: Calcula diferença temporal entre \textit{timestamps}
+    \item \texttt{is\_distraction()}: Classifica se um \textit{trace} representa atividade em site distrator
+\end{itemize}
+
+\subsubsection{Frequência de Distração}
+
+A Frequência de Distração (\textit{Distraction Frequency}) mede quantas vezes por hora os alunos alternam da aula para sites classificados como distractores durante sua sessão de aprendizagem. Esta métrica complementa a \textbf{calculate\_distraction\_ratio} ao capturar a dinâmica temporal das transições de atenção, ao invés de apenas a proporção total de tempo distraído.
+
+O cálculo é realizado pela função \textbf{calculate\_distraction\_frequency(traces)} que implementa a seguinte lógica:
+
+\begin{equation}
+\text{Frequência de Distração} = \frac{\text{Número de Transições para Distração}}{\text{Tempo Total de Sessão (horas)}}
+\end{equation}
+
+\lstinputlisting[
+    language=python,
+    caption={Cálculo da Taxa de Distração},
+    firstline=68,
+    lastline=129,
+    label={lst:calculate_distraction_frequency}
+]{scripts/metricsCalc/disturb.py}
+
+\textbf{Etapas do cálculo}:
+\begin{enumerate}
+    \item \textbf{Agrupamento e ordenação}: Organiza os \textit{traces} por aluno e ordena cronologicamente
+    \item \textbf{Detecção de transições}: Identifica mudanças do estado "em aula" para "distração" entre \textit{traces} consecutivos
+    \item \textbf{Acúmulo temporal}: Calcula o tempo total de sessão somando intervalos entre registros
+    \item \textbf{Normalização horária}: Converte a contagem de transições para frequência por hora de sessão
+    \item \textbf{Média agregada}: Computa a média das frequências individuais dos alunos
+\end{enumerate}
+
+\textbf{Funções auxiliares}:
+\begin{itemize}
+    \item \textbf{is\_lecture\_tab()}: Determina se o \textit{trace} representa atividade na aba da aula
+    \item \textbf{is\_distraction()}: Classifica se o \textit{trace} representa atividade em site distrator
+    \item \textbf{get\_time\_diff\_minutes()}: Calcula diferença temporal entre \textbf{timestamps}
+\end{itemize}
