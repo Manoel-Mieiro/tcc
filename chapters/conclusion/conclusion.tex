@@ -121,5 +121,44 @@
 % Alunos podem estar altamente engajados tomando notas em papel ou realizando
 % atividades offline relacionadas, sem ativar dispositivos de mídia.
 
+
+% \subsubsection{Tendência de Engajamento}
+% AMEAÇA À VALIDADE: Assunção de Linearidade Temporal
+% A divisão em quartis assume distribuição uniforme de conteúdo pedagógico,
+% mas aulas com estrutura não-linear podem ter momentos naturalmente mais/ menos engajantes.
+
+% AMEAÇA À VALIDADE: Granularidade de Atribuição
+% Traces no limite entre quartis podem ser atribuídos incorretamente,
+% especialmente com baixa frequência de amostragem.
+
+% AMEAÇA À VALIDADE: Duração Heterogênea de Atividades
+% Atividades com durações diferentes dentro da aula podem distorcer
+% a interpretação do engajamento por quartil.
+
+% \subsubsection{Pico de Engajamento}
+% AMEAÇA À VALIDADE: Sensibilidade à Duração do Intervalo
+% A escolha de 5 minutos pode não capturar picos mais curtos ou diluir
+% engajamento em intervalos maiores do que a atividade real.
+
+% AMEAÇA À VALIDADE: Viés de Amostragem Temporal
+% Alunos com padrões de chegada/partida diferentes podem distorcer
+% a identificação do pico real de engajamento.
+
+% AMEAÇA À VALIDADE: Conflito com Estrutura da Aula
+% Picos podem refletir momentos de "descanso" (ex.: intervalo) onde
+% alunos estão presentes mas não necessariamente engajados.
+
+% \subsubsection{Ponto de Queda de Engajamento}
+% AMEAÇA À VALIDADE: Sensibilidade ao Limiar de 50%
+% A escolha de 50% do pico é arbitrária e pode não representar
+% queda significativa em todos os contextos pedagógicos.
+
+% AMEAÇA À VALIDADE: Requisito de Sustentação
+% A exigência de queda sustentada pode falhar em detectar
+% quedas abruptas seguidas de recuperações rápidas.
+
+% AMEAÇA À VALIDADE: Viés de Duração
+% Aulas muito curtas podem não permitir detecção confiável de
+% padrões de queda sustentada.
 \section{Trabalhos Futuros}\label{sec:future_endeavor}
 \input{chapters/conclusion/futureEndeavors.tex}
