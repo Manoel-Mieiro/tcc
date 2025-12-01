@@ -52,5 +52,31 @@
 % AMEAÇA À VALIDADE: Viés de Duração de Sessão
 % Alunos com sessões muito curtas podem ter frequências artificialmente infladas
 % devido ao efeito de borda temporal.
+
+% \subsubsection{Frequência de Troca de Aba}
+% AMEAÇA À VALIDADE: Sensibilidade à Navegação Intra-site
+% O algoritmo detecta qualquer mudança de URL, incluindo navegação dentro do mesmo
+% site educacional, o que pode inflar artificialmente a métrica de multitarefa.
+
+% AMEAÇA À VALIDADE: Granularidade Temporal
+% A precisão da detecção de trocas depende da frequência de amostragem dos traces,
+% podendo subestimar trocas rápidas entre amostras temporais distantes.
+
+% AMEAÇA À VALIDADE: Contexto de Navegação
+% A métrica não distingue entre trocas relacionadas à aula (ex.: material complementar)
+% e trocas para distração, limitando a interpretação específica do comportamento.
+
+% \subsubsection{Fragmentação do Foco}
+% AMEAÇA À VALIDADE: Sensibilidade ao Limiar de Detecção
+% O algoritmo conta cada retorno à aula como novo segmento, podendo superestimar
+% fragmentação em casos de flutuações rápidas na mesma sessão de estudo.
+
+% AMEAÇA À VALIDADE: Duração Mínima de Segmento
+% Não há limiar mínimo de duração para considerar um segmento válido, o que pode
+% incluir retornos momentâneos sem engajamento cognitivo real.
+
+% AMEAÇA À VALIDADE: Estado Inicial Não Contabilizado
+% O primeiro segmento de foco não é contado se o aluno já iniciar na aula,
+% subestimando levemente a fragmentação real.
 \section{Trabalhos Futuros}\label{sec:future_endeavor}
 \input{chapters/conclusion/futureEndeavors.tex}
