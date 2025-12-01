@@ -178,6 +178,61 @@
 	 2025}
 }
 
+\newcommand\dfolhaaprovacao{%
+    \thispagestyle{empty} % sem numeracao
+    \newgeometry{left=3cm, right=2cm, top=3cm, bottom=2cm}
+    
+    \begin{center}
+        \singlespacing
+        \bfseries \textbf{FOLHA DE APROVAÇÃO}\\
+        
+        \vspace{2em}
+        
+        \normalfont \textbf{\dtitle} \\
+        
+        \vspace{2em}
+        
+        \textbf{\dauthor} \\
+        
+        \vspace{2em}
+    \end{center}
+    
+    \begin{flushleft}
+        \normalfont \normalsize
+        Trabalho de Conclusão de Curso apresentado em 19 de dezembro de 2025 como requisito parcial para a obtenção do título de Bacharel em Sistemas de Informação. O candidato foi arguido pela banca examinadora composta pelos professores abaixo assinados. \\
+        Após deliberação, a banca considerou o trabalho aprovado. \\
+		\vspace{1em}
+		
+    \end{flushleft}
+    
+    \vspace{2em}
+    
+    \begin{center}
+        \normalfont \normalsize
+		\rule{8cm}{0.4pt} \\
+        Prof. Sildenir Alves Ribeiro, DSc. \\
+        Orientador/Presidente \\
+        (CEFET/RJ) \\
+        
+        \vspace{2em}
+		\rule{8cm}{0.4pt} \\
+        Prof. Diego Cardoso Borda Castro, DSc. \\
+        (COCSI/CEFET/RJ) \\
+        
+        \vspace{2em}
+		\rule{8cm}{0.4pt} \\
+        Prof. Monica Ferreira da Silva, DSc. \\
+        (PPGI/UFRJ) \\
+        
+    \end{center}
+    
+	\vfill	
+	{\bfseries \large Rio de Janeiro,\\
+	 2025}
+    
+    \restoregeometry
+}
+
 %dcoverback
 \newcommand\dcoverback{%
 
