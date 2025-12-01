@@ -36,3 +36,43 @@ O cálculo é realizado pela função \textbf{calculate\_camera\_engagement(trac
     \item \texttt{cameraStreaming}: Indica se a câmera está transmitindo vídeo ativamente
     \item \textbf{Lógica OR}: Considera câmera ativa se qualquer um dos indicadores for verdadeiro
 \end{itemize}
+
+
+\subsection{Engajamento por Microfone}
+O Engajamento por Microfone (\textit{Microphone Engagement}) mede a proporção do tempo de sessão durante a qual os alunos mantiveram seu microfone ativo. Esta métrica indica o nível de participação vocal e contribuição auditiva em atividades síncronas, servindo como indicador de engajamento ativo em discussões e interações verbais durante a aula.
+
+O cálculo é realizado pela função \textbf{calculate\_mic\_engagement(traces)} que implementa a seguinte fórmula:
+
+\begin{equation}
+\text{Engajamento por Microfone} = \frac{\text{Tempo com Microfone Ativo}}{\text{Tempo Total de Sessão}}
+\end{equation}
+
+
+% \lstinputlisting[
+%     language=python,
+%     caption={Cálculo do Engajamento por Microfone},
+%     firstline=69,
+%     lastline=126,
+%     label={lst:calculate_microphone_engagement}
+% ]{scripts/metricsCalc/participation.py}
+
+\textbf{Etapas do cálculo}:
+\begin{enumerate}
+    \item \textbf{Agrupamento por aluno}: Organiza os \textit{traces} por usuário
+    \item \textbf{Ordenação temporal}: Ordena cronologicamente os registros de cada aluno
+    \item \textbf{Cálculo incremental}: Para cada intervalo entre \textit{traces} consecutivos:
+    \begin{itemize}
+        \item Calcula diferença temporal em minutos
+        \item Adiciona ao tempo total de sessão
+        \item Se microfone estava ativo no \textit{trace} anterior, adiciona ao tempo de microfone ativo
+    \end{itemize}
+    \item \textbf{Razão individual}: Calcula proporção de tempo com microfone ativo para cada aluno
+    \item \textbf{Média agregada}: Computa média aritmética das proporções individuais
+\end{enumerate}
+
+\textbf{Detecção de microfone ativo}:
+\begin{itemize}
+    \item \texttt{microphoneEnabled}: Indica se o microfone está habilitado no sistema
+    \item \texttt{microphoneStreaming}: Indica se o microfone está transmitindo áudio ativamente
+    \item \textbf{Lógica OR}: Considera microfone ativo se qualquer um dos indicadores for verdadeiro
+\end{itemize}
