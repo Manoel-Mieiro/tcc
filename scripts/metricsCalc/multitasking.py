@@ -112,7 +112,7 @@ def calculate_multitasking_intensity(traces):
                 if current_url != last_url:
                     total_switches += 1
 
-                    # Detecta troca específica: foco → distração
+                    # Detecta troca específica: foco-distração
                     if last_was_focus and is_distraction(curr_trace):
                         focus_to_distraction_switches += 1
 
@@ -121,7 +121,7 @@ def calculate_multitasking_intensity(traces):
 
             # Calcula score de multitasking (0-1)
             if total_switches > 0 and total_session_time > 0:
-                # Fator 1: Proporção de switches que são foco→distração
+                # Fator 1: Proporção de switches que são foco-distração
                 distraction_switch_ratio = focus_to_distraction_switches / total_switches
 
                 # Fator 2: Frequência geral de switches (normalizada)
@@ -136,7 +136,7 @@ def calculate_multitasking_intensity(traces):
                 multitasking_scores.append(multitasking_score)
 
                 print(
-                    f"[MULTITASKING] Aluno {user}: intensidade {multitasking_score:.2f} (switches: {distraction_switch_ratio:.1%} foco→distração, {switch_frequency:.1f}/hora)")
+                    f"[MULTITASKING] Aluno {user}: intensidade {multitasking_score:.2f} (switches: {distraction_switch_ratio:.1%} foco-distração, {switch_frequency:.1f}/hora)")
 
         if not multitasking_scores:
             return 0.0
