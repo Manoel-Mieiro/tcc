@@ -1,5 +1,4 @@
 \subsubsection{Tempo Médio Real de Sessão}
-
 O tempo médio real de sessão por aluno é calculado com base nos \textit{traces} de interação coletados pela extensão durante a aula. O algoritmo implementado no Script segue as seguintes etapas:
 
 \begin{enumerate}
@@ -14,15 +13,24 @@ O tempo médio real de sessão por aluno é calculado com base nos \textit{trace
     \item \textbf{Média agregada}: A métrica final é obtida através da média aritmética simples de todas as durações individuais de sessão.
 \end{enumerate}
 
-% \lstinputlisting[
-%     language=python,
-%     caption={Cálculo do Tempo Médio Real de Sessão},
-%     firstline=4,
-%     lastline=62,
-%     label={lst:calculate_real_avg_session_per_student}
-% ]{scripts/metricsCalc/base.py}
 
+\textbf{Duração de sessão de um aluno}:
+\begin{equation}
+T_{s,i} = \max\left(1, \frac{t_{i,\text{último}} - t_{i,\text{primeiro}}}{60}\right)
+\end{equation}
 
+\textbf{onde para o aluno $i$:}
+\begin{itemize}
+    \item $t_{i,\text{primeiro}}$: timestamp do primeiro trace (em segundos)
+    \item $t_{i,\text{último}}$: timestamp do último trace (em segundos)
+    \item Divisão por 60 converte segundos para minutos
+    \item $\max(1, \cdot)$: garante mínimo de 1 minuto
+\end{itemize}
+
+\textbf{Tempo médio real de sessão (turma)}:
+\begin{equation}
+\bar{T}_s = \frac{1}{n} \sum_{i=1}^{n} T_{s,i}
+\end{equation}
 
 \textbf{Premissas do cálculo}:
 \begin{itemize}
@@ -32,12 +40,6 @@ O tempo médio real de sessão por aluno é calculado com base nos \textit{trace
     \item O último registro representa o término da sessão do aluno
 \end{itemize}
 
-Esta métrica fornece uma estimativa do tempo real que cada aluno dedicou à aula, considerando sua presença em sala de aula virtual.
-
-\subsubsection{Taxa de Presença}
-A Taxa de Presença (\textit{Attendance Ratio}) representa a proporção entre o tempo médio real de participação dos alunos e a duração total oficial da aula. Esta métrica quantifica o nível de engajamento temporal da turma como um todo, indicando qual porcentagem da aula os alunos permaneceram ativos em média.
-
-O cálculo é realizado pela função \textbf{calculate\_attendance\_ratio} (Script~\ref{lst:calculate_attendance_ratio}) conforme a seguinte fórmula:
 
 \textbf{Tempo Médio Real de Sessão (turma)}:
 \begin{equation}
