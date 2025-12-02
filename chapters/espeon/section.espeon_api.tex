@@ -1,1 +1,42 @@
-<esclarecer endpoints><esclarecer funções do relatório>
+De forma a permitir o transporte de dados de aula entre diferentes clientes (Power BI, MongoDB e PostgreSQL), faz-se necessária a implementação de uma \textit{Application Programming Interface} (API), a qual chamaremos de ESPEON API. Essa API foi desenvolvida utilizando a linguagem de programação Python, em conjunto com o \textit{framework} Flask, apropriado para cenários de porte moderado. Para conferir organização ao projeto, adotou-se a arquitetura em camadas (Figura \ref{fig:espeon_api_layers}), o que facilita o diagnóstico do fluxo de dados e a manutenção do ambiente.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.9\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{espeon/camadas.png}
+        \caption{Arquitetura em camadas}
+        \label{fig:espeon_api_layers}
+    \end{minipage}\hfill
+\end{figure}
+
+\subsection{Camada Modelo}\label{espeon_api_model}
+A camada de modelo descreve as entidades do banco de dados relacional, bem como os atributos esperados na construção de um \textit{trace}. Nesta camada definem-se os esquemas de dados e as restrições essenciais (tipos, obrigatoriedade, relacionamentos) que representam a realidade do domínio.
+
+\subsection{Camada DTO}\label{espeon_api_dto}
+\textit{Data Transfer Object} (DTO) é a camada responsável por padronizar e validar os dados de entrada e saída da API. Para cada entidade da camada de modelo existe, quando aplicável, um DTO que assegura formatos, tipos e validações (por exemplo: esquema JSON, campos obrigatórios e formatos de data).
+
+\subsection{Rotas}\label{espeon_api_routes}
+As rotas expõem os \textit{endpoints} da aplicação e orquestram o fluxo de requisição e resposta. No caminho de entrada a rota valida parâmetros básicos e encaminha a requisição ao \textit{controller}; na saída a rota formata a resposta ao cliente e devolve um \textit{status code} apropriado.
+
+\subsection{\textit{Controller}}\label{espeon_api_controller}
+Os \textit{controllers} atuam como camada de coordenação entre as rotas e a lógica de negócio. Recebem as requisições das rotas, invocam os serviços correspondentes, tratam exceções e montam as respostas. Aqui também podem ser aplicadas validações específicas de negócio e transformação de DTOs para objetos de domínio.
+
+\subsection{Camada de Serviço}\label{espeon_api_service}
+A camada de serviço concentra a lógica de negócio da aplicação. Ela encapsula regras, fluxos transacionais e orquestra chamadas a repositórios, serviços externos (por exemplo, integração com MongoDB ou PostgreSQL) e outros componentes. Essa separação facilita testes unitários e a reutilização de regras de negócio. É aqui que são calculadas as métricas para composição do relatório e também é feita sua emissão gráfica.
+
+\subsection{\textit{Repository}}\label{espeon_api_repository}
+A camada \textit{repository} é responsável pela persistência e recuperação de dados. Implementa operações CRUD, consultas específicas e adaptações necessárias entre o modelo de domínio e os modelos de dados dos bancos. 
+
+\subsection{Swagger}\label{espeon_api_swagger}
+A documentação da API é gerada por meio do Swagger. Essa documentação descreve os endpoints, parâmetros, esquemas de requisição/resposta e códigos de status, além de fornecer uma interface interativa para testes, sendo acessível na rota "\texttt{/docs}" (Figura \ref{fig:espeon_api_docs}).
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.9\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{espeon/swagger.png}
+        \caption{ESPEON Swagger}
+        \label{fig:espeon_api_docs}
+    \end{minipage}\hfill
+\end{figure}
