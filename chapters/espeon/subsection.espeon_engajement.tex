@@ -3,8 +3,20 @@ O Engajamento por Câmera (\textit{Camera Engagement}) mede a proporção do tem
 
 O cálculo é realizado pela função \textbf{calculate\_camera\_engagement(traces)} que implementa a seguinte fórmula:
 
+\textbf{Engajamento por Câmera de um aluno}:
 \begin{equation}
-    \text{Engajamento por Câmera} = \frac{\text{Tempo com Câmera Ativa}}{\text{Tempo Total de Sessão}}
+E_{c,i} = \frac{T_{c,i}}{T_{s,i}}
+\end{equation}
+
+\textbf{onde para o aluno $i$:}
+\begin{itemize}
+    \item $T_{c,i}$: tempo com câmera ativa (em minutos)
+    \item $T_{s,i}$: tempo total de sessão (em minutos)
+\end{itemize}
+
+\textbf{Engajamento por Câmera Médio da Turma}:
+\begin{equation}
+\bar{E}_c = \frac{1}{n} \sum_{i=1}^{n} E_{c,i}
 \end{equation}
 
 % \lstinputlisting[
@@ -43,8 +55,20 @@ O Engajamento por Microfone (\textit{Microphone Engagement}) mede a proporção 
 
 O cálculo é realizado pela função \textbf{calculate\_mic\_engagement(traces)} que implementa a seguinte fórmula:
 
+\textbf{Engajamento por Microfone de um aluno}:
 \begin{equation}
-    \text{Engajamento por Microfone} = \frac{\text{Tempo com Microfone Ativo}}{\text{Tempo Total de Sessão}}
+E_{m,i} = \frac{T_{m,i}}{T_{s,i}}
+\end{equation}
+
+\textbf{onde para o aluno $i$:}
+\begin{itemize}
+    \item $T_{m,i}$: tempo com microfone ativo (em minutos)
+    \item $T_{s,i}$: tempo total de sessão (em minutos)
+\end{itemize}
+
+\textbf{Engajamento por Microfone Médio da Turma}:
+\begin{equation}
+\bar{E}_m = \frac{1}{n} \sum_{i=1}^{n} E_{m,i}
 \end{equation}
 
 
@@ -83,8 +107,20 @@ A Participação Voluntária (\textit{Voluntary Participation}) mede a proporç�
 
 O cálculo é realizado pela função \textbf{calculate\_voluntary\_participation(traces)} que implementa a seguinte lógica combinatória:
 
+\textbf{Participação Voluntária de um aluno}:
 \begin{equation}
-    \text{Participação Voluntária} = \frac{\text{Tempo na Aula com Câmera ou Microfone Ativo}}{\text{Tempo Total de Sessão}}
+P_{v,i} = \frac{T_{p,i}}{T_{s,i}}
+\end{equation}
+
+\textbf{onde para o aluno $i$:}
+\begin{itemize}
+    \item $T_{p,i}$: tempo em participação voluntária (em minutos)
+    \item $T_{s,i}$: tempo total de sessão (em minutos)
+\end{itemize}
+
+\textbf{Participação Voluntária Média da Turma}:
+\begin{equation}
+\bar{P}_v = \frac{1}{n} \sum_{i=1}^{n} P_{v,i}
 \end{equation}
 
 % \lstinputlisting[

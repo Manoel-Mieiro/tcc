@@ -39,9 +39,29 @@ A Taxa de Presença (\textit{Attendance Ratio}) representa a proporção entre o
 
 O cálculo é realizado pela função \textbf{calculate\_attendance\_ratio} (Script~\ref{lst:calculate_attendance_ratio}) conforme a seguinte fórmula:
 
+\textbf{Tempo Médio Real de Sessão (turma)}:
 \begin{equation}
-\text{Taxa de Presença} = \min\left(1, \max\left(0, \frac{\text{Tempo Médio Real de Sessão}}{\text{Duração Oficial da Aula}}\right)\right)
+\bar{T}_s = \frac{1}{n} \sum_{i=1}^{n} T_{s,i}
 \end{equation}
+
+\textbf{onde:}
+\begin{itemize}
+    \item $T_{s,i}$: tempo de sessão do aluno $i$ (em minutos)
+    \item $n$: número de alunos
+\end{itemize}
+
+\textbf{Taxa de Presença da Turma}:
+\begin{equation}
+P = \min\left(1, \max\left(0, \frac{\bar{T}_s}{T_a}\right)\right)
+\end{equation}
+
+\textbf{onde:}
+\begin{itemize}
+    \item $\bar{T}_s$: tempo médio de sessão da turma (em minutos)
+    \item $T_a$: duração oficial da aula (em minutos)
+    \item $\min(1, \cdot)$: limita em 100\% (não excede duração total)
+    \item $\max(0, \cdot)$: garante não negativo
+\end{itemize}
 
 
 % \lstinputlisting[

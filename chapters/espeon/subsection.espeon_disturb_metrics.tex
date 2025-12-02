@@ -3,8 +3,20 @@ A Taxa de Distração (\textit{Distraction Ratio}) mede a proporção do tempo t
 
 O cálculo é realizado pela função \textbf{calculate\_distraction\_ratio} que implementa a seguinte lógica:
 
+\textbf{Taxa de Distração de um aluno}:
 \begin{equation}
-\text{Taxa de Distração} = \frac{\text{Tempo Total em Distração}}{\text{Tempo Total de Sessão}}
+D_i = \frac{T_{d,i}}{T_{s,i}}
+\end{equation}
+
+\textbf{onde para o aluno $i$:}
+\begin{itemize}
+    \item $T_{d,i}$: tempo total em sites classificados como distração (em minutos)
+    \item $T_{s,i}$: tempo total de sessão (em minutos)
+\end{itemize}
+
+\textbf{Taxa de Distração Média da Turma}:
+\begin{equation}
+\bar{D} = \frac{1}{n} \sum_{i=1}^{n} D_i
 \end{equation}
 
 % \lstinputlisting[
