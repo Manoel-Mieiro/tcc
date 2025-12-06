@@ -323,6 +323,11 @@
 \pagebreak
 }
 
+
+%dresumoheader
+\newcommand{\dresumoheader}[8]{\par\noindent\uppercase{#1}, #2. \textbf{#3}. #4. Trabalho de Conclusão de Curso --- #5. #6. #7, #8.\\[3em]}
+
+
 %dabstract
 \newcommand{\dabstract}[2]{
 	\begin{center}
