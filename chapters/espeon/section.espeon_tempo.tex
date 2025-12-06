@@ -1,4 +1,4 @@
-\subsubsection{Tendência de Engajamento}
+\subsection{Tendência de Engajamento}
 A Tendência de Engajamento \textit{Engagement Trend} analisa a evolução temporal do foco dos alunos ao longo da duração total da aula, dividindo a sessão em quatro segmentos temporais iguais (quartis). Esta métrica permite identificar padrões de variação no engajamento, como desgaste da atenção, picos de interesse ou momentos críticos de distração.
 
 O cálculo é realizado pela função \textbf{calculate\_engagement\_trend(traces, lecture\_id)} que implementa a seguinte abordagem:
@@ -39,7 +39,7 @@ O cálculo é realizado pela função \textbf{calculate\_engagement\_trend(trace
 \end{itemize}
 
 
-\subsubsection{Pico de Engajamento}
+\subsection{Pico de Engajamento}
 O Pico de Engajamento Temporal (\textit{Peak Engagement Time}) identifica o período de 5 minutos durante a aula que concentrou a maior quantidade de tempo focado pelos alunos. Esta métrica permite localizar os momentos de máxima atenção coletiva, fornecendo insights sobre quais segmentos da aula foram mais efetivos em capturar e manter o engajamento dos estudantes.
 
 O cálculo é realizado pela função \textbf{calculate\_peak\_engagement\_time(traces, lecture\_id)} que implementa a seguinte abordagem:
@@ -76,7 +76,7 @@ O cálculo é realizado pela função \textbf{calculate\_peak\_engagement\_time(
     \item \textbf{Identificação do pico}: Localiza o intervalo com maior soma acumulada de tempo focado
 \end{enumerate}
 
-\subsubsection{Ponto de Queda de Engajamento}
+\subsection{Ponto de Queda de Engajamento}
 O Ponto de Queda de Engajamento (\textit{Dropoff Point}) identifica o momento temporal em que o nível de foco dos alunos cai para 50\% do pico máximo de engajamento observado durante a aula e permanece abaixo deste limiar de forma sustentada. Esta métrica é crucial para detectar quando a atenção coletiva diminui significativamente, indicando possíveis pontos de fadiga cognitiva ou perda de interesse no conteúdo.
 
 O cálculo é realizado pela função \textbf{calculate\_dropoff\_point(traces, lecture\_id)} que implementa a seguinte lógica:

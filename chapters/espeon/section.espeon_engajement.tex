@@ -1,4 +1,4 @@
-\subsubsection{Engajamento por Câmera}
+\subsection{Engajamento por Câmera}
 O Engajamento por Câmera (\textit{Camera Engagement}) mede a proporção do tempo de sessão durante a qual os alunos mantiveram sua câmera de vídeo ativa. Esta métrica serve como indicador de participação ativa e presença social em ambientes de aprendizagem remota, onde a visibilidade facial pode influenciar a qualidade da interação e o senso de comunidade.
 
 O cálculo é realizado pela função \textbf{calculate\_camera\_engagement(traces)} que implementa a seguinte fórmula:
@@ -50,7 +50,7 @@ E_{c,i} = \frac{T_{c,i}}{T_{s,i}}
 \end{itemize}
 
 
-\subsubsection{Engajamento por Microfone}
+\subsection{Engajamento por Microfone}
 O Engajamento por Microfone (\textit{Microphone Engagement}) mede a proporção do tempo de sessão durante a qual os alunos mantiveram seu microfone ativo. Esta métrica indica o nível de participação vocal e contribuição auditiva em atividades síncronas, servindo como indicador de engajamento ativo em discussões e interações verbais durante a aula.
 
 O cálculo é realizado pela função \textbf{calculate\_mic\_engagement(traces)} que implementa a seguinte fórmula:
@@ -101,7 +101,7 @@ E_{m,i} = \frac{T_{m,i}}{T_{s,i}}
     \item \textbf{Lógica OR}: Considera microfone ativo se qualquer um dos indicadores for verdadeiro
 \end{itemize}
 
-\subsubsection{Participação Voluntária Média}
+\subsection{Participação Voluntária Média}
 
 A Participação Voluntária (\textit{Voluntary Participation}) mede a proporção do tempo de sessão durante a qual os alunos demonstram engajamento ativo através de sinais multimodais combinados. Esta métrica avançada considera a presença simultânea na aba da aula juntamente com a ativação de pelo menos um dispositivo de mídia (câmera ou microfone), representando um comprometimento mais substantivo com a atividade de aprendizagem.
 

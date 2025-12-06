@@ -1,4 +1,4 @@
-\subsubsection{\textit{Score} Geral de Engajamento}
+\subsection{\textit{Score} Geral de Engajamento}
 O Score Geral de Engajamento (\textit{Engagement Score}) é uma métrica composta que integra múltiplas dimensões de participação em um único valor numérico entre 0 e 1. Esta medida sintética permite uma avaliação holística do engajamento estudantil, combinando indicadores de foco, presença temporal e participação ativa através de uma abordagem ponderada.
 
 O cálculo é realizado pela função \textbf{calculate\_engagement\_score(metrics\_dict)} que implementa uma média ponderada de cinco componentes fundamentais:
@@ -34,7 +34,7 @@ O cálculo é realizado pela função \textbf{calculate\_engagement\_score(metri
 \end{itemize}
 
 
-\subsubsection{Saúde da Atenção}
+\subsection{Saúde da Atenção}
 A Saúde da Atenção (\textit{Attention Health}) é uma métrica composta que avalia a qualidade do padrão de foco dos estudantes, considerando não apenas a quantidade de tempo focado, mas também características qualitativas como sustentação, consistência e baixa fragmentação. Este score, variando de 0 a 1, mede a robustez do processo atencional durante as sessões de aprendizagem.
 
 O cálculo é realizado pela função \textbf{calculate\_attention\_health(metrics\_dict)} que integra quatro dimensões qualitativas da atenção:
@@ -69,7 +69,7 @@ O cálculo é realizado pela função \textbf{calculate\_attention\_health(metri
     \item \textbf{calculate\_consistency\_health()}: Analisa a estabilidade do engajamento ao longo da sessão
 \end{itemize}
 
-\subsubsection{Risco de Distração}
+\subsection{Risco de Distração}
 O Risco de Distração (\textit{Distraction Risk}) é uma métrica composta que quantifica a propensão dos estudantes à desatenção durante as sessões de aprendizagem. Este score, variando de 0 a 1, integra múltiplos indicadores comportamentais para fornecer uma medida sintética do nível de distração, sendo valores mais altos indicativos de maior propensão à perda de foco.
 
 O cálculo é realizado pela função \textbf{calculate\_distraction\_risk(metrics\_dict)} que implementa uma média ponderada de quatro componentes críticos:
