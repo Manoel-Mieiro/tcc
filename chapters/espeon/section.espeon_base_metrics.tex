@@ -1,15 +1,14 @@
 \subsection{Tempo Médio Real de Sessão}
-A métrica é calculada com base nos \textit{traces} de interação coletados pela extensão durante a aula. Primeiro, os \textit{traces} são organizados por \textit{id} do usuário. Para cada aluno, os \textit{timestamps} são convertidos em objetos de tempo e ordenados cronologicamente. Depois, há o cálculo da duração, fazendo-se a diferença entre o tempo do primeiro e útlimo registro. Para casos com apenas um registro, é assinalada a duração mínima de 1 minuto, válido também para sessões de menos de 1 minuto, que são adaptadas a esse piso. Finalmente, o valor é obtido através da média aritmética simples das durações individuais de sessão.
+A métrica é calculada com base nos \textit{traces} de interação coletados pela extensão durante a aula. Primeiro, os \textit{traces} são organizados por \textit{id} do usuário. Para cada aluno, os \textit{timestamps} são convertidos em objetos de tempo e ordenados cronologicamente. Depois, há o cálculo da duração, fazendo-se a diferença entre o tempo do primeiro e útlimo registro. Para casos com apenas um registro, é assinalada a duração mínima de 1 minuto, válido também para sessões de menos de 1 minuto, que são adaptadas a esse piso. Finalmente, o valor é obtido através da média aritmética simples das durações individuais de sessão. A duranção da sessão de por aluno é determinada pela Equação~\ref{eq:session_length}:
 
-A duranção da sessão de por aluno é determinada pela Equação~\ref{eq:session_length}:
 \begin{equation}\label{eq:session_length}
 T_{s,i} = \max\left(1, \frac{t_{i,\text{último}} - t_{i,\text{primeiro}}}{60}\right)
 \end{equation}
 
-Onde para cada aluno $i$, $t_{i,\text{primeiro}}$ e $t_{i,\text{último}}$ correspondem ao primeiro e útlimo \textit{trace}, em segundos, respectivamente. É feita a divizão por 60 para converter os segundos em minutos, com $\max(1, \cdot)$ garantindo ao menos 1 minuto.
+Na qual, para cada aluno $i$, $t_{i,\text{primeiro}}$ e $t_{i,\text{último}}$ correspondem ao primeiro e útlimo \textit{trace}, em segundos, respectivamente. É feita a divizão por 60 para converter os segundos em minutos, com $\max(1, \cdot)$ garantindo ao menos 1 minuto.
 
 
-O tempo médio de sessão por turma é definido conforme a Equação~\ref{eq:real_mean_session_time}:
+Depois, calcula-se o  tempo médio de sessão por turma, conforme a Equação~\ref{eq:real_mean_session_time}:
 \begin{equation}\label{eq:real_mean_session_time}
 \bar{T}_s = \frac{1}{n} \sum_{i=1}^{n} T_{s,i}
 \end{equation}
@@ -17,29 +16,19 @@ O tempo médio de sessão por turma é definido conforme a Equação~\ref{eq:rea
 Como premissas, temos que a extensão permanece ativa continuamente durante a participação do aluno, com os \textit{traces} emitidos regularmente durante a sessão. O primeiro registro representa o início efetivo da participação, enquanto o último o término da sessão do aluno.
 
 
-\textbf{Tempo Médio Real de Sessão (turma)}:
-\begin{equation}
+A taxa de presença da turma é determinada a partir do tempo médio real de sessão dos alunos, calculado com base nos registros de interação relacionados a uma aula específica. Inicialmente, os tempos de sessão individuais são organizados por aluno e utilizados para compor uma média aritmética simples, conforme definido pela Equação~\ref{eq:real_mean_session_time_class}:
+
+\begin{equation}\label{eq:real_mean_session_time_class}
 \bar{T}_s = \frac{1}{n} \sum_{i=1}^{n} T_{s,i}
 \end{equation}
 
-\textbf{onde:}
-\begin{itemize}
-    \item $T_{s,i}$: tempo de sessão do aluno $i$ (em minutos)
-    \item $n$: número de alunos
-\end{itemize}
+Nela, $T_{s,i}$ representa o tempo de sessão do aluno $i$, em minutos, e $n$ corresponde ao número total de alunos. Em seguida, esse valor médio é comparado com a duração oficial da aula para obtenção da proporção entre participação observada e tempo previsto. A razão é calculada por meio da Equação~\ref{eq:class_attendance_ratio} abaixo:
 
-\textbf{Taxa de Presença da Turma}:
-\begin{equation}
+\begin{equation}\label{eq:class_attendance_ratio}
 P = \min\left(1, \max\left(0, \frac{\bar{T}_s}{T_a}\right)\right)
 \end{equation}
 
-\textbf{onde:}
-\begin{itemize}
-    \item $\bar{T}_s$: tempo médio de sessão da turma (em minutos)
-    \item $T_a$: duração oficial da aula (em minutos)
-    \item $\min(1, \cdot)$: limita em 100\% (não excede duração total)
-    \item $\max(0, \cdot)$: garante não negativo
-\end{itemize}
+Nessa expressão, $\bar{T}_s$ indica o tempo médio da sessão da turma, $T_a$ corresponde à duração oficial da aula (em minutos), enquanto as funções $\min(1, \cdot)$ e $\max(0, \cdot)$ garantem respectivamente, que o resultado não ultrapasse 100\% e não assuma valores negativos. Dessa forma, o valor final da taxa de presença é normalizado entre 0 e 1, sendo comumente apresentado com três casas decimais de precisão.
 
 
 % \lstinputlisting[
@@ -50,14 +39,4 @@ P = \min\left(1, \max\left(0, \frac{\bar{T}_s}{T_a}\right)\right)
 %     label={lst:calculate_attendance_ratio}
 % ]{scripts/metricsCalc/base.py}
 
-
-\textbf{Etapas do cálculo}:
-\begin{enumerate}
-    \item \textbf{Entrada}: Recebe os \textit{traces} de interação e o identificador da aula
-    \item \textbf{Tempo médio real}: Calcula o tempo médio de sessão usando a função anterior
-    \item \textbf{Duração oficial}: Obtém o tempo total da aula do sistema de registros
-    \item \textbf{Razão}: Divide o tempo médio real pela duração oficial
-    \item \textbf{Normalização}: Limita o resultado entre 0 (0\%) e 1 (100\%)
-    \item \textbf{Arredondamento}: Retorna o valor com 3 casas decimais de precisão
-\end{enumerate}
 
