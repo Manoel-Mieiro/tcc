@@ -170,17 +170,11 @@ Sistema de banco de dados objeto-relacional e \textit{open-source}, o PostgreSQL
 \subsection{Hosting}\label{sub:tools_hosting}
 Para viabilizar a realização de testes em sala de aula, tornou-se necessário realizar o \textit{deploy} do ESPEON, de modo a disponibilizá-lo de forma centralizada aos alunos e professores. Considerando as tecnologias adotadas — \textit{backend} em Flask e os bancos de dados —, foi provisionado um ambiente na \textit{web} por meio dos serviços Render (para a aplicação) e MongoDB Atlas (para o banco de dados), utilizando planos gratuitos de hospedagem em ambos os casos.
 
-\subsubsection{Render}
+\subsubsection{Render:}
 A Render é um serviço de hospedagem que oferece planos gratuitos para uma variedade de tipos de \textit{stacks}. Ela é especialmente interessante para este trabalho por permitir o \textit{deploy} contínuo da aplicação Flask a partir da conclusão de um \textit{Pull Request}, além de realizar o \textit{hosting} do banco de dados PostgreSQL. Dessa forma, a Render fornece a conectividade remota necessária para o ESPEON, viabilizando os testes em sala de aula propostos de maneira acessível e descomplicada.
 
-\subsubsection{AtlasDB}
+\subsubsection{AtlasDB:}
 O AtlasDB é um serviço \textit{multi-cloud} de \textit{hosting} para bancos de dados MongoDB. Similar ao Render, destaca-se pela acessibilidade no que diz respeito a custos e implantação, sendo um serviço que facilita a migração de bancos de dados locais para a nuvem. Neste projeto, foi utilizada a instância \textit{basic}, que oferece 512 MB de armazenamento, além de RAM e CPU compartilhadas. 
-
-\subsection{LaTeX e MiKTeX}\label{sub:tools_latex}
-O \LaTeX\ é uma linguagem de marcação que segue a filosofia WYSIWYM (\textit{What You See Is What You Mean}) \cite{alvesIntroducaoAoLaTeX}. Sua escolha para a construção textual desta pesquisa deu-se pelas possibilidades de criar componentes reutilizáveis e pelo amplo suporte a \textit{templates} institucionais. Considerando que a plataforma principal de desenvolvimento foi o Sistema Operacional Windows, optou-se pela distribuição TeX MiKTeX para compilação do projeto.
-
-\subsection{Zotero}\label{sub:tools_zotero}
-O Zotero é um \textit{software} gerenciador de referências bibliográficas, destinado à coleta, organização, anotação, citação e compartilhamento de fontes de pesquisa. A ferramenta foi utilizada em conjunto com a extensão Zotero Connector para organizar as referências bibliográficas desta pesquisa, facilitando sua categorização e garantindo alto acesso às fontes a partir de qualquer dispositivo (\textit{desktop}, \textit{web} e \textit{mobile}). Outra facilidade relevante é a exportação direta das referências para o formato BibTeX, funcionalidade utilizada neste trabalho.
 
 \subsection{Git, Github e Actions}\label{sub:tools_git}
 Para centralizar e distribuir o \textit{software} ESPEON e esta monografia, mantendo o controle de versão e a consistência do código, adotou-se o sistema Git. Visando garantir a disponibilidade do projeto, o GitHub foi escolhido como plataforma de \textit{hosting}. A estrutura foi dividida em dois repositórios distintos devido à natureza das operações: um para o \textit{software} e outro para a monografia.
