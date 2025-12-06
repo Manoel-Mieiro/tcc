@@ -1,10 +1,10 @@
 \chapter{Metodologia, Métodos e Ferramentas} \label{chp:methodology}
 Neste capítulo serão apresentados os princípios metodológicos e ferramentas para tipificar, caracterizar e conduzir a pesquisa. São apresentadas a metodologia aplicada ao estudo em laboratório efetuado, os métodos empregados na condução do estudo e o ferramental utilizado na extração dos dados, para validação das informações elicitadas.
 
-\section{Tipo de Pesquisa}
-É chamada pesquisa aplicada aquela que gera conhecimento visando aplicação prática, direcionada para a solução de problemas específicos \cite{sienaMetodologiaPesquisaCientifica2024}. Assim, o presente trabalho busca investigar o desempenho, no que diz respeito à atenção e engajamento dos alunos submentidos a aulas expositivas em ambiente remoto, aplicando e validando o \textit{software} ESPEON, para que,- por meio de relatórios quantitativos - seja possível fundamentar argumentos contrários ao uso da metodologia expositiva, sobretudo em sala de aula remota.
+\section{Tipo de Pesquisa}\label{sec:research_kind}
+É chamada pesquisa aplicada aquela que gera conhecimento visando aplicação prática, direcionada para a solução de problemas específicos \cite{sienaMetodologiaPesquisaCientifica2024}. Assim, o presente trabalho busca investigar o desempenho, no que diz respeito à atenção e engajamento dos alunos submentidos a aulas expositivas em ambiente remoto, aplicando e validando o \textit{software} ESPEON, para que,- por meio de cruzamento entre dados quantitativos (relatórios) e qualitativos (questionários de aula) - seja possível fundamentar argumentos contrários ao uso da metodologia expositiva, sobretudo em sala de aula remota.
 
-\section{Metodologia Aplicada}
+\section{Metodologia Aplicada}\label{sec:applied_methodology}
 Trata-se de uma pesquisa descritiva explicativa que busca, por meio da observação sistemática, descrever comportamentalmente a população (alunos) submetida à metodologia expositiva em sala de aula virtual. Pretende-se, com o auxílio do ESPEON para coleta e análise de dados, elicitar o desempenho, no que diz respeito ao comprometimento discente, dos alunos submetidos ao cenário proposto, a fim de identificar os desafios que a aula expositiva enfrenta nesse contexto.
 
 É descritiva porque objetiva, primeiramente, caracterizar uma população submetida a um fenômeno (aula expositiva remota), utilizando técnicas padronizadas de coleta de dados (\textit{payload} da \textit{API}), conforme prescrito por \cite{gilComoElaborarProjetos2008a}.
@@ -19,21 +19,97 @@ Também é considerada explicativa porque busca, por meio das evidências (relat
     \cite{sienaMetodologiaPesquisaCientifica2024}
 \end{customquote}
 
-\section{Abordagem da Pesquisa}
-No que se refere à abordagem do problema, \cite{ribeiroManagementAccountingAnalysis2015} destaca que uma pesquisa quantitativa é aquela que emprega a quantificação tanto na coleta quanto no tratamento dos dados, por meio de técnicas estatísticas. Neste trabalho, serão utilizadas ferramentas de estatística descritiva, como a média aritmética (medida de tendência central), o desvio-padrão (indicador de dispersão) e a moda (valor de maior frequência), de forma a caracterizar a população estudada. Os cálculos serão processados pelo ESPEON no \textit{backend} e consolidados em gráficos, visando facilitar a interpretação dos resultados e possibilitar análises mais claras.
+\section{Abordagem da Pesquisa}\label{sec:research_approach}
+O método qualitativo é aquele em que há estrutura interpretativa e construtivista, tendo como matéria prima textos, falas, figuras e dados observacionais \cite{sienaMetodologiaPesquisaCientifica2024}.
+
+No que se refere à abordagem do problema, \cite{ribeiroManagementAccountingAnalysis2015} destaca que uma pesquisa quantitativa é aquela que emprega a quantificação tanto na coleta quanto no tratamento dos dados, por meio de técnicas estatísticas.  Neste trabalho, serão utilizadas ferramentas de estatística descritiva, como a média aritmética (medida de tendência central), o desvio-padrão (indicador de dispersão) e a moda (valor de maior frequência), de forma a caracterizar a população estudada. Os cálculos serão processados pelo ESPEON no \textit{backend} e consolidados em gráficos, visando facilitar a interpretação dos resultados e possibilitar análises mais claras.
 
 A escolha da estatística descritiva justifica-se pelo fato de que ela permite sintetizar e interpretar grandes volumes de dados de maneira objetiva, fornecendo subsídios para a comparação entre diferentes comportamentos observados durante as aulas remotas.
 
-% Talvez caiba colocar uma definição desses caras na literatura, e um parágrafo final justificando sua escolha
+\subsection{Mecanismos de Análise de Dados}\label{sub:data_analysis_mechanisms}
+A seguir é definido o ferramental estatístico descritivo adotado na construção dos indicadores de foco e participação construídos pelo ESPEON.
 
-\section{Método de Pesquisa}
-Buscando averiguar a problemática do emprego da metodologia expositiva no ambiente remoto de ensino, parte-se da hipótese de que alunos submetidos a esse tipo de aula, seja no EAD ou no ERE, tendem a apresentar dispersão de foco e baixo engajamento em razão dos inúmero estímulos provenientes de telas, em particular o celular \cite{lopesUsoCelularEm2017}.
+\subsubsection{Média Aritmética}
+Entende-se por média aritmética a medida de tendência central que representa um “ponto médio” de um conjunto de dados. Frequentemente denominada simplesmente de média, ela pode ser interpretada como uma estimativa da expectativa de uma variável estocástica a partir da qual as observações presentes no conjunto de dados são amostradas \cite{wohlinAnalysisInterpretation2000}. 
 
-Para testar essa hipótese, a pesquisa será conduzida por meio de experimentos controlados com alunos do curso de Sistemas de Informação do CEFET/RJ, campus Maria da Graça. Os participantes serão submetidos às condições mencionadas e terão seu comportamento monitorado pelo sistema ESPEON, mediante consentimento prévio, de forma a possibilitar a coleta de dados para posterior análise estatística.
+\subsubsection{Quartis}
+Alternativa à medidas afetadas por valores extremos (média e desvio-padrão), os quartis são denotadores de tendência central e dispersão de distribuições assimétricas \cite{samapintoEstatisticaBasica2010}. São representados em quatro partes iguais, com cada uma responsável por 25\% das observações feitas, sendo representado graficamente na Figura.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.9\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{espeon/quartis.png}
+        \caption{Representação gráfica dos quartis. \textbf{Fonte:}\cite{samapintoEstatisticaBasica2010}}
+        \label{fig:qurtile_graphics}
+    \end{minipage}\hfill
+\end{figure}
+
+% \subsubsection{Medidas de Posição Relativa}
+% \begin{itemize}
+%     \item \textbf{Quartis (Q1, Q2, Q3, Q4)} - Para análise temporal segmentada da aula:
+%     \begin{equation}
+%     \text{Engajamento}(Q_i) = \frac{\sum \text{tempo focado em } Q_i}{\sum \text{tempo total em } Q_i}
+%     \end{equation}
+% \end{itemize}
+
+
+\subsubsection{Cumes e Vales}
+O cume representa o máximo da curva representativa de uma séria cronológica \cite{da1970dicionario}, enquanto o oposto, vale, seria o mínimo nessa disposição.
+% \subsubsection{Operadores de Extremos}
+% \begin{itemize}
+%     \item \textbf{Máximo ($\max$)} - Identificação do pico de engajamento:
+%     \begin{equation}
+%     \text{Pico} = \max_{t \in T} \text{Engajamento}(t)
+%     \end{equation}
+    
+%     \item \textbf{Mínimo ($\min$)} - Identificação do ponto de queda:
+%     \begin{equation}
+%     \text{Dropoff Point} = \min\{t \mid \text{Engajamento}(t) < 0.5 \times \text{Pico} \land \cdots\}
+%     \end{equation}
+    
+%     \item \textbf{Função $\min()$ para normalização} - Limitação de valores em [0,1]:
+%     \begin{equation}
+%     F_n = \min\left(1, \frac{F_{\text{média}}}{30}\right)
+%     \end{equation}
+% \end{itemize}
+
+\subsubsection{Razão e Proporção}
+Na estatística, entende-se como porpoção valores a que se reduzem ou em que se resolvem relações de comparação entre a intensidade de dois fenômenos \cite{da1970dicionario}. 
+% \subsubsection{Medidas de Razão e Proporção}
+% \begin{itemize}
+%     \item \textbf{Razão/Proporção} - Base para todas as métricas percentuais:
+%     \begin{equation}
+%     R = \frac{\text{parte}}{\text{todo}}
+%     \end{equation}
+%     \textbf{Exemplos}: $D$, $E_c$, $E_m$, $P_v$, etc.
+    
+%     \item \textbf{Taxa por Unidade de Tempo} - Para métricas de frequência:
+%     \begin{equation}
+%     \text{Frequência} = \frac{\text{eventos}}{\text{tempo}}
+%     \end{equation}
+%     \textbf{Exemplos}: $F$ (fragmentação), frequência de troca de aba
+% \end{itemize}
+
+\subsubsection{Média Ponderada}
+A média ponderada é uma medida de tendência central em que cada valor observado contribui para o resultado de acordo com um peso associado \cite{da1970dicionario}. Em vez de atribuir igual importância a todos os elementos, a média ponderada considera que determinadas observações podem ter maior relevância no conjunto de dados.
+% \subsubsection{Agregação Composta}
+% \begin{itemize}
+%     \item \textbf{Média Ponderada} - Para scores que combinam múltiplas métricas:
+%     \begin{equation}
+%     \bar{x}_p = \sum_{i=1}^{k} w_i \times x_i
+%     \end{equation}
+%     \textbf{Exemplos}: Score de engajamento, risco de distração, saúde da atenção
+% \end{itemize}
+
+\section{Método de Pesquisa}\label{sec:research_method}
+Buscando averiguar a problemática do emprego da metodologia expositiva no ambiente remoto de ensino, o trabalho tem como prosta investigar se alunos submetidos a esse tipo de aula, seja no EAD ou no ERE, tendem a apresentar dispersão de foco e baixo engajamento em razão dos inúmero estímulos provenientes de telas, em particular o celular \cite{lopesUsoCelularEm2017}.
+
+Para testar a proposta, a pesquisa será conduzida por meio de testes em sala de aula virtual com alunos do curso de Sistemas de Informação do CEFET/RJ, campus Maria da Graça. Os participantes serão submetidos às condições mencionadas e terão seu comportamento monitorado pelo sistema ESPEON, mediante consentimento prévio, de forma a possibilitar a coleta de dados para posterior análise estatística.
 
 O método adotado é caracterizado como hipotético-dedutivo, visto que, conforme \cite{ribeiroManagementAccountingAnalysis2015}, fundamenta-se na experimentação para verificar a validade de uma teoria — neste caso, a de que aulas expositivas em ambientes remotos se mostram ineficazes.
 
-\section{Procedimentos e Instrumentos de Coleta de Dados}
+\section{Procedimentos e Instrumentos de Coleta de Dados}\label{sec:data_collection}
 A coleta dos dados ocorre de forma passiva durante aulas remotas ministradas no CEFET/RJ, campus Maria da Graça, mediante consentimento dos envolvidos, utilizando o sistema ESPEON. O diagrama abaixo ilustra o processo de coleta, armazenamento e processamento dos dados comportamentais.
 
 \begin{figure}[H]
@@ -50,19 +126,9 @@ Ao final das aulas, os dados serão compilados em um relatório, que apresenta n
 
 \input{tables/metrics.tex}
 
+Essas métricas são construídas pelo processamento de \textit{snapshots} das guias, armazenadas em banco NoSQL, no \textit{backend} Flask.
 
-\section{Ferramentas Utilizadas}\label{sec:tools}
-
-A coleta de dados será realizada por meio do \textit{software} ESPEON, durante a condução do estudo em laboratório. A ferramenta armazena as informações das guias em um banco de dados NoSQL, com os dados estruturados no formato mostrado no Script~\ref{script:logs.json} a seguir.
-
-\spaceH{}
-\lstinputlisting[
-    language=json,
-    caption={Exemplo de \textit{log}},
-    label={script:logs.json}
-]{scripts/mongo.dump.json}
-
-A análise dos dados será realizada com base nos relatórios em PDF emitidos pelo ESPEON (Figura~\ref{fig:report}), que apresentam, de forma objetiva, métricas de estatística descritiva, bastando apenas sua visualização para interpretação inicial dos resultados.
+A análise dos dados é realizada com base nos relatórios em PDF emitidos pelo ESPEON (Figura~\ref{fig:report}), que apresentam de forma objetiva métricas de estatística descritiva, bastando apenas sua visualização para interpretação inicial dos resultados.
 
 \begin{figure}[ht]
     \centering
@@ -86,6 +152,44 @@ Adicionalmente, será utilizado o \textit{Power BI} para uma visualização mais
     \end{minipage}\hfill
 \end{figure}
 
+\section{Ferramentas Utilizadas}\label{sec:tools}
+A confecção desta pesquisa foi possibilitada por um leque de ferramentas e tecnologias. Esta seção busca elucidar o leitor acerca de todo o aparato utilizado para a construção do trabalho, de forma a permitir a futura reprodução do estudo.
+
+\subsection{ESPEON}\label{sub:tools_espeon}
+A extensão ESPEON é ferramenta principal no monitoramento discente, coletando dados de navegação e emitindo relatórios pautados em métricas de atenção e engajamento. Tem também como funções o controle de acesso e organização de relatórios por aula ministrada. Finalmente, serve os dados quantitativos sobre a aula tanto em formato PDF quanto JSON (API), permitindo agilidade e flexibilidade na análise dos dados.
+
+\subsection{Chrome API}\label{sub:tools_chrome_api}
+De acordo com a documentação oficial do Chrome for Developers, as Chrome APIs são estruturas do tipo namespace que agrupam métodos e propriedades projetados para capacitar as extensões em suas funcionalidades. No contexto do ESPEON, a implementação faz uso intensivo do \textit{namespace tabs}  e de suas propriedades.
+
+\subsection{Python Flask}\label{sub:tools_flask}
+Flask é um \textit{micro-framework} de desenvolvimento \textit{web} que permite a criação de \textit{APIs lightweight} de maneira ágil. Sua escolha para o \textit{backend} foi motivada também pelas facilidades inerentes ao Python, como a vasta gama de bibliotecas para tratamento de dados. Essa combinação se mostrou eficiente e produtiva para os propósitos da pesquisa, justificando a decisão ao longo do desenvolvimento.
+
+\subsection{MongoDB e Compass}\label{sub:tools_mongodb}
+O MongoDB é um banco de dados não relacional orientado a documentos. Foi escolhido pelo caráter não estruturado dos \textit{traces} do ESPEON. Como Sistema Gerenciador de Banco de Dados (SGBD) foi usado o MongoDB Compass, que é um cliente local, pelo qual podemos conectar e gerenciar as instâncias locais e remotas do banco.
+
+\subsection{PostgreSQL e DBeaver}\label{sub:tools_postgres}
+Sistema de banco de dados objeto-relacional e \textit{open-source}, o PostgreSQL foi escolhido como banco relacional, em detrimento ao MongoDB, usado meramente para armazenamento de \textit{traces}. Para o gerenciamento do banco, foi empregado o SGBD DBeaver, que consege se conectar às instâncias locais e remotas (Render) do ESPEON.
+
+\subsection{Hosting}\label{sub:tools_hosting}
+Para viabilizar a realização de testes em sala de aula, tornou-se necessário realizar o \textit{deploy} do ESPEON, de modo a disponibilizá-lo de forma centralizada aos alunos e professores. Considerando as tecnologias adotadas — \textit{backend} em Flask e os bancos de dados —, foi provisionado um ambiente na \textit{web} por meio dos serviços Render (para a aplicação) e MongoDB Atlas (para o banco de dados), utilizando planos gratuitos de hospedagem em ambos os casos.
+
+\subsubsection{Render}
+A Render é um serviço de hospedagem que oferece planos gratuitos para uma variedade de tipos de \textit{stacks}. Ela é especialmente interessante para este trabalho por permitir o \textit{deploy} contínuo da aplicação Flask a partir da conclusão de um \textit{Pull Request}, além de realizar o \textit{hosting} do banco de dados PostgreSQL. Dessa forma, a Render fornece a conectividade remota necessária para o ESPEON, viabilizando os testes em sala de aula propostos de maneira acessível e descomplicada.
+
+\subsubsection{AtlasDB}
+O AtlasDB é um serviço \textit{multi-cloud} de \textit{hosting} para bancos de dados MongoDB. Similar ao Render, destaca-se pela acessibilidade no que diz respeito a custos e implantação, sendo um serviço que facilita a migração de bancos de dados locais para a nuvem. Neste projeto, foi utilizada a instância \textit{basic}, que oferece 512 MB de armazenamento, além de RAM e CPU compartilhadas. 
+
+\subsection{LaTeX e MiKTeX}\label{sub:tools_latex}
+O \LaTeX\ é uma linguagem de marcação que segue a filosofia WYSIWYM (\textit{What You See Is What You Mean}) \cite{alvesIntroducaoAoLaTeX}. Sua escolha para a construção textual desta pesquisa deu-se pelas possibilidades de criar componentes reutilizáveis e pelo amplo suporte a \textit{templates} institucionais. Considerando que a plataforma principal de desenvolvimento foi o Sistema Operacional Windows, optou-se pela distribuição TeX MiKTeX para compilação do projeto.
+
+\subsection{Zotero}\label{sub:tools_zotero}
+O Zotero é um \textit{software} gerenciador de referências bibliográficas, destinado à coleta, organização, anotação, citação e compartilhamento de fontes de pesquisa. A ferramenta foi utilizada em conjunto com a extensão Zotero Connector para organizar as referências bibliográficas desta pesquisa, facilitando sua categorização e garantindo alto acesso às fontes a partir de qualquer dispositivo (\textit{desktop}, \textit{web} e \textit{mobile}). Outra facilidade relevante é a exportação direta das referências para o formato BibTeX, funcionalidade utilizada neste trabalho.
+
+\subsection{Git, Github e Actions}\label{sub:tools_git}
+Para centralizar e distribuir o \textit{software} ESPEON e esta monografia, mantendo o controle de versão e a consistência do código, adotou-se o sistema Git. Visando garantir a disponibilidade do projeto, o GitHub foi escolhido como plataforma de \textit{hosting}. A estrutura foi dividida em dois repositórios distintos devido à natureza das operações: um para o \textit{software} e outro para a monografia.
+
+A gestão dos dois projetos foi realizada com o GitHub Projects, que oferece uma estrutura de \textit{cards} similar ao Kanban. Essa ferramenta proporciona funcionalidades como documentação de tarefas, acompanhamento do andamento do projeto e organização geral dos \textit{cards}. Adicionalmente, foi implementada uma \textit{pipeline} de entrega contínua para eventuais \textit{releases} da monografia utilizando o GitHub Actions.
+
 \section{Mecanismo de Análise de Dados}\label{sec:data_analysis}
 Visando obter conclusões válidas, deve-se interpretar os dados do experimento \cite{wohlinAnalysisInterpretation2000}. A interpretação dos dados deve ocorrer em três etapas, conforme ilustra a Figura \ref{fig:steps-data}.
 
@@ -101,4 +205,4 @@ Visando obter conclusões válidas, deve-se interpretar os dados do experimento 
 
 Segundo \cite{wohlinAnalysisInterpretation2000}, inicialmente os dados são caracterizados por meio da estatística descritiva. Em seguida, realiza-se a exclusão de dados atípicos ou inválidos, de modo a reduzir o \textit{dataset} a pontos confiáveis. Por fim, no terceiro passo, os dados são analisados por meio de testes de hipótese, avaliando-se estatisticamente a conjectura que originou a pesquisa.
 
-Considerando que esta investigação possui caráter quantitativo, optou-se pela análise descritiva dos dados, empregando medidas de tendência central para caracterizar o elemento “aula” analisado.
+Considerando que esta investigação possui caráter - não exclusivo - quantitativo, optou-se pela análise descritiva dos dados, empregando medidas de tendência central para caracterizar o elemento “aula” analisado.

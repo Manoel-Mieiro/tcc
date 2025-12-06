@@ -1,0 +1,137 @@
+\subsubsection{Frequência de Troca de Aba}
+
+A Frequência de Troca de Aba (\textit{Tab Switch Frequency}) mede a taxa média de alternância entre diferentes abas do navegador durante ao longo de uma aula. Esta métrica serve como indicador de comportamento multitarefa, capturando a tendência dos alunos em alternar entre diferentes conteúdos, denotando dispersão de foco.
+
+O cálculo é realizado pela função \textbf{calculate\_tab\_switch\_frequency(traces)} que implementa a seguinte fórmula:
+
+\begin{equation}
+\text{Frequência de Troca de Aba} = \frac{\sum \text{trocas de URL}}{\sum \text{tempo de sessão (horas)}}
+\end{equation}
+
+\textbf{onde:}
+\begin{itemize}
+    \item $\sum \text{trocas de URL}$ é o somatório das mudanças de URL de todos os alunos
+    \item $\sum \text{tempo de sessão (horas)}$ é o somatório do tempo total de sessão em horas
+\end{itemize}
+
+% \lstinputlisting[
+%     language=python,
+%     caption={Cálculo da Frequência de Troca de Aba},
+%     firstline=11,
+%     lastline=69,
+%     label={lst:calculate_tab_switch_frequency}
+% ]{scripts/metricsCalc/multitasking.py}
+
+\subsubsection{Intensidade Multitarefa}
+
+A Intensidade Multitarefa (\textit{Multitasking Intensity}) é uma métrica composta que quantifica o grau de comportamento multitarefa durante as sessões de aprendizagem em uma escala de 0 a 1. Diferente das métricas anteriores que medem aspectos isolados, esta integra múltiplas dimensões do comportamento de alternância para fornecer uma visão mais abrangente.
+
+O cálculo é realizado pela função \textbf{calculate\_multitasking\_intensity(traces)} que combina dois fatores principais:
+
+\begin{equation}
+\text{Intensidade Multitarefa} = \frac{I_d + I_s}{2}
+\end{equation}
+
+\textbf{onde:}
+\begin{itemize}
+    \item $I_d = \text{Razão de Switches para Distração}$ é a proporção de trocas direcionadas a distrações
+    \item $I_s = \text{Frequência Normalizada de Switches}$ é a taxa de trocas ajustada pelo tempo de sessão
+\end{itemize}
+
+% \lstinputlisting[
+%     language=python,
+%     caption={Cálculo da Intensidade Multitarefa},
+%     firstline=72,
+%     lastline=151,
+%     label={lst:calculate_multitasking_intensity}
+% ]{scripts/metricsCalc/multitasking.py}
+
+\textbf{Componentes da métrica por aluno}:
+\begin{enumerate}
+    \item \textbf{Razão de Switches para Distração (por aluno)}:
+    \begin{equation}
+    R_{d,i} = \frac{S_{d,i}}{S_{t,i}}
+    \end{equation}
+    \textbf{onde:}
+    \begin{itemize}
+        \item $S_{d,i}$ é o número de switches para distração de um dado aluno $i$
+        \item $S_{t,i}$ é o número total de switches de um aluno $i$
+    \end{itemize}
+    
+    \item \textbf{Frequência Normalizada de Switches (por aluno)}:
+    \begin{equation}
+    F_{n,i} = \min\left(1, \frac{S_{t,i}}{H_i} \times \frac{1}{30}\right)
+    \end{equation}
+    \textbf{onde:}
+    \begin{itemize}
+        \item $S_{t,i}$ é o número total de switches de um dado aluno $i$
+        \item $H_i$ é o tempo de sessão de um dado aluno $i$ em horas
+        \item 30 switches/hora é o limiar máximo para normalização
+    \end{itemize}
+\end{enumerate}
+
+\textbf{Intensidade Multitarefa (por aluno)}:
+\begin{equation}
+I_{m,i} = \frac{R_{d,i} + F_{n,i}}{2}
+\end{equation}
+
+\textbf{Intensidade Multitarefa Média (turma)}:
+\begin{equation}
+\bar{I}_m = \frac{1}{n} \sum_{i=1}^{n} I_{m,i}
+\end{equation}
+
+\textbf{Etapas do cálculo}:
+\begin{enumerate}
+    \item \textbf{Agrupamento e ordenação}: Organiza traces por aluno e ordena cronologicamente
+    \item \textbf{Contagem dupla}: Registra tanto \textit{switches} totais quanto \textit{switches} específicos para distração
+    \item \textbf{Cálculo dos fatores}: Computa razão de distração e frequência normalizada
+    \item \textbf{Combinação}: Calcula média aritmética dos dois fatores para score final
+    \item \textbf{Média agregada}: Computa média dos \textit{scores} individuais dos alunos
+\end{enumerate}
+
+\subsubsection{Fragmentação do Foco}
+
+A Fragmentação do Foco (\textit{Focus Fragmentation}) mede a taxa de segmentos de atenção dedicada à aula por hora, quantificando o grau de interrupção e retomada do foco durante a sessão de aprendizagem. Esta métrica captura a qualidade da atenção sustentada, complementando as medidas de frequência de distração.
+
+O cálculo é realizado pela função \textbf{calculate\_focus\_fragmentation(traces)} que implementa a seguinte abordagem:
+
+\textbf{Fragmentação do Foco de um aluno}:
+\begin{equation}
+F_i = \frac{S_i}{H_i}
+\end{equation}
+
+\textbf{onde para o aluno $i$:}
+\begin{itemize}
+    \item $S_i$: número de segmentos de foco na aula
+    \item $H_i$: tempo total de sessão em horas
+\end{itemize}
+
+\textbf{Fragmentação Média da Turma}:
+\begin{equation}
+\bar{F} = \frac{1}{n} \sum_{i=1}^{n} F_i
+\end{equation}
+
+% \lstinputlisting[
+%     language=python,
+%     caption={Cálculo da Fragmentação do Foco},
+%     firstline=154,
+%     lastline=218,
+%     label={lst:calculate_focus_fragmentation}
+% ]{scripts/metricsCalc/multitasking.py}
+
+\textbf{Etapas do cálculo}:
+\begin{enumerate}
+    \item \textbf{Agrupamento e ordenação}: Organiza \textit{traces} por aluno e ordena cronologicamente
+    \item \textbf{Detecção de transições}: Identifica mudanças de estado entre "em foco" e "fora de foco"
+    \item \textbf{Contagem de segmentos}: Incrementa contador a cada início de período de foco na aula
+    \item \textbf{Monitoramento de estado}: Mantém estado atual do aluno (em foco ou não)
+    \item \textbf{Normalização horária}: Converte contagem de segmentos para taxa por hora
+    \item \textbf{Média agregada}: Computa média das taxas individuais
+\end{enumerate}
+
+\textbf{Conceito de segmento de foco}:
+\begin{itemize}
+    \item \textbf{Início}: Transição de qualquer aba para a aba da aula
+    \item \textbf{Término}: Transição da aba da aula para qualquer outra aba
+    \item \textbf{Duração}: Período contínuo na aba da aula entre transições
+\end{itemize}

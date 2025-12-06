@@ -1,0 +1,1 @@
+cp -r ../CEFET\ -\ RJ/8°\ Período/espeon/api/app/services/postgres/reports/metricsCalc/ -t scripts/
