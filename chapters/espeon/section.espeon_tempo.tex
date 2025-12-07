@@ -1,10 +1,10 @@
 \subsection{Tendência de Engajamento}
-A Tendência de Engajamento \textit{Engagement Trend} analisa a evolução temporal do foco dos alunos ao longo da duração total da aula, dividindo a sessão em quatro segmentos temporais iguais (quartis). Esta métrica permite identificar padrões de variação no engajamento, como desgaste da atenção, picos de interesse ou momentos críticos de distração.
+Métrica que exibe o foco dos alunos ao longo do período de aula, segmentando a sessão em quatro intervalos iguals, os quartis.Essa abordagem permite identificar padrões de variação no engajamento — como períodos de maior atenção, momentos de queda de foco ou recuperação da participação.
 
-O cálculo é realizado pela função \textbf{calculate\_engagement\_trend(traces, lecture\_id)} que implementa a seguinte abordagem:
+A proporção de engajamento em um dado quartil $Q_i$, com $i \in \{1,2,3,4\}$ é expressa pela seguinte equação:
 
-\begin{equation}
-\text{Engajamento}(Q_i) = \frac{\sum \text{tempo focado em } Q_i}{\sum \text{tempo total em } Q_i} \quad \text{para } i \in \{1,2,3,4\}
+\begin{equation}\label{eq:engagement_trend}
+\text{Engajamento}(Q_i) = \frac{\sum \text{tempo focado em } Q_i}{\sum \text{tempo total em } Q_i}
 \end{equation}
 
 % \lstinputlisting[
@@ -15,82 +15,41 @@ O cálculo é realizado pela função \textbf{calculate\_engagement\_trend(trace
 %     label={lst:calculate_engagement_trend}
 % ]{scripts/metricsCalc/time.py}
 
-\textbf{Etapas do cálculo}:
-\begin{enumerate}
-    \item \textbf{Recuperação de metadados}: Obtém data, horário de início e fim reais da aula
-    \item \textbf{Construção temporal}: Cria objetos \textit{datetime} com data e hora combinadas
-    \item \textbf{Definição de quartis}: Divide a duração total em quatro intervalos iguais
-    \item \textbf{Mapeamento temporal}: Para cada intervalo entre \textit{traces} consecutivos:
-    \begin{itemize}
-        \item Calcula tempo decorrido desde o início da aula
-        \item Atribui ao quartil correspondente baseado no timestamp
-        \item Soma ao tempo total do quartil
-        \item Se estava focado na aula, soma ao tempo focado do quartil
-    \end{itemize}
-    \item \textbf{Cálculo de proporções}: Para cada quartil, calcula razão entre tempo focado e tempo total
-\end{enumerate}
+A partir da data e período da aula são construídos objetos \textit{datetime} para permitir o cálculo preciso da duração. Em seguida, divide-se o tempo total em quatro quartis equivalentes. Para cada intervalo entre \textit{traces} consecutivos, calcula-se o tempo decorrido desde o início, identifica-se o quartil correspondente com base no \textit{timestamp} e são acumulados tanto o tempo total quanto o tempo focado naquele quartil, quando o aluno está na aba da aula. Por fim, computa-se, para cada quartil, a razão entre tempo focado e tempo total, resultando no perfil temporal do engajamento.
 
-\textbf{Definição dos quartis}:
-\begin{itemize}
-    \item \textbf{Q1 (Quartil 1)}: Primeiro 25\% da duração da aula (0--25\%)
-    \item \textbf{Q2 (Quartil 2)}: Segundo 25\% da duração (25--50\%)
-    \item \textbf{Q3 (Quartil 3)}: Terceiro 25\% da duração (50--75\%)
-    \item \textbf{Q4 (Quartil 4)}: Último 25\% da duração (75--100\%)
-\end{itemize}
-
+% \textbf{Definição dos quartis}:
+% \begin{itemize}
+%     \item \textbf{Q1 (Quartil 1)}: Primeiro 25\% da duração da aula (0--25\%)
+%     \item \textbf{Q2 (Quartil 2)}: Segundo 25\% da duração (25--50\%)
+%     \item \textbf{Q3 (Quartil 3)}: Terceiro 25\% da duração (50--75\%)
+%     \item \textbf{Q4 (Quartil 4)}: Último 25\% da duração (75--100\%)
+% \end{itemize}
 
 \subsection{Pico de Engajamento}
-O Pico de Engajamento Temporal (\textit{Peak Engagement Time}) identifica o período de 5 minutos durante a aula que concentrou a maior quantidade de tempo focado pelos alunos. Esta métrica permite localizar os momentos de máxima atenção coletiva, fornecendo insights sobre quais segmentos da aula foram mais efetivos em capturar e manter o engajamento dos estudantes.
+Tem como propósito identificar o intervalo contínuo de cinco minutos que concentrou a maior quantidade de tempo focado pelos alunos ao longo da aula. A definição formal é expressa pela seguinte equação:
 
-O cálculo é realizado pela função \textbf{calculate\_peak\_engagement\_time(traces, lecture\_id)} que implementa a seguinte abordagem:
-
-\begin{equation}
+\begin{equation}\label{eq:peak_engagement}
 \text{Pico de Engajamento} = \arg\max_{t \in T} \sum_{a \in A} \text{tempo\_focado}_a(t)
 \end{equation}
 
-\textbf{onde:}
-\begin{itemize}
-    \item $T$ é o conjunto de intervalos de 5 minutos durante a aula
-    \item $A$ é o conjunto de todos os alunos
-    \item $\text{tempo\_focado}_a(t)$ é o tempo que o aluno $a$ esteve focado durante o intervalo $t$
-\end{itemize}
+$T$ representa o conjunto de intervalos de cinco minutos que cobrem toda a duração da aula, $A$ é o conjunto de alunos participantes e $\text{tempo\_focado}_a(t)$ corresponde ao tempo que o aluno $a$ permaneceu focado durante o intervalo $t$.
 
-% \lstinputlisting[
-%     language=python,
-%     caption={Cálculo do Pico de Engajamento},
-%     firstline=201,
-%     lastline=255,
-%     label={lst:calculate_peak_engagement_time}
-% ]{scripts/metricsCalc/time.py}
-
-\textbf{Etapas do cálculo}:
-\begin{enumerate}
-    \item \textbf{Recuperação temporal}: Obtém horários reais de início e fim da aula
-    \item \textbf{Agrupamento em intervalos}: Divide a aula em segmentos de 5 minutos
-    \item \textbf{Processamento incremental}: Para cada intervalo entre \textit{traces}:
-    \begin{itemize}
-        \item Determina o intervalo de 5 minutos correspondente ao timestamp
-        \item Soma o tempo de foco (quando na aba da aula) ao intervalo
-        \item Acumula tempo focado de todos os alunos
-    \end{itemize}
-    \item \textbf{Identificação do pico}: Localiza o intervalo com maior soma acumulada de tempo focado
-\end{enumerate}
+O cálculo consite em dividir o período de aula em janelas sucessivas de cinco minutos. Para cada par de \textit{traces} consecutivos, identifica-se a qual janela temporal o respectivo \textit{timestamp} pertence e acumula-se o tempo de foco (isto é, o tempo em que o aluno permaneceu na aba da aula) na janela correspondente. Em seguida, somam-se os tempos focados de todos os alunos em cada intervalo e, ao final, identifica-se a janela cuja soma acumulada é máxima. 
 
 \subsection{Ponto de Queda de Engajamento}
-O Ponto de Queda de Engajamento (\textit{Dropoff Point}) identifica o momento temporal em que o nível de foco dos alunos cai para 50\% do pico máximo de engajamento observado durante a aula e permanece abaixo deste limiar de forma sustentada. Esta métrica é crucial para detectar quando a atenção coletiva diminui significativamente, indicando possíveis pontos de fadiga cognitiva ou perda de interesse no conteúdo.
 
-O cálculo é realizado pela função \textbf{calculate\_dropoff\_point(traces, lecture\_id)} que implementa a seguinte lógica:
+Identifica o instante em que o nível de foco coletivo dos alunos cai para menos de 50\% do pico máximo registrado durante a aula e permanece abaixo desse limiar de forma sustentada. Essa métrica permite detectar o momento em que a atenção começa a se deteriorar de maneira consistente, podendo ser indicativo de fadiga, saturação de conteúdo ou perda gradual de interesse por parte dos estudantes.
 
+A definição formal é expressa por:
 \begin{equation}
-\text{Dropoff Point} = \min\{t \mid \text{Engajamento}(t) < 0.5 \times \text{Pico} \land \forall s \in [t, t+15]: \text{Engajamento}(s) < 0.5 \times \text{Pico}\}
+D = \min\{t \mid E(t) < 0.5P \ \land \ \forall s \in [t,t+\Delta]: E(s) < 0.5P \}
 \end{equation}
 
-\textbf{onde:}
-\begin{itemize}
-    \item $\text{Pico} = \max_{t \in T} \text{Engajamento}(t)$ é o nível máximo de engajamento
-    \item $\text{Engajamento}(t)$ é a proporção de foco no intervalo temporal $t$
-    \item O limiar é definido como 50\% do pico máximo
-\end{itemize}
+Em que $P$ é o valor máximo observado de engajamento, $E(t)$ é o engajamento no intervalo temporal $t$, $\Delta$ representa o período mínimo de sustentação da queda (10--15 minutos) e $D$ indica o ponto inicial em que essa queda se torna estável. O limiar é definido como metade do pico, tornando a detecção adaptativa ao perfil de engajamento de cada aula.
+
+Com o período de aula, agrega-se a sessão em janelas contínuas de cinco minutos. Para cada janela, calcula-se a proporção de tempo em que os alunos permaneceram focados e identifica-se o valor máximo desse engajamento ao longo de toda a aula. Em seguida, define-se o limiar como 50\% do valor máximo encontrado e procura-se o primeiro intervalo cuja proporção esteja abaixo desse limite. Após essa detecção inicial, verifica-se se os intervalos subsequentes também permanecem abaixo do limiar estabelecido.
+
+
 
 % \lstinputlisting[
 %     language=python,
@@ -100,21 +59,11 @@ O cálculo é realizado pela função \textbf{calculate\_dropoff\_point(traces, 
 %     label={lst:calculate_dropoff_point}
 % ]{scripts/metricsCalc/time.py}
 
-\textbf{Etapas do cálculo}:
-\begin{enumerate}
-    \item \textbf{Processamento temporal}: Converte timestamps para tempo real desde início da aula
-    \item \textbf{Agrupamento em intervalos}: Divide em segmentos de 5 minutos
-    \item \textbf{Cálculo de engajamento}: Para cada intervalo, calcula proporção de tempo focado
-    \item \textbf{Identificação do pico}: Determina nível máximo de engajamento
-    \item \textbf{Definição do limiar}: Estabelece limite como 50\% do pico máximo
-    \item \textbf{Detecção de queda}: Encontra primeiro intervalo abaixo do limiar com sustentação temporal
-    \item \textbf{Verificação de sustentação}: Confirma que queda persiste por 10-15 minutos
-\end{enumerate}
 
-\textbf{Critérios de detecção}:
-\begin{itemize}
-    \item \textbf{Limiar adaptativo}: 50\% do pico máximo (não valor absoluto fixo)
-    \item \textbf{Sustentação temporal}: Queda deve persistir por 10-15 minutos
-    \item \textbf{Intervalos consecutivos}: Próximos 2-3 intervalos (10-15min) também abaixo do limiar
-    \item \textbf{Foco no primeiro ocorrência}: Identifica ponto inicial da queda significativa
-\end{itemize}
+% \textbf{Critérios de detecção}:
+% \begin{itemize}
+%     \item \textbf{Limiar adaptativo}: 50\% do pico máximo (não valor absoluto fixo)
+%     \item \textbf{Sustentação temporal}: Queda deve persistir por 10-15 minutos
+%     \item \textbf{Intervalos consecutivos}: Próximos 2-3 intervalos (10-15min) também abaixo do limiar
+%     \item \textbf{Foco no primeiro ocorrência}: Identifica ponto inicial da queda significativa
+% \end{itemize}
