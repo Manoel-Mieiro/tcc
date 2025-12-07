@@ -1,18 +1,13 @@
 \subsection{Frequência de Troca de Aba}
+Quantifica a taxa média de alternância entre diferentes abas do navegador ao longo de uma aula, funcionando como indicador de comportamento multitarefa e potencial dispersão de foco. Seu cálculo é definido pela razão entre o número total de trocas de \textit{URL} e o tempo total de sessão medido em horas:
 
-A Frequência de Troca de Aba (\textit{Tab Switch Frequency}) mede a taxa média de alternância entre diferentes abas do navegador durante ao longo de uma aula. Esta métrica serve como indicador de comportamento multitarefa, capturando a tendência dos alunos em alternar entre diferentes conteúdos, denotando dispersão de foco.
-
-O cálculo é realizado pela função \textbf{calculate\_tab\_switch\_frequency(traces)} que implementa a seguinte fórmula:
-
-\begin{equation}
+\begin{equation}\label{eq:tab_switch_frequency}
 \text{Frequência de Troca de Aba} = \frac{\sum \text{trocas de URL}}{\sum \text{tempo de sessão (horas)}}
 \end{equation}
 
-\textbf{onde:}
-\begin{itemize}
-    \item $\sum \text{trocas de URL}$ é o somatório das mudanças de URL de todos os alunos
-    \item $\sum \text{tempo de sessão (horas)}$ é o somatório do tempo total de sessão em horas
-\end{itemize}
+Nessa definição, o numerador corresponde ao somatório das mudanças de aba realizadas pelos alunos durante a aula, enquanto o denominador representa o somatório do tempo total de sessão convertido em horas. 
+
+% O cálculo é realizado pela função \textbf{calculate\_tab\_switch\_frequency(traces)} que implementa a seguinte fórmula: \begin{equation} \text{Frequência de Troca de Aba} = \frac{\sum \text{trocas de URL}}{\sum \text{tempo de sessão (horas)}} \end{equation}
 
 % \lstinputlisting[
 %     language=python,
@@ -23,93 +18,54 @@ O cálculo é realizado pela função \textbf{calculate\_tab\_switch\_frequency(
 % ]{scripts/metricsCalc/multitasking.py}
 
 \subsection{Intensidade Multitarefa}
+A métrica quantifica, em uma escala de 0 a 1, o grau de comportamento multitarefa durante as sessões de aprendizagem. Diferentemente das métricas anteriores, que avaliam dimensões isoladas, esta integra múltiplos fatores relacionados à alternância de abas para oferecer uma medida mais abrangente. Seu cálculo é feito conforme a Equação~\ref{eq:multitasking_intensity}:
 
-A Intensidade Multitarefa (\textit{Multitasking Intensity}) é uma métrica composta que quantifica o grau de comportamento multitarefa durante as sessões de aprendizagem em uma escala de 0 a 1. Diferente das métricas anteriores que medem aspectos isolados, esta integra múltiplas dimensões do comportamento de alternância para fornecer uma visão mais abrangente.
-
-O cálculo é realizado pela função \textbf{calculate\_multitasking\_intensity(traces)} que combina dois fatores principais:
-
-\begin{equation}
+\begin{equation}\label{eq:multitasking_intensity}
 \text{Intensidade Multitarefa} = \frac{I_d + I_s}{2}
 \end{equation}
 
-\textbf{onde:}
-\begin{itemize}
-    \item $I_d = \text{Razão de Switches para Distração}$ é a proporção de trocas direcionadas a distrações
-    \item $I_s = \text{Frequência Normalizada de Switches}$ é a taxa de trocas ajustada pelo tempo de sessão
-\end{itemize}
+O termo $I_d$ representa a proporção de trocas de aba direcionadas a conteúdos não relacionados à aula, enquanto $I_s$ expressa a taxa de alternâncias ajustada pelo tempo total de sessão.
 
-% \lstinputlisting[
-%     language=python,
-%     caption={Cálculo da Intensidade Multitarefa},
-%     firstline=72,
-%     lastline=151,
-%     label={lst:calculate_multitasking_intensity}
-% ]{scripts/metricsCalc/multitasking.py}
+O cálculo individual desses componentes ocorre por aluno. A razão $I_d$ ($R_{d,i}$) é representada na Equação~\ref{eq:ratio_switch_distraction} abaixo:
 
-\textbf{Componentes da métrica por aluno}:
-\begin{enumerate}
-    \item \textbf{Razão de Switches para Distração (por aluno)}:
-    \begin{equation}
-    R_{d,i} = \frac{S_{d,i}}{S_{t,i}}
-    \end{equation}
-    \textbf{onde:}
-    \begin{itemize}
-        \item $S_{d,i}$ é o número de switches para distração de um dado aluno $i$
-        \item $S_{t,i}$ é o número total de switches de um aluno $i$
-    \end{itemize}
-    
-    \item \textbf{Frequência Normalizada de Switches (por aluno)}:
-    \begin{equation}
-    F_{n,i} = \min\left(1, \frac{S_{t,i}}{H_i} \times \frac{1}{30}\right)
-    \end{equation}
-    \textbf{onde:}
-    \begin{itemize}
-        \item $S_{t,i}$ é o número total de switches de um dado aluno $i$
-        \item $H_i$ é o tempo de sessão de um dado aluno $i$ em horas
-        \item 30 switches/hora é o limiar máximo para normalização
-    \end{itemize}
-\end{enumerate}
+\begin{equation}\label{eq:ratio_switch_distraction}
+R_{d,i} = \frac{S_{d,i}}{S_{t,i}}
+\end{equation}
 
-\textbf{Intensidade Multitarefa (por aluno)}:
-\begin{equation}
+$S_{d,i}$ é o número de trocas classificadas como distração e $S_{t,i}$ é o número total de trocas realizadas por um dado aluno $i$. Já a Frequência Normalizada de Switches $F_{n,i}$ é definida por:
+
+\begin{equation}\label{eq:normalized_switch_frequency}
+F_{n,i} = \min\left(1, \frac{S_{t,i}}{H_i} \times \frac{1}{30}\right)
+\end{equation}
+
+ O total de trocas do aluno $i$ é expresso por $S_{t,i}$, enquanto $H_i$ é seu tempo de sessão convertido em horas, e o fator de (30) trocas por hora funciona como um limite superior para normalização, garantindo que o valor seja truncado em 1 quando a atividade multitarefa é extremamente elevada. A integração desses dois componentes resulta na intensidade multitarefa final, permitindo comparar de forma padronizada o comportamento multitarefa entre diferentes alunos e sessões.
+
+Com $R_{d,i}$ e $F_{n,i}$ calcula-se a média aritmética $I_{m,i}$ conforme Equação~\ref{eq:multitasking_intensity_student}
+
+\begin{equation}\label{eq:multitasking_intensity_student}
 I_{m,i} = \frac{R_{d,i} + F_{n,i}}{2}
 \end{equation}
 
-\textbf{Intensidade Multitarefa Média (turma)}:
-\begin{equation}
-\bar{I}_m = \frac{1}{n} \sum_{i=1}^{n} I_{m,i}
+Há também a média da turma, obtida conforme a Equação~\ref{eq:multitasking_intensity_avg} abaixo:
+\begin{equation}\label{eq:multitasking_intensity_avg}
+\bar{I}*m = \frac{1}{n} \sum*{i=1}^{n} I_{m,i}
 \end{equation}
 
-\textbf{Etapas do cálculo}:
-\begin{enumerate}
-    \item \textbf{Agrupamento e ordenação}: Organiza traces por aluno e ordena cronologicamente
-    \item \textbf{Contagem dupla}: Registra tanto \textit{switches} totais quanto \textit{switches} específicos para distração
-    \item \textbf{Cálculo dos fatores}: Computa razão de distração e frequência normalizada
-    \item \textbf{Combinação}: Calcula média aritmética dos dois fatores para score final
-    \item \textbf{Média agregada}: Computa média dos \textit{scores} individuais dos alunos
-\end{enumerate}
-
 \subsection{Fragmentação do Foco}
+Corresponde à taxa de segmentos de atenção dedicados à aula por hora, medindo o grau com que o foco é interrompido e retomado ao longo da sessão. Essa medida complementa as métricas de distração ao avaliar a qualidade da atenção sustentada, oferecendo uma perspectiva sobre a constância do engajamento. A fragmentação individual do foco para um aluno $i$ é definida como:
 
-A Fragmentação do Foco (\textit{Focus Fragmentation}) mede a taxa de segmentos de atenção dedicada à aula por hora, quantificando o grau de interrupção e retomada do foco durante a sessão de aprendizagem. Esta métrica captura a qualidade da atenção sustentada, complementando as medidas de frequência de distração.
-
-O cálculo é realizado pela função \textbf{calculate\_focus\_fragmentation(traces)} que implementa a seguinte abordagem:
-
-\textbf{Fragmentação do Foco de um aluno}:
-\begin{equation}
+\begin{equation}\label{eq:focus_fragmentation_student}
 F_i = \frac{S_i}{H_i}
 \end{equation}
 
-\textbf{onde para o aluno $i$:}
-\begin{itemize}
-    \item $S_i$: número de segmentos de foco na aula
-    \item $H_i$: tempo total de sessão em horas
-\end{itemize}
+É feita a razão entre o número de segmentos de foco detectados $S_i$ e o tempo total de sessão em horas $H_i$. A partir destes valores individuais obtém-se a Fragmentação Média da Turma, expressa como a média aritmética entre os $n$ alunos:
 
-\textbf{Fragmentação Média da Turma}:
-\begin{equation}
+\begin{equation}\label{eq:focus_fragmentation_avg}
 \bar{F} = \frac{1}{n} \sum_{i=1}^{n} F_i
 \end{equation}
+
+O processo de cálculo inicia-se com o agrupamento dos \textit{traces} por aluno e sua ordenação cronológica. Em seguida ocorrem as etapas de detecção de transições, identificando mudanças entre estados de “em foco” e “fora de foco”. Cada nova transição para a aba da aula incrementa a contagem de segmentos de foco, sendo que um monitoramento contínuo mantém o estado atual do aluno. Após a contagem, normaliza-se o valor obtido em função do tempo total de sessão (em horas), resultando em uma taxa de fragmentação. Por fim, computa-se a média agregada dessas taxas para todos os alunos. Um segmento de foco é caracterizado pelo período contínuo em que o aluno permanece na aba da aula, iniciando-se quando há uma transição para essa aba e terminando quando ocorre a mudança para qualquer outra aba.
+
 
 % \lstinputlisting[
 %     language=python,
@@ -119,19 +75,3 @@ F_i = \frac{S_i}{H_i}
 %     label={lst:calculate_focus_fragmentation}
 % ]{scripts/metricsCalc/multitasking.py}
 
-\textbf{Etapas do cálculo}:
-\begin{enumerate}
-    \item \textbf{Agrupamento e ordenação}: Organiza \textit{traces} por aluno e ordena cronologicamente
-    \item \textbf{Detecção de transições}: Identifica mudanças de estado entre "em foco" e "fora de foco"
-    \item \textbf{Contagem de segmentos}: Incrementa contador a cada início de período de foco na aula
-    \item \textbf{Monitoramento de estado}: Mantém estado atual do aluno (em foco ou não)
-    \item \textbf{Normalização horária}: Converte contagem de segmentos para taxa por hora
-    \item \textbf{Média agregada}: Computa média das taxas individuais
-\end{enumerate}
-
-\textbf{Conceito de segmento de foco}:
-\begin{itemize}
-    \item \textbf{Início}: Transição de qualquer aba para a aba da aula
-    \item \textbf{Término}: Transição da aba da aula para qualquer outra aba
-    \item \textbf{Duração}: Período contínuo na aba da aula entre transições
-\end{itemize}
