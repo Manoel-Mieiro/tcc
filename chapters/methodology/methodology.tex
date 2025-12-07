@@ -66,7 +66,7 @@ A análise dos dados é realizada com base nos relatórios em PDF emitidos pelo 
 
 Adicionalmente, será utilizado o \textit{Power BI} para uma visualização mais intuitiva e interativa dos dados, de modo a compor uma análise de caráter macro sobre o conjunto coletado. A Figura~\ref{fig:dashboard} ilustra o \textit{dashboard} desenvolvido a partir do consumo da \textit{API} de relatórios.
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \begin{minipage}{0.999\textwidth}
         \centering
@@ -81,10 +81,10 @@ A seguir é definido o ferramental estatístico descritivo adotado na construç�
 
 \subsection{Estatística Utilizada}\label{sub:utilized_statistics}
 \subsubsection{Média Aritmética}
-Entende-se por média aritmética a medida de tendência central que representa um “ponto médio” de um conjunto de dados. Frequentemente denominada simplesmente de média, ela pode ser interpretada como uma estimativa da expectativa de uma variável estocástica a partir da qual as observações presentes no conjunto de dados são amostradas \cite{wohlinAnalysisInterpretation2000}.
+Entende-se por média aritmética a medida de tendência central que representa um “ponto médio” de um conjunto de dados. Frequentemente denominada simplesmente de média, ela pode ser interpretada como uma estimativa da expectativa de uma variável estocástica a partir da qual as observações presentes no conjunto de dados são amostradas \cite{wohlinAnalysisInterpretation2000}. No ESPEON, foi empregada para o cálculo da \textbf{Duração Média do Foco} e \textbf{Tempo Médio por Aluno}.
 
 \subsubsection{Quartis}
-Alternativa à medidas afetadas por valores extremos (média e desvio-padrão), os quartis são denotadores de tendência central e dispersão de distribuições assimétricas \cite{samapintoEstatisticaBasica2010}. São representados em quatro partes iguais, com cada uma responsável por 25\% das observações feitas, sendo representado graficamente na Figura.
+Alternativa à medidas afetadas por valores extremos (média e desvio-padrão), os quartis são denotadores de tendência central e dispersão de distribuições assimétricas \cite{samapintoEstatisticaBasica2010}. São representados em quatro partes iguais, com cada uma responsável por 25\% das observações feitas, sendo representado graficamente na Figura~\ref{fig:qurtile_graphics}.
 
 \begin{figure}[H]
     \centering
@@ -96,6 +96,8 @@ Alternativa à medidas afetadas por valores extremos (média e desvio-padrão), 
     \end{minipage}\hfill
 \end{figure}
 
+Na extensão, é utilizada para descrever o foco discente ao longo do período da aula, segemantando a sessão em quatro partes iguais e atribuindo um percentual de atenção ao longo dos intervalos.
+
 % \subsubsection{Medidas de Posição Relativa}
 % \begin{itemize}
 %     \item \textbf{Quartis (Q1, Q2, Q3, Q4)} - Para análise temporal segmentada da aula:
@@ -106,7 +108,7 @@ Alternativa à medidas afetadas por valores extremos (média e desvio-padrão), 
 
 
 \subsubsection{Cumes e Vales}
-O cume representa o máximo da curva representativa de uma séria cronológica \cite{da1970dicionario}, enquanto o oposto, vale, seria o mínimo nessa disposição.
+O cume representa o máximo da curva representativa de uma séria cronológica \cite{da1970dicionario}, enquanto o oposto, vale, seria o mínimo nessa disposição. No ESPEON, são utilizados na seção de \textbf{Padrões Temporais} do relatório para os cálculos de \textbf{Pico de Engajamento} e \textbf{Ponto de Queda}, respectivamente.
 % \subsubsection{Operadores de Extremos}
 % \begin{itemize}
 %     \item \textbf{Máximo ($\max$)} - Identificação do pico de engajamento:
@@ -126,7 +128,7 @@ O cume representa o máximo da curva representativa de uma séria cronológica \
 % \end{itemize}
 
 \subsubsection{Razão e Proporção}
-Na estatística, entende-se como porpoção valores a que se reduzem ou em que se resolvem relações de comparação entre a intensidade de dois fenômenos \cite{da1970dicionario}.
+Na estatística, entende-se como porpoção valores a que se reduzem ou em que se resolvem relações de comparação entre a intensidade de dois fenômenos \cite{da1970dicionario}. Foi empregada no cálculo das taxas de presença, foco, intensidade multitarefa e fragmentação da atenção.
 % \subsubsection{Medidas de Razão e Proporção}
 % \begin{itemize}
 %     \item \textbf{Razão/Proporção} - Base para todas as métricas percentuais:
@@ -143,7 +145,7 @@ Na estatística, entende-se como porpoção valores a que se reduzem ou em que s
 % \end{itemize}
 
 \subsubsection{Média Ponderada}
-A média ponderada é uma medida de tendência central em que cada valor observado contribui para o resultado de acordo com um peso associado \cite{da1970dicionario}. Em vez de atribuir igual importância a todos os elementos, a média ponderada considera que determinadas observações podem ter maior relevância no conjunto de dados.
+A média ponderada é uma medida de tendência central em que cada valor observado contribui para o resultado de acordo com um peso associado \cite{da1970dicionario}. Em vez de atribuir igual importância a todos os elementos, a média ponderada considera que determinadas observações podem ter maior relevância no conjunto de dados. Foi empregada na construção dos \textit{scores}, dados pesos atribuídos a cada métrica envolvida em seu cálculo.
 % \subsubsection{Agregação Composta}
 % \begin{itemize}
 %     \item \textbf{Média Ponderada} - Para scores que combinam múltiplas métricas:
