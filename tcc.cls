@@ -323,6 +323,11 @@
 \pagebreak
 }
 
+
+%dresumoheader
+\newcommand{\dresumoheader}[9]{\par\noindent\uppercase{#1}, #2. \textbf{#3}. #4. #5 --- #6. #7. #8, #9.\\[3em]}
+
+
 %dabstract
 \newcommand{\dabstract}[2]{
 	\begin{center}

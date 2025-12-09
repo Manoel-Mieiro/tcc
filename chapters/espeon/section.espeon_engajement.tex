@@ -1,0 +1,109 @@
+\subsection{Engajamento por Câmera}
+A métrica mede a proporção do tempo de sessão durante a qual os alunos mantiveram sua câmera de vídeo ativa, a nível de permissão no navegador. É definida na Equação~\ref{eq:student_camera_engagement}.
+
+\begin{equation}\label{eq:student_camera_engagement}
+E_{c,i} = \frac{T_{c,i}}{T_{s,i}}
+\end{equation}
+
+O cálculo é feito para um dado aluno $i$, e é feita a razão entre tempo com câmera ativa ($T_{c,i}$) e o tempo total de sessão ($T_{s,i}$), ambos em minutos.
+
+A métrica de Engajamento por Câmera Médio da Turma corresponde à média aritmética dos engajamentos individuais por câmera. É definida na Equação~\ref{eq:student_camera_engagement_avg}, sendo calculada pela soma das proporções individuais $E_{c,i}$ dividida pelo número total de alunos $n$.
+
+% \lstinputlisting[
+%     language=python,
+%     caption={Cálculo do Engajamento por Câmera},
+%     firstline=8,
+%     lastline=66,
+%     label={lst:calculate_camera_engagement}
+% ]{scripts/metricsCalc/participation.py}
+
+\begin{equation}\label{eq:student_camera_engagement_avg}
+\bar{E}c = \frac{1}{n} \sum{i=1}^{n} E_{c,i}
+\end{equation}
+
+A partir dos \textit{traces} já processados, estima-se para cada aluno o tempo em que a câmera permaneceu ativa, utilizando os intervalos entre registros consecutivos. A razão entre esse tempo e a duração total da sessão define a proporção individual de engajamento por câmera. A métrica final corresponde à média dessas proporções.
+
+% \textbf{Detecção de câmera ativa}:
+% \begin{itemize}
+%     \item \texttt{cameraEnabled}: Indica se a câmera está habilitada no sistema
+%     \item \texttt{cameraStreaming}: Indica se a câmera está transmitindo vídeo ativamente
+%     \item \textbf{Lógica OR}: Considera câmera ativa se qualquer um dos indicadores for verdadeiro
+% \end{itemize}
+
+
+\subsection{Engajamento por Microfone}
+Mede a proporção do tempo de sessão em que os alunos mantiveram o microfone ativo, a nível de permissão no navegador. Para um dado aluno $i$, é definido pela razão entre o tempo com microfone ativo ($T_{m,i}$) e o tempo total de sessão ($T_{s,i}$), conforme Equação~\ref{eq:microphone_engagement_student}.
+
+\begin{equation}\label{eq:microphone_engagement_student}
+E_{m,i} = \frac{T_{m,i}}{T_{s,i}}
+\end{equation}
+
+A partir das proporções individuais, obtém-se o Engajamento por Microfone Médio da Turma, calculado pela média aritmética dos valores $E_{m,i}$ para todos os $n$ alunos, segundo a Equação~\ref{eq:microphone_engagement_avg}.
+
+% \lstinputlisting[
+%     language=python,
+%     caption={Cálculo do Engajamento por Microfone},
+%     firstline=69,
+%     lastline=126,
+%     label={lst:calculate_microphone_engagement}
+% ]{scripts/metricsCalc/participation.py}
+
+\begin{equation}\label{eq:microphone_engagement_avg}
+\bar{E}*m = \frac{1}{n} \sum*{i=1}^{n} E_{m,i}
+\end{equation}
+
+Com os \textit{traces} previamente tratados, identifica-se o tempo de microfone ativo ao longo da sessão, com base nos intervalos entre registros consecutivos. A proporção individual de engajamento é obtida dividindo-se esse tempo pelo total da sessão, e a média dessas proporções resulta no valor agregado para a turma.
+
+% \textbf{Detecção de microfone ativo}:
+% \begin{itemize}
+%     \item \texttt{microphoneEnabled}: Indica se o microfone está habilitado no sistema
+%     \item \texttt{microphoneStreaming}: Indica se o microfone está transmitindo áudio ativamente
+%     \item \textbf{Lógica OR}: Considera microfone ativo se qualquer um dos indicadores for verdadeiro
+% \end{itemize}
+
+\subsection{Participação Voluntária Média}
+Corresponde à proporção do tempo de sessão durante a qual os alunos demonstram engajamento ativo através de sinais multimodais combinados. Esta métrica considera a presença simultânea na aba da aula juntamente com a ativação de pelo menos um dispositivo de mídia (câmera ou microfone), representando um comprometimento mais substantivo com a atividade de aprendizagem.
+
+Dado um aluno $i$, a participação voluntária é dada pela razão entre o tempo em participação voluntária $T_{p,i}$ e o tempo total de sessão $T_{s,i}$:
+
+\begin{equation}\label{eq:voluntary_participation_student}
+P_{v,i} = \frac{T_{p,i}}{T_{s,i}}
+\end{equation}
+
+De posse das proporções individuais, obtém-se o valor $P_{v,i}$, que é a média aritmética dos $n$ alunos:
+
+\begin{equation}\label{eq:voluntary_participation_avg}
+\bar{P}*v = \frac{1}{n} \sum*{i=1}^{n} P_{v,i}
+\end{equation}
+
+% \lstinputlisting[
+%     language=python,
+%     caption={Cálculo da Participação Voluntária Média},
+%     firstline=129,
+%     lastline=193,
+%     label={lst:calculate_avg_voluntary}
+% ]{scripts/metricsCalc/participation.py}
+
+Após a consolidação dos \textit{traces}, cada intervalo entre registros é analisado para verificar se o aluno estava na aba da aula e com algum canal de engajamento multimodal ativo (câmera ou microfone). Os intervalos que atendem a essa condição compõem o tempo de participação voluntária $T_{p,i}$, enquanto todos os intervalos formam o tempo total de sessão $T_{s,i}$. A razão individual $P_{v,i}$ é então calculada, e a média dessas razões define a métrica final da turma.
+
+
+% \textbf{Condições para participação voluntária}:
+% \begin{itemize}
+%     \item \textbf{Presença obrigatória}: Aluno deve estar na aba da aula (\texttt{is\_lecture\_tab()})
+%     \item \textbf{Engajamento multimodal}: Pelo menos um dispositivo de mídia ativo:
+%           \begin{itemize}
+%               \item Câmera habilitada (\texttt{cameraEnabled}) \textbf{OU}
+%               \item Câmera transmitindo (\texttt{cameraStreaming}) \textbf{OU}
+%               \item Microfone habilitado (\texttt{microphoneEnabled}) \textbf{OU}
+%               \item Microfone transmitindo (\texttt{microphoneStreaming})
+%           \end{itemize}
+% \end{itemize}
+
+% \textbf{Etapas do cálculo}:
+% \begin{enumerate}
+%     \item \textbf{Agrupamento e ordenação}: Organiza \textit{traces} por aluno cronologicamente
+%     \item \textbf{Verificação combinada}: Para cada intervalo, verifica condições de presença + mídia
+%     \item \textbf{Acúmulo temporal}: Soma tempos que atendem aos critérios combinados
+%     \item \textbf{Razão individual}: Calcula proporção de participação ativa para cada aluno
+%     \item \textbf{Média agregada}: Computa média das proporções individuais
+% \end{enumerate}

@@ -1,0 +1,43 @@
+\subsection{Tempo Médio Real de Sessão}
+Após o processamento dos \textit{traces} conforme a Seção~\ref{sec:traces_proccess}, estabelece-se um piso mínimo de duração igual a 1 minuto, aplicado também a sessões com valor inferior. A duração individual de cada sessão é calculada pela Equação~\ref{eq:session_length}, e a métrica final corresponde à média aritmética simples dessas durações.
+
+
+\begin{equation}\label{eq:session_length}
+T_{s,i} = \max\left(1, \frac{t_{i,\text{último}} - t_{i,\text{primeiro}}}{60}\right)
+\end{equation}
+
+Na qual, para cada aluno $i$, $t_{i,\text{primeiro}}$ e $t_{i,\text{último}}$ correspondem ao primeiro e útlimo \textit{trace}, em segundos, respectivamente. É feita a divizão por 60 para converter os segundos em minutos, com $\max(1, \cdot)$ garantindo ao menos 1 minuto.
+
+
+Depois, calcula-se o  tempo médio de sessão por turma, conforme a Equação~\ref{eq:real_mean_session_time}:
+\begin{equation}\label{eq:real_mean_session_time}
+\bar{T}_s = \frac{1}{n} \sum_{i=1}^{n} T_{s,i}
+\end{equation}
+
+Como premissas, temos que a extensão permanece ativa continuamente durante a participação do aluno, com os \textit{traces} emitidos regularmente durante a sessão. O primeiro registro representa o início efetivo da participação, enquanto o último o término da sessão do aluno.
+
+
+A taxa de presença da turma é determinada a partir do tempo médio real de sessão dos alunos, calculado com base nos registros de interação relacionados a uma aula específica. Inicialmente, os tempos de sessão individuais são organizados por aluno e utilizados para compor uma média aritmética simples, conforme definido pela Equação~\ref{eq:real_mean_session_time_class}:
+
+\begin{equation}\label{eq:real_mean_session_time_class}
+\bar{T}_s = \frac{1}{n} \sum_{i=1}^{n} T_{s,i}
+\end{equation}
+
+Nela, $T_{s,i}$ representa o tempo de sessão do aluno $i$, em minutos, e $n$ corresponde ao número total de alunos. Em seguida, esse valor médio é comparado com a duração oficial da aula para obtenção da proporção entre participação observada e tempo previsto. A razão é calculada por meio da Equação~\ref{eq:class_attendance_ratio} abaixo:
+
+\begin{equation}\label{eq:class_attendance_ratio}
+P = \min\left(1, \max\left(0, \frac{\bar{T}_s}{T_a}\right)\right)
+\end{equation}
+
+Nessa expressão, $\bar{T}_s$ indica o tempo médio da sessão da turma, $T_a$ corresponde à duração oficial da aula (em minutos), enquanto as funções $\min(1, \cdot)$ e $\max(0, \cdot)$ garantem respectivamente, que o resultado não ultrapasse 100\% e não assuma valores negativos. Dessa forma, o valor final da taxa de presença é normalizado entre 0 e 1, sendo comumente apresentado com três casas decimais de precisão.
+
+
+% \lstinputlisting[
+%     language=python,
+%     caption={Cálculo da Taxa de Presença},
+%     firstline=104,
+%     lastline=129,
+%     label={lst:calculate_attendance_ratio}
+% ]{scripts/metricsCalc/base.py}
+
+

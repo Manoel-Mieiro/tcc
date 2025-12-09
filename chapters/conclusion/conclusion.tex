@@ -1,198 +1,21 @@
-\chapter{Conclusão}\label{chp:conclusao}
-\section{Ameaça à Validade}\label{sec:validation_threat}
+\chapter{Considerações Finais}\label{chp:final_considerations}
+Esta pesquisa propôs investigar episódios de dispersão de foco e baixo engajamento em aulas remotas expositivas. Para tal, foi construída a ferramenta ESPEON, utilizada para monitoramento passivo do comportamento discente, analisando navegabilidade --- com ênfase nas trocas de aba como potenciais indicadores de distração --- e o uso de periféricos audiovisuais como sinalizadores de engajamento ativo.
 
-% \subsubsection{Tempo Médio Real de Sessão}
-% AMEAÇA À VALIDADE: Presença Técnica vs Cognitiva
-% A métrica assume que a extensão ativa corresponde a atenção cognitiva do aluno,
-% porém casos de "presença fantasma" (aba aberta sem interação real) podem
-% superestimar o engajamento. Esta limitação será discutida na Seção de Ameaças à Validade.
+Os dados coletados revelam um cenário complexo. Embora alguns indicadores de atenção tenham se mantido altos quando os estudantes estavam presentes na sessão (como a taxa geral de foco em algumas turmas), há contraste com questões de engajamento. A aula de Programação \textit{Web}, por exemplo, apresentou foco médio elevado (99{,}5\%), mas acompanhada de uma presença extremamente baixa (27{,}2\%) e alta fragmentação (990\%), sugerindo que a manutenção do foco não se traduz necessariamente em engajamento contínuo ou participação significativa. Em contrapartida, disciplinas como Análise e Modelagem de Sistemas e Programação Orientada a Objetos mostraram maior presença, porém acompanhada de atenção intermitente e considerável grau de multitarefa, variando entre 21\% e 35\%.
 
-% AMEAÇA À VALIDADE: Frequência de Traces  
-% O cálculo depende da frequência e consistência dos traces emitidos pela extensão.
-% Gaps prolongados entre interações podem indicar problemas técnicos ou desengajamento
-% não capturado pela métrica atual.
+Outro achado importante foi a ausência total de engajamento audiovisual em todas as turmas: câmeras e microfones permaneceram desligados, e não houve participações voluntárias. Esse padrão reforça o caráter predominantemente passivo dessas aulas e indica que, mesmo quando o estudante se mantém conectado e atento, a interação efetiva com o professor e com os colegas é mínima. A fragmentação de foco --- que atingiu níveis elevados em todas as disciplinas --- evidencia uma dinâmica de aprendizagem caracterizada por ciclos curtos de atenção,interrompidos por navegação paralela.
 
-% \subsubsection{Taxa de Presença}
-% AMEAÇA À VALIDADE: Normalização Artificial
-% O truncamento em 100% pode mascarar casos onde alunos permanecem além do horário,
-% perdendo informação sobre engajamento extra. Alternativas seriam manter a razão
-% original ou usar escalas logarítmicas para melhor distribuição.
+A análise temporal por quartis também confirmou variações significativas ao longo das sessões. Nas três disciplinas, observou-se queda acentuada no engajamento logo nos primeiros minutos de aula, com picos geralmente localizados na metade ou no terço final, momento em que ocorriam ativides práticas ou esclarecimento de dúvidas.
 
-% AMEAÇA À VALIDADE: Comparação Temporal Assimétrica
-% A comparação entre tempo médio individual e duração total da aula pode distorcer
-% a percepção de engajamento coletivo, especialmente em turmas com alta variância
-% de participação entre alunos.
+Ainda que os dados não permitam concluir que esse modelo seja inviável em ambientes digitais, os resultados evidenciam vulnerabilidades importantes --- sobretudo a facilidade de dispersão, o baixo nível de engajamento ativo e a dificuldade de manter a atenção por períodos prolongados sem alternâncias de estímulo.
 
-% \subsubsection{Taxa de Distração}
-% AMEAÇA À VALIDADE: Classificação Binária de Distração
-% A função is_distraction() opera com classificação binária (distração/não-distração),
-% podendo não capturar nuances em sites que podem ser tanto educacionais quanto
-% distractores dependendo do contexto de uso.
+Dessa forma, a pesquisa aponta que a adoção exclusiva de aulas expositivas no ensino remoto pode favorecer comportamentos noçivos ao rendimento acadêmico.
 
-% AMEAÇA À VALIDADE: Atribuição Temporal Proximal
-% O algoritmo atribui todo o intervalo entre dois traces ao estado do trace anterior,
-% o que pode superestimar tempos de distração se a mudança de estado ocorrer
-% no meio do intervalo.
-
-% AMEAÇA À VALIDADE: Sensibilidade à Frequência de Traces
-% Métrica altamente dependente da frequência de emissão de traces - baixa frequência
-% pode levar a estimativas imprecisas dos períodos de distração.
+Por fim, os resultados reforçam a relevância de ferramentas de monitoramento estudantil, que permitem refletir sobre a dinâmica de ensino aplicada e as percepções dos alunos; sobretudo \textit{softwares} de fácil aplicabilidade, como é o caso do ESPEON, que possibilitam conduzir estudos de forma rápida e descomplicada, além de prover uma base de conhecimento crescente, disponível para consulta por outros educadores. Assim, abre-se espaço para, futuramente, constituir um painel descritivo mais amplo sobre o panorama do ensino remoto.
 
 
-% \subsubsection{Frequência de Distração}
-% AMEAÇA À VALIDADE: Sensibilidade à Granularidade Temporal
-% A detecção de transições depende criticamente da frequência de amostragem dos traces.
-% Baixa frequência pode subestimar transições rápidas, enquanto alta frequência
-% pode capturar flutuações irrelevantes.
-
-% AMEAÇA À VALIDADE: Definição de Transição Válida
-% O algoritmo considera apenas transições diretas da aula para distração, ignorando
-% padrões complexos como: aula → neutro → distração, que também representam perda de foco.
-
-% AMEAÇA À VALIDADE: Viés de Duração de Sessão
-% Alunos com sessões muito curtas podem ter frequências artificialmente infladas
-% devido ao efeito de borda temporal.
-
-% \subsubsection{Frequência de Troca de Aba}
-% AMEAÇA À VALIDADE: Sensibilidade à Navegação Intra-site
-% O algoritmo detecta qualquer mudança de URL, incluindo navegação dentro do mesmo
-% site educacional, o que pode inflar artificialmente a métrica de multitarefa.
-
-% AMEAÇA À VALIDADE: Granularidade Temporal
-% A precisão da detecção de trocas depende da frequência de amostragem dos traces,
-% podendo subestimar trocas rápidas entre amostras temporais distantes.
-
-% AMEAÇA À VALIDADE: Contexto de Navegação
-% A métrica não distingue entre trocas relacionadas à aula (ex.: material complementar)
-% e trocas para distração, limitando a interpretação específica do comportamento.
-
-% \subsubsection{Fragmentação do Foco}
-% AMEAÇA À VALIDADE: Sensibilidade ao Limiar de Detecção
-% O algoritmo conta cada retorno à aula como novo segmento, podendo superestimar
-% fragmentação em casos de flutuações rápidas na mesma sessão de estudo.
-
-% AMEAÇA À VALIDADE: Duração Mínima de Segmento
-% Não há limiar mínimo de duração para considerar um segmento válido, o que pode
-% incluir retornos momentâneos sem engajamento cognitivo real.
-
-% AMEAÇA À VALIDADE: Estado Inicial Não Contabilizado
-% O primeiro segmento de foco não é contado se o aluno já iniciar na aula,
-% subestimando levemente a fragmentação real.
-
-
-% \subsubsection{Engajamento por Câmera}
-% AMEAÇA À VALIDADE: Atribuição Temporal Proximal
-% O algoritmo atribui todo o intervalo entre dois traces ao estado do trace anterior,
-% o que pode superestimar tempos de câmera ativa se a desativação ocorrer
-% no meio do intervalo entre amostras.
-
-% AMEAÇA À VALIDADE: Presença sem Engajamento
-% Câmera ativa não garante engajamento cognitivo - alunos podem manter câmera
-% ligada enquanto realizam outras atividades fora do campo visual.
-
-% AMEAÇA À VALIDADE: Fatores Contextuais Externos
-% Decisão de ativar câmera pode ser influenciada por fatores como qualidade de
-% internet, privacidade doméstica, normas culturais ou políticas institucionais,
-% não refletindo necessariamente nível de participação.
-
-% \subsection{Engajamento por Microfone}
-% AMEAÇA À VALIDADE: Atividade sem Fala
-% Microfone ativo não garere fala efetiva - pode capturar ruído ambiente,
-% respiração ou períodos de silêncio com microfone inadvertidamente ativado.
-
-% AMEAÇA À VALIDADE: Políticas de Sala
-% Normas do instrutor sobre quando manter microfone ativo/desativado podem
-% influenciar significativamente a métrica independente do engajamento real.
-
-% AMEAÇA À VALIDADE: Qualidade da Participação
-% A métrica não distingue entre fala relevante e ruído, limitando a avaliação
-% da qualidade das contribuições verbais.
-
-% \subsubsection{Participação Voluntária Média}
-% AMEAÇA À VALIDADE: Viés Tecnológico
-% Alunos com restrições técnicas (câmera/microfone quebrados, internet limitada)
-% são penalizados mesmo com alto engajamento cognitivo.
-
-% AMEAÇA À VALIDADE: Cultural e Contextual
-% Normas culturais sobre uso de câmera e preferências pessoais de participação
-% podem influenciar a métrica independente do engajamento real.
-
-% AMEAÇA À VALIDADE: Participação Não-Digital
-% Alunos podem estar altamente engajados tomando notas em papel ou realizando
-% atividades offline relacionadas, sem ativar dispositivos de mídia.
-
-
-% \subsubsection{Tendência de Engajamento}
-% AMEAÇA À VALIDADE: Assunção de Linearidade Temporal
-% A divisão em quartis assume distribuição uniforme de conteúdo pedagógico,
-% mas aulas com estrutura não-linear podem ter momentos naturalmente mais/ menos engajantes.
-
-% AMEAÇA À VALIDADE: Granularidade de Atribuição
-% Traces no limite entre quartis podem ser atribuídos incorretamente,
-% especialmente com baixa frequência de amostragem.
-
-% AMEAÇA À VALIDADE: Duração Heterogênea de Atividades
-% Atividades com durações diferentes dentro da aula podem distorcer
-% a interpretação do engajamento por quartil.
-
-% \subsubsection{Pico de Engajamento}
-% AMEAÇA À VALIDADE: Sensibilidade à Duração do Intervalo
-% A escolha de 5 minutos pode não capturar picos mais curtos ou diluir
-% engajamento em intervalos maiores do que a atividade real.
-
-% AMEAÇA À VALIDADE: Viés de Amostragem Temporal
-% Alunos com padrões de chegada/partida diferentes podem distorcer
-% a identificação do pico real de engajamento.
-
-% AMEAÇA À VALIDADE: Conflito com Estrutura da Aula
-% Picos podem refletir momentos de "descanso" (ex.: intervalo) onde
-% alunos estão presentes mas não necessariamente engajados.
-
-% \subsubsection{Ponto de Queda de Engajamento}
-% AMEAÇA À VALIDADE: Sensibilidade ao Limiar de 50%
-% A escolha de 50% do pico é arbitrária e pode não representar
-% queda significativa em todos os contextos pedagógicos.
-
-% AMEAÇA À VALIDADE: Requisito de Sustentação
-% A exigência de queda sustentada pode falhar em detectar
-% quedas abruptas seguidas de recuperações rápidas.
-
-% AMEAÇA À VALIDADE: Viés de Duração
-% Aulas muito curtas podem não permitir detecção confiável de
-% padrões de queda sustentada.
-
-% \subsubsection{\textit{Score} Geral de Engajamento}
-% AMEAÇA À VALIDADE: Arbitrariedade dos Pesos
-% A atribuição de pesos é baseada em pressupostos teóricos e pode não
-% refletir a importância real de cada componente em todos os contextos.
-
-% AMEAÇA À VALIDADE: Viés Tecnológico
-% Componentes que dependem de hardware específico (câmera/microfone)
-% podem penalizar injustamente alunos com limitações técnicas.
-
-% AMEAÇA À VALIDADE: Reducionismo
-% A redução de múltiplas dimensões complexas a um único número pode
-% ocultar nuances importantes e padrões específicos de engajamento.
-
-
-% \subsubsection{Saúde da Atenção}
-% AMEAÇA À VALIDADE: Idealização do Padrão
-% O conceito de "saúde" da atenção baseia-se em modelos ideais que podem
-% não considerar diferenças individuais legítimas em estilos cognitivos.
-
-% AMEAÇA À VALIDADE: Complexidade de Medição Indireta
-% As funções auxiliares realizam transformações complexas que podem
-% introduzir erros de medição cumulativos.
-
-
-% \subsubsection{Risco de Distração}
-% AMEAÇA À VALIDADE: Normalização Heterogênea
-% Os diferentes fatores usam escalas e métodos de normalização distintos,
-% o que pode afetar a comparabilidade entre componentes.
-
-% AMEAÇA À VALIDADE: Viés Contextual
-% Fatores como tipo de aula, horário e características individuais
-% podem influenciar os níveis basais de distração
+\section{Ameaças à Validade}\label{sec:validation_threat}
+\input{chapters/conclusion/validationThreats.tex}
 
 \section{Trabalhos Futuros}\label{sec:future_endeavor}
 \input{chapters/conclusion/futureEndeavors.tex}

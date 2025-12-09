@@ -1,0 +1,73 @@
+\subsection{\textit{Score} Geral de Engajamento}
+Essa métrica integra diferentes dimensões de participação em um único valor entre 0 e 1. Busca capturar, de forma sintética, a qualidade do engajamento estudantil combinando indicadores de foco, presença temporal e participação ativa. Essa abordagem ponderada permite uma avaliação holística do comportamento dos alunos durante a aula, fornecendo uma medida única, interpretável e comparável entre sessões distintas. A definição formal é expressa por:
+\begin{equation}
+\text{Engagement Score} = \sum_{i=1}^{5} w_i \times m_i
+\end{equation}
+
+$w_i$ corresponde ao peso atribuído a um componente específico da métrica e cada $m_i$ corresponde ao valor normalizado desse componente. Os pesos são definidos de forma que sua soma seja igual a 1, assegurando que o resultado permaneça dentro do intervalo unitário. Pode-se observar os valores atribuídos a esses pesos na Tabela~\ref{tab:engagement_score_components} a seguir.
+
+\input{tables/engagement_score_components.tex}
+
+A estrutura adotada estabelece um peso maior para fatores diretamente relacionados à atenção contínua e ao tempo efetivamente dedicado à aula, seguidos por indicadores de participação ativa e contribuições audiovisuais. Essa distribuição ponderada privilegia a dimensão cognitiva do engajamento, ao mesmo tempo em que incorpora elementos comportamentais e de interação síncrona.
+
+% \textbf{Justificativa dos pesos}:
+% \begin{itemize}
+%     \item \textbf{Foco na Aula (35\%)}: Considerado o indicador mais direto de atenção cognitiva
+%     \item \textbf{Presença Temporal (30\%)}: Base fundamental para qualquer tipo de engajamento
+%     \item \textbf{Participação Voluntária (20\%)}: Indica iniciativa ativa do estudante
+%     \item \textbf{Engajamento por Câmera (10\%)}: Contribuição visual limitada por fatores contextuais
+%     \item \textbf{Engajamento por Microfone (5\%)}: Participação vocal menos frequente em aulas expositivas
+% \end{itemize}
+
+
+\subsection{Saúde da Atenção}
+
+Avalia a qualidade do padrão de foco dos estudantes ao longo da aula. Diferentemente de medidas puramente quantitativas, esse indicador considera aspectos qualitativos como sustentação do foco, estabilidade temporal e baixa fragmentação. O resultado, expresso em um valor entre 0 e 1, permite comparar a consistência do engajamento entre diferentes aulas e grupos de alunos e pode ser obtido segundo a Equação~\ref{eq:attention_health}
+\begin{equation}\label{eq:attention_health}
+\text{Attention Health} = \sum_{i=1}^{4} w_i \times h_i
+\end{equation}
+
+Para cada $w_i$, peso atribuído a uma dimensão de saúde da atenção, e cada $h_i$ (valor normalizado dessa dimensão), pesos são definidos de forma que sua soma seja igual a 1, como indicado na Tabela~\ref{tab:attention_health_components} abaixo: 
+
+% \lstinputlisting[
+%     language=python,
+%     caption={Cálculo da Saúde da Atenção},
+%     firstline=49,
+%     lastline=110,
+%     label={lst:calculate_attention_health}
+% ]{scripts/metricsCalc/scores.py}
+
+\input{tables/attention_health_components.tex}
+
+% \textbf{Funções auxiliares}:
+% \begin{itemize}
+%     \item \textbf{calculate\_focus\_duration\_health()}: Avalia a adequação da duração dos períodos de foco (nem muito curtos, nem muito longos)
+%     \item \textbf{calculate\_fragmentation\_health()}: Mede o grau de continuidade atencional (menor fragmentação = mais saudável)
+%     \item \textbf{calculate\_multitasking\_health()}: Avalia a gestão de múltiplas tarefas (multitasking produtivo vs. destrutivo)
+%     \item \textbf{calculate\_consistency\_health()}: Analisa a estabilidade do engajamento ao longo da sessão
+% \end{itemize}
+
+\subsection{Risco de Distração}
+Denota a propensão dos estudantes à desatenção durante as aulas. Este \textit{score}, variando de 0 a 1, integra múltiplos indicadores comportamentais para fornecer uma medida sintética do nível de distração, sendo valores mais altos indicativos de maior propensão à perda de foco. O cálculo descrito na Equação~\ref{eq:distraction_risk} a seguir.
+
+\begin{equation}
+\label{eq:distraction_risk}
+\text{Distraction Risk} = \sum_{i=1}^{4} w_i \times f_i
+\end{equation}
+
+Aqui, $w_i$ representa o peso atribuído ao fator de risco $i$ e $f_i$ corresponde ao valor normalizado desse fator, com pesos definidos de forma que sua soma seja igual a 1. A escolha dos pesos reflete a importância relativa de cada elemento observado durante a aula, privilegiando aqueles que apresentam maior correlação com episódios de perda de atenção. A Tabela~\ref{tab:distraction_risk_components} indica o peso atribuído a cada propriedade.
+% \lstinputlisting[
+%     language=python,
+%     caption={Cálculo do Risco de Distração},
+%     firstline=170,
+%     lastline=210,
+%     label={lst:calculate_distraction_risk}
+% ]{scripts/metricsCalc/scores.py}
+
+\input{tables/distraction_risk_components.tex}
+
+% \textbf{Funções auxiliares}:
+% \begin{itemize}
+%     \item \textbf{calculate\_main\_distraction\_strength()}: Calcula o impacto relativo das principais categorias de distração detectadas
+%     \item \textbf{calculate\_tab\_switch\_intensity()}: Normaliza e pondera a frequência de troca de abas
+% \end{itemize}

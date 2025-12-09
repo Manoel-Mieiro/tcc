@@ -10,7 +10,7 @@ De forma a distribuir o ESPEON e executar os testes em sala de aula remota, faz-
     \end{minipage}\hfill
 \end{figure}
 
-Ainda que seja possível implantar o banco MongoDB, não é um processo gerenciado nativamente pelo serviço \textit{web}, então - para evitar enventuais complicações - optou-se pela hospedagem AtlasDB, com suporte nativo para o banco NoSQL que pretendemos implantar. No entanto, Atlas possui controle de acesso por lista de IPs, que limita conexões que não sejam da sua máquina, inicalmente. Então, para possibilitar a comunicação entre Render e Atlas, que ocorre quando o ESPEON API tenta gravar um \textit{log} de atividade do aluno, deve-se incluir os IPs de saída da instância Render na \textit{whitelist} do Atlas, conforme indicado na Figura \ref{fig:atlas_whitelist}.
+Ainda que seja possível implantar o banco MongoDB, não é um processo gerenciado nativamente pelo serviço \textit{web}, então --- para evitar enventuais complicações --- optou-se pela hospedagem AtlasDB, com suporte nativo para o banco NoSQL que pretendemos implantar. No entanto, Atlas possui controle de acesso por lista de IPs, que limita conexões que não sejam da sua máquina, inicalmente. Então, para possibilitar a comunicação entre Render e Atlas, que ocorre quando o ESPEON API tenta gravar um \textit{log} de atividade do aluno, deve-se incluir os IPs de saída da instância Render na \textit{whitelist} do Atlas, conforme indicado na Figura \ref{fig:atlas_whitelist}.
 
 \begin{figure}[H]
     \centering

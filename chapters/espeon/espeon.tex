@@ -1,6 +1,6 @@
 \chapter{ESPEON}
 \label{chp:espeon}
-Este capítulo tem como objetivo detalhar a solução Engajamento e Supervisão do Porcesso de Ensino Online (ESPEON), sendo divido em quatro seções. Chrome API (Seção ~\ref{sec:espeon_chrome}) descreve a extensão construída, detalhando dependências, permissionamento cliente e a comunicação com o \textit{backend}. Na Seção ~\ref{sec:espeon_data} e descrito o \textit{dataset} recebido no MongoDB, bem como o modelo conceitual do banco de dados relacional PostgreSQL. A Seção ~\ref{sec:espeon_api} traz detalhamento à estrutura arquitetural do \textit{backend}, bem como as rotas da API ESPEON. Detalhes sobre a hospedagem dos serviços podem ser encontrados na Seção ~\ref{sec:espeon_deploy}, enquanto o funcionamento é descrito na Seção ~\ref{sec:espeon_operation}.
+Este capítulo tem como objetivo detalhar a solução Engajamento e Supervisão do Processo de Ensino Online (ESPEON), descrevendo a extensão construída, detalhando dependências, permissionamento no cliente e comunicação com o \textit{backend}. Também será descrito o \textit{dataset} recebido no MongoDB, bem como o modelo conceitual do banco de dados relacional PostgreSQL. Além disso será detalhada a estrutura arquitetural do \textit{backend}, bem como as rotas da API ESPEO, além das questões de hospedagem dos serviços, finalizando com o funcionamento da ferramenta.
 
 \section{Extensão Chrome}\label{sec:espeon_chrome}
 \input{chapters/espeon/section.espeon_chrome.tex}
@@ -17,5 +17,23 @@ Este capítulo tem como objetivo detalhar a solução Engajamento e Supervisão 
 \section{Funcionamento}\label{sec:espeon_operation}
 \input{chapters/espeon/section.espeon_operation.tex}
 
-\section{Cálculo de Métricas}\label{sec:espeon_metrics_calc}
-\input{chapters/espeon/section.espeon_metrics_calc.tex}
+\section{Processamento dos \textit{Traces}}\label{sec:traces_proccess}
+\input{chapters/espeon/section.espeon_period.tex}
+
+\section{Métricas Base}\label{sec:espeon_base_metrics}
+\input{chapters/espeon/section.espeon_base_metrics.tex}
+
+\section{Métricas de Distração}\label{sec:espeon_disturb_metrics}
+\input{chapters/espeon/section.espeon_disturb_metrics.tex}
+
+\section{Métricas de Engajamento}\label{sec:espeon_engajement}
+\input{chapters/espeon/section.espeon_engajement.tex}
+
+\section{Métricas Multitarefa}\label{sec:espeon_multitask}
+\input{chapters/espeon/section.espeon_multitask.tex}
+
+\section{Cálculo de Padrões Temporais}\label{sec:espeon_tempo}
+\input{chapters/espeon/section.espeon_tempo.tex}
+
+\section{Cálculo dos \textit{Scores}}\label{sec:espeon_scores}
+\input{chapters/espeon/section.espeon_scores.tex}
