@@ -21,7 +21,7 @@ A métrica de Engajamento por Câmera Médio da Turma corresponde à média arit
 \bar{E}c = \frac{1}{n} \sum{i=1}^{n} E_{c,i}
 \end{equation}
 
-O processo de cálculo ocorre em etapas. Primeiro, os \textit{traces} de interação são agrupados por aluno e ordenados cronologicamente. Em seguida, para cada par de \textit{traces} consecutivos, é calculada a diferença de tempo em minutos, adicionando-a ao tempo total de sessão. Caso a câmera estivesse ativa no \textit{trace} anterior, esse intervalo também é somado ao tempo de câmera ativa. Assim, obtém-se a proporção individual de tempo com câmera ativa. Por fim, calcula-se a média dessas proporções, resultando no engajamento médio da turma.
+A partir dos \textit{traces} já processados, estima-se para cada aluno o tempo em que a câmera permaneceu ativa, utilizando os intervalos entre registros consecutivos. A razão entre esse tempo e a duração total da sessão define a proporção individual de engajamento por câmera. A métrica final corresponde à média dessas proporções.
 
 % \textbf{Detecção de câmera ativa}:
 % \begin{itemize}
@@ -52,7 +52,7 @@ A partir das proporções individuais, obtém-se o Engajamento por Microfone Mé
 \bar{E}*m = \frac{1}{n} \sum*{i=1}^{n} E_{m,i}
 \end{equation}
 
-O processo de cálculo é feito, primeiramente, pelo agrupamento dos \textit{traces} por aluno, ordenados cronologicamente. Em seguida, para cada intervalo entre \textit{traces} consecutivos, é calculada a diferença de tempo em minutos, que é adicionada ao tempo total de sessão. Caso o microfone estivesse ativo no \textit{trace} anterior, esse intervalo também é acumulado como tempo de microfone ativo. Após o cálculo individual das proporções, computa-se a média desses valores, resultando no engajamento médio da turma.
+Com os \textit{traces} previamente tratados, identifica-se o tempo de microfone ativo ao longo da sessão, com base nos intervalos entre registros consecutivos. A proporção individual de engajamento é obtida dividindo-se esse tempo pelo total da sessão, e a média dessas proporções resulta no valor agregado para a turma.
 
 % \textbf{Detecção de microfone ativo}:
 % \begin{itemize}
@@ -84,7 +84,8 @@ De posse das proporções individuais, obtém-se o valor $P_{v,i}$, que é a mé
 %     label={lst:calculate_avg_voluntary}
 % ]{scripts/metricsCalc/participation.py}
 
-O cálculo procede da seguinte forma: inicialmente os \textit{traces} de interação são agrupados por aluno e ordenados cronologicamente; em cada intervalo entre \textit{traces} consecutivos verifica-se se o aluno estava na aba da aula e se havia engajamento multimodal --- isto é, se pelo menos ou câmera ou microfone estão habilitados. Quando atendida, o intervalo é acumulado como tempo de participação voluntária $T_{p,i}$; todos os intervalos contribuem para o tempo total de sessão $T_{s,i}$. Finalmente, calcula-se a razão individual $P_{v,i}$ para cada aluno e obtém-se a média agregada (${P}_v$) da turma.
+Após a consolidação dos \textit{traces}, cada intervalo entre registros é analisado para verificar se o aluno estava na aba da aula e com algum canal de engajamento multimodal ativo (câmera ou microfone). Os intervalos que atendem a essa condição compõem o tempo de participação voluntária $T_{p,i}$, enquanto todos os intervalos formam o tempo total de sessão $T_{s,i}$. A razão individual $P_{v,i}$ é então calculada, e a média dessas razões define a métrica final da turma.
+
 
 % \textbf{Condições para participação voluntária}:
 % \begin{itemize}

@@ -1,5 +1,6 @@
 \subsection{Tempo Médio Real de Sessão}
-A métrica é calculada com base nos \textit{traces} de interação coletados pela extensão durante a aula. Primeiro, os \textit{traces} são organizados por \textit{id} do usuário. Para cada aluno, os \textit{timestamps} são convertidos em objetos de tempo e ordenados cronologicamente. Depois, há o cálculo da duração, fazendo-se a diferença entre o tempo do primeiro e útlimo registro. Para casos com apenas um registro, é assinalada a duração mínima de 1 minuto, válido também para sessões de menos de 1 minuto, que são adaptadas a esse piso. Finalmente, o valor é obtido através da média aritmética simples das durações individuais de sessão. A duranção da sessão por aluno é determinada pela Equação~\ref{eq:session_length}:
+Após o processamento dos \textit{traces} conforme a Seção~\ref{sec:traces_proccess}, estabelece-se um piso mínimo de duração igual a 1 minuto, aplicado também a sessões com valor inferior. A duração individual de cada sessão é calculada pela Equação~\ref{eq:session_length}, e a métrica final corresponde à média aritmética simples dessas durações.
+
 
 \begin{equation}\label{eq:session_length}
 T_{s,i} = \max\left(1, \frac{t_{i,\text{último}} - t_{i,\text{primeiro}}}{60}\right)

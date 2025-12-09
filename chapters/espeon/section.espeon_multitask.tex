@@ -64,7 +64,7 @@ F_i = \frac{S_i}{H_i}
 \bar{F} = \frac{1}{n} \sum_{i=1}^{n} F_i
 \end{equation}
 
-O processo de cálculo inicia-se com o agrupamento dos \textit{traces} por aluno e sua ordenação cronológica. Em seguida ocorrem as etapas de detecção de transições, identificando mudanças entre estados de “em foco” e “fora de foco”. Cada nova transição para a aba da aula incrementa a contagem de segmentos de foco, sendo que um monitoramento contínuo mantém o estado atual do aluno. Após a contagem, normaliza-se o valor obtido em função do tempo total de sessão (em horas), resultando em uma taxa de fragmentação. Por fim, computa-se a média agregada dessas taxas para todos os alunos. Um segmento de foco é caracterizado pelo período contínuo em que o aluno permanece na aba da aula, iniciando-se quando há uma transição para essa aba e terminando quando ocorre a mudança para qualquer outra aba.
+Uma vez processados os \textit{traces}, identifica-se, para cada aluno, as transições entre os estados “em foco” e “fora de foco” ao longo da sessão. Cada transição para a aba da aula inicia um novo segmento de foco, que se encerra quando o aluno alterna para qualquer outra aba. O número de segmentos detectados é então normalizado pelo tempo total de sessão (em horas), resultando em uma taxa individual de fragmentação. A métrica final corresponde à média dessas taxas para todos os alunos.
 
 
 % \lstinputlisting[
