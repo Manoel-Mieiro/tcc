@@ -20,7 +20,8 @@ De posse dos dados individuais do aluno $i$, pode-se calcular a taxa de duranç�
 %     label={lst:calculate_attendance_ratio}
 % ]{scripts/metricsCalc/disturb.py}
 
-Primeiramente é feito o agrupamento dos \textit{traces} por usuário, seguido da sua ordenação por \textit{timestamp}. Feito isso, para cada intervalo entre \textit{traces} consecutivos é caulculado intervalo etre os registros (em minutos), que é dividido pelo tempo total da sessão. Traces considerados distração, isto é, que não a aula, são adicionados à pilha para cálculo do tempo total de \textit{disturbance}. Ao fim, é feito o cálculo da proporção de distração para cada aulo, seguido da emissão de média aritmética das taxas individuais (aluno).
+Após o processamento dos \textit{traces}, são identificados os registros classificados como distração, isto é, aqueles em que o aluno não estava na aba da aula. Para cada aluno, soma-se o tempo total de distração e divide-se esse valor pela duração total da sessão, obtendo-se a taxa individual de distração. A métrica final corresponde à média aritmética dessas taxas individuais.
+
 
 % \textbf{Funções auxiliares}:
 % \begin{itemize}
@@ -43,7 +44,8 @@ Esta métrica mede quantas vezes por hora os alunos alternam da aula para sites,
 %     label={lst:calculate_distraction_frequency}
 % ]{scripts/metricsCalc/disturb.py}
 
-O processo de cálculo consiste em agrupar e ordenar cronologicamente os \textit{traces} por aluno, identificando transições entre os estados “em aula” e “distração” em registros consecutivos. Em seguida, calcula-se o tempo total de sessão por meio do somatório dos intervalos entre registros válidos. As transições detectadas são então normalizadas em frequência por hora, permitindo comparar sessões de durações distintas. Por fim, obtém-se um valor agregado da turma a partir da média das frequências individuais dos alunos.
+Feito o processamento dos \textit{logs}, identificam-se as transições entre os estados “em aula” e “distração” em \textit{traces} consecutivos. O número de transições é então normalizado em frequência por hora, permitindo a comparação entre sessões de durações distintas. A métrica final corresponde à média dessas frequências individuais por aluno.
+
 
 % \textbf{Funções auxiliares}:
 % \begin{itemize}
