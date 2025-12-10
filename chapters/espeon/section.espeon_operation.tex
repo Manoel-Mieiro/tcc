@@ -25,29 +25,32 @@ O processo de leitura das abas ocorre quando há o disparo do gatilho, que é a 
     \end{minipage}\hfill
 \end{figure}
 
-Para garantir a conformidade com essa expressão, o docente faz um cadastro prévio de sua aula no Banco de Dados, por meio do formulário disposto na Figura \ref{fig:formulario-aula}, no qual será gerada uma \textit{string} (ver Figura \ref{fig:clipboard}) com essa máscara, para que o docente, ao acessar a plataforma de \textit{Webconference} de sua escolha, preencha o título da reunião com essa expressão.
+Para garantir a correta identificação da aula, o docente realiza previamente seu cadastro no Banco de Dados, por meio do formulário ilustrado na Figura~\ref{fig:formulario-aula}. 
 
 \begin{figure}[H]
     \centering
     \begin{minipage}{0.7\textwidth}
         \centering
-        \includegraphics[width=.9\textwidth]{espeon/formulario.aula.png}
+        \includegraphics[width=.6\textwidth]{espeon/formulario.aula.png}
         \caption{Formulário de Aula}
         \label{fig:formulario-aula}
     \end{minipage}\hfill
 \end{figure}
 
+Ao final do cadastro, é gerada uma \textit{string} identificadora da aula (Figura~\ref{fig:clipboard}) que deve ser inserida pelo docente como título da reunião na plataforma de webconferência de sua escolha.
+
 \begin{figure}[H]
     \centering
     \begin{minipage}{0.7\textwidth}
         \centering
-        \includegraphics[width=.9\textwidth]{espeon/clipboard.png}
-        \caption{Expressão Reguar Gerada}
+        \includegraphics[width=.6\textwidth]{espeon/clipboard.png}
+        \caption{Identificador Gerado}
         \label{fig:clipboard}
     \end{minipage}\hfill
 \end{figure}
 
-Então, quando o aluno acessa essa reunião por meio da extensão e o \textit{Service Worker} validar o título, ele estará sendo monitorado, sem qualquer necessidade de interação adicional. Suas interações com a guia e o estado dos periféricos serão armazenados em um banco de \textit{logs} para posterior composição dos relatórios.
+Quando o aluno acessa a reunião por meio da extensão, e o \textit{Service Worker} valida o título informado, o monitoramento é iniciado automaticamente, sem necessidade de interação adicional. Suas interações são registradas em um banco de \textit{logs}, que posteriormente subsidiará a composição dos relatórios.
+
 
 % colocar figura com as permissões do manifest
 
