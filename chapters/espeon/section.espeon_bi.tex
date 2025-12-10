@@ -1,0 +1,45 @@
+É possível construir painéis com os dados coletados em sala de aula, permitindo uma melhor visualização e consolidação das informações. Para essa finalidade, utilizou-se o Power BI para construir um \textit{dashboard} demonstrativo, ilustrado na Figura~\ref{fig:dashboard} abaixo.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.999\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{espeon/espeon_dashboard.png}
+        \caption{Power BI ESPEON}
+        \label{fig:dashboard}
+    \end{minipage}\hfill
+\end{figure}
+
+A ingestão de dados é realizada no editor Power Query M, apontando diretamente para a API produtiva, conforme apresentado na Figura~\ref{fig:espeon_query}.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.999\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{espeon/bi_espeon_query.png}
+        \caption{Consulta à API ESPEON}
+        \label{fig:espeon_query}
+    \end{minipage}\hfill
+\end{figure}
+
+Os dados são retornados como \textit{records}, os quais devem ser expandidos para que se convertam em tabelas. A expansão consiste em mapear as colunas originais --- isto é, as propriedades retornadas pela API --- a partir de \textit{Column1}, obtendo-se o conteúdo estruturado como tabela, conforme indicado nas Figuras~\ref{fig:espeon_query_load} e~\ref{fig:espeon_query_expand}.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.999\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{espeon/bi_espeon_load.png}
+        \caption{Carregamento de Dados}
+        \label{fig:espeon_query_load}
+    \end{minipage}\hfill
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.999\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{espeon/bi_espeon_expand.png}
+        \caption{Coluna Expandida}
+        \label{fig:espeon_query_expand}
+    \end{minipage}\hfill
+\end{figure}
