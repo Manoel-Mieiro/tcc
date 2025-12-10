@@ -1,3 +1,5 @@
+Nesta seção são descritos os procedimentos para transformar os \textit{traces} brutos em estimativas de tempo de sessão. Como os registros são emitidos em intervalos variáveis, mesmo possuindo um formato padronizado, utilizam-se estratégias de agregação e normalização para garantir coerência nos cálculos.
+
 \subsection{Tempo Médio Real de Sessão}
 Após o processamento dos \textit{traces} conforme a Seção~\ref{sec:traces_proccess}, estabelece-se um piso mínimo de duração igual a 1 minuto, aplicado também a sessões com valor inferior. A duração individual de cada sessão é calculada pela Equação~\ref{eq:session_length}, e a métrica final corresponde à média aritmética simples dessas durações.
 
