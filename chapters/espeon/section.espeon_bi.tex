@@ -14,7 +14,7 @@ A ingestão de dados é realizada no editor Power Query M, apontando diretamente
 
 \begin{figure}[H]
     \centering
-    \begin{minipage}{0.999\textwidth}
+    \begin{minipage}{0.8\textwidth}
         \centering
         \includegraphics[width=.9\textwidth]{espeon/bi_espeon_query.png}
         \caption{Consulta à API ESPEON}
@@ -22,11 +22,11 @@ A ingestão de dados é realizada no editor Power Query M, apontando diretamente
     \end{minipage}\hfill
 \end{figure}
 
-Os dados são retornados como \textit{records}, os quais devem ser expandidos para que se convertam em tabelas. A expansão consiste em mapear as colunas originais --- isto é, as propriedades retornadas pela API --- a partir de \textit{Column1}, obtendo-se o conteúdo estruturado como tabela, conforme indicado nas Figuras~\ref{fig:espeon_query_load} e~\ref{fig:espeon_query_expand}.
+Os dados são retornados como \textit{records}, os quais devem ser expandidos para que se convertam em tabelas, o que pode ser feito com a \textit{query} ilustrada na Figura~\ref{fig:espeon_query_load}. 
 
 \begin{figure}[H]
     \centering
-    \begin{minipage}{0.999\textwidth}
+    \begin{minipage}{0.8\textwidth}
         \centering
         \includegraphics[width=.9\textwidth]{espeon/bi_espeon_load.png}
         \caption{Carregamento de Dados}
@@ -34,12 +34,16 @@ Os dados são retornados como \textit{records}, os quais devem ser expandidos pa
     \end{minipage}\hfill
 \end{figure}
 
+A expansão consiste em mapear as colunas originais --- isto é, as propriedades retornadas pela API --- a partir de \textit{Column1}, obtendo-se o conteúdo estruturado como tabela, conforme indicado na Figura \ref{fig:espeon_query_expand}.
+
 \begin{figure}[H]
     \centering
-    \begin{minipage}{0.999\textwidth}
+    \begin{minipage}{0.8\textwidth}
         \centering
-        \includegraphics[width=.9\textwidth]{espeon/bi_espeon_expand.png}
+        \includegraphics[width=.9\textwidth]{espeon/bi_espeon_expand.jpeg}
         \caption{Coluna Expandida}
         \label{fig:espeon_query_expand}
     \end{minipage}\hfill
 \end{figure}
+
+Com isso, pode-se fechar e aplicar as consultas, tornando-as disponíveis para ingestão de dados nos gráficos do Power BI.
