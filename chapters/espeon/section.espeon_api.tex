@@ -1,4 +1,4 @@
-De forma a permitir o transporte de dados de aula entre diferentes clientes (Power BI, MongoDB e PostgreSQL), faz-se necessária a implementação de uma \textit{Application Programming Interface} (API), a qual chamaremos de ESPEON API. Essa API foi desenvolvida utilizando a linguagem de programação Python, em conjunto com o \textit{framework} Flask, apropriado para cenários de porte moderado. Para conferir organização ao projeto, adotou-se a arquitetura em camadas (Figura \ref{fig:espeon_api_layers}), o que facilita o diagnóstico do fluxo de dados e a manutenção do ambiente.
+De forma a permitir o transporte de dados de aula entre diferentes clientes (Power BI, MongoDB e PostgreSQL), faz-se necessária a implementação de uma \textit{Application Programming Interface} (API), denominada ESPEON API. Essa API foi desenvolvida em Python, utilizando o \textit{framework} Flask, apropriado para aplicações de porte moderado. Para conferir organização ao projeto e estruturar o fluxo de dados, adotou-se uma arquitetura em camadas, apresentada na Figura~\ref{fig:espeon_api_layers}.
 
 \begin{figure}[H]
     \centering
@@ -9,6 +9,9 @@ De forma a permitir o transporte de dados de aula entre diferentes clientes (Pow
         \label{fig:espeon_api_layers}
     \end{minipage}\hfill
 \end{figure}
+
+Essa organização modular facilita o diagnóstico de problemas, permite a evolução isolada de componentes e promove maior clareza na manutenção e expansão do ambiente, especialmente diante do suporte a múltiplos clientes e formatos de dados.
+
 
 \subsection{Camada Modelo}\label{espeon_api_model}
 A camada de modelo descreve as entidades do banco de dados relacional, bem como os atributos esperados na construção de um \textit{trace}. Nesta camada definem-se os esquemas de dados e as restrições essenciais (tipos, obrigatoriedade, relacionamentos) que representam a realidade do domínio.
