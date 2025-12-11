@@ -205,21 +205,21 @@
 		
     \end{flushleft}
     
-    \vspace{2em}
+    \vspace{1em}
     
     \begin{center}
         \normalfont \normalsize
 		\rule{8cm}{0.4pt} \\
         Prof. Sildenir Alves Ribeiro, DSc. \\
         Orientador/Presidente \\
-        (CEFET/RJ) \\
+        (COCSI/CEFET/RJ) \\
         
-        \vspace{2em}
+        \vspace{4em}
 		\rule{8cm}{0.4pt} \\
         Prof. Diego Cardoso Borda Castro, DSc. \\
         (COCSI/CEFET/RJ) \\
         
-        \vspace{2em}
+        \vspace{6em}
 		\rule{8cm}{0.4pt} \\
         Prof. Monica Ferreira da Silva, DSc. \\
         (PPGI/UFRJ) \\
