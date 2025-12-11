@@ -4,20 +4,23 @@ De forma a distribuir o ESPEON e executar os testes em sala de aula remota, faz-
     \centering
     \begin{minipage}{0.7\textwidth}
         \centering
-        \includegraphics[width=.9\textwidth]{espeon/suporte.render.png}
+        \includegraphics[width=.8\textwidth]{espeon/suporte.render.png}
         \caption{Suporte Render. \textbf{fonte: \href{https://render.com/docs/faq}}{Render.com}} 
         \label{fig:render_stacks}
     \end{minipage}\hfill
 \end{figure}
 
-Ainda que seja possível implantar o banco MongoDB, não é um processo gerenciado nativamente pelo serviço \textit{web}, então --- para evitar enventuais complicações --- optou-se pela hospedagem AtlasDB, com suporte nativo para o banco NoSQL que pretendemos implantar. No entanto, Atlas possui controle de acesso por lista de IPs, que limita conexões que não sejam da sua máquina, inicalmente. Então, para possibilitar a comunicação entre Render e Atlas, que ocorre quando o ESPEON API tenta gravar um \textit{log} de atividade do aluno, deve-se incluir os IPs de saída da instância Render na \textit{whitelist} do Atlas, conforme indicado na Figura \ref{fig:atlas_whitelist}.
+Ainda que seja possível implantar o banco MongoDB, não é um processo gerenciado nativamente pelo serviço \textit{web}, então --- para evitar enventuais complicações --- optou-se pela hospedagem AtlasDB, com suporte nativo para o banco NoSQL que pretendemos implantar. No entanto, Atlas possui controle de acesso por lista de IPs (Figura~\ref{fig:atlas_whitelist} ), que limita conexões que não sejam da sua máquina, inicalmente. 
 
 \begin{figure}[H]
     \centering
     \begin{minipage}{0.9\textwidth}
         \centering
-        \includegraphics[width=.9\textwidth]{espeon/atlas.whitelist.png}
+        \includegraphics[width=.8\textwidth]{espeon/atlas.whitelist.png}
         \caption{Habilitando acesso da origem Render} 
         \label{fig:atlas_whitelist}
     \end{minipage}\hfill
 \end{figure}
+
+Então, para possibilitar a comunicação entre Render e Atlas, que ocorre quando o ESPEON API tenta gravar um \textit{log} de atividade do aluno, deve-se incluir os IPs de saída da instância Render na \textit{whitelist} do Atlas.
+
