@@ -50,9 +50,7 @@ Ao final das aulas, os dados serão compilados em um relatório, que apresenta n
 
 \input{tables/metrics.tex}
 
-Essas métricas são construídas pelo processamento de \textit{snapshots} das guias, armazenadas em banco NoSQL, no \textit{backend} Flask.
-
-A análise dos dados é realizada com base nos relatórios em PDF emitidos pelo ESPEON (Figura~\ref{fig:report}), que apresentam de forma objetiva métricas de estatística descritiva, bastando apenas sua visualização para interpretação inicial dos resultados.
+Essas métricas são obtidas a partir do processamento de \textit{snapshots} das guias, armazenados em um banco NoSQL e posteriormente tratados pelo \textit{backend} Flask, resultando em um relatório de aula em formato PDF, conforme ilustrado na Figura~\ref{fig:report}.
 
 \begin{figure}[ht]
     \centering
@@ -63,6 +61,10 @@ A análise dos dados é realizada com base nos relatórios em PDF emitidos pelo 
         \label{fig:report}
     \end{minipage}\hfill
 \end{figure}
+
+A análise dos dados baseia-se no conteúdo desse documento, que apresenta de forma objetiva as métricas de estatística descritiva. Dessa forma, sua simples visualização já permite uma primeira interpretação dos resultados.
+
+
 
 % Adicionalmente, será utilizado o Power BI para uma visualização mais intuitiva e interativa dos dados, de modo a compor uma análise de caráter macro sobre o conjunto coletado. A Figura~\ref{fig:dashboard} ilustra o \textit{dashboard} desenvolvido a partir do consumo da API de relatórios.
 
