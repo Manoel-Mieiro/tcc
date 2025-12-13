@@ -21,15 +21,21 @@ A estrutura adotada estabelece um peso maior para fatores diretamente relacionad
 %     \item \textbf{Engajamento por Microfone (5\%)}: Participação vocal menos frequente em aulas expositivas
 % \end{itemize}
 
-
 \subsection{Saúde da Atenção}
 
-Avalia a qualidade do padrão de foco dos estudantes ao longo da aula. Diferentemente de medidas puramente quantitativas, esse indicador considera aspectos qualitativos como sustentação do foco, estabilidade temporal e baixa fragmentação. O resultado, expresso em um valor entre 0 e 1, permite comparar a consistência do engajamento entre diferentes aulas e grupos de alunos e pode ser obtido segundo a Equação~\ref{eq:attention_health}
+Avalia a qualidade do padrão de foco dos estudantes ao longo da aula. Diferentemente de medidas puramente quantitativas, esse indicador considera aspectos qualitativos como sustentação do foco, estabilidade temporal e baixa fragmentação, cujo resultado é obtido conforme a Equação~\ref{eq:attention_health}.
+
 \begin{equation}\label{eq:attention_health}
 \text{Attention Health} = \sum_{i=1}^{4} w_i \times h_i
 \end{equation}
 
-Para cada $w_i$, peso atribuído a uma dimensão de saúde da atenção, e cada $h_i$ (valor normalizado dessa dimensão), pesos são definidos de forma que sua soma seja igual a 1, como indicado na Tabela~\ref{tab:attention_health_components} abaixo: 
+Expresso em um valor entre 0 e 1, \textit{Attention Health} permite comparar a consistência do engajamento entre diferentes aulas e grupos de alunos.
+
+Para cada $w_i$ — peso atribuído a uma dimensão de saúde da atenção — e cada $h_i$ — valor normalizado dessa dimensão — os pesos são definidos de forma que sua soma seja igual a 1, como indicado na Tabela~\ref{tab:attention_health_components}.
+
+\input{tables/attention_health_components.tex}
+
+Assim, a combinação ponderada das quatro dimensões permite capturar não apenas quanto tempo o aluno permaneceu focado, mas também como esse foco se distribuiu ao longo da sessão, oferecendo uma métrica mais adequada para análises de engajamento.
 
 % \lstinputlisting[
 %     language=python,
@@ -39,7 +45,6 @@ Para cada $w_i$, peso atribuído a uma dimensão de saúde da atenção, e cada 
 %     label={lst:calculate_attention_health}
 % ]{scripts/metricsCalc/scores.py}
 
-\input{tables/attention_health_components.tex}
 
 % \textbf{Funções auxiliares}:
 % \begin{itemize}
@@ -57,7 +62,12 @@ Denota a propensão dos estudantes à desatenção durante as aulas. Este \texti
 \text{Distraction Risk} = \sum_{i=1}^{4} w_i \times f_i
 \end{equation}
 
-Aqui, $w_i$ representa o peso atribuído ao fator de risco $i$ e $f_i$ corresponde ao valor normalizado desse fator, com pesos definidos de forma que sua soma seja igual a 1. A escolha dos pesos reflete a importância relativa de cada elemento observado durante a aula, privilegiando aqueles que apresentam maior correlação com episódios de perda de atenção. A Tabela~\ref{tab:distraction_risk_components} indica o peso atribuído a cada propriedade.
+Aqui, $w_i$ representa o peso atribuído ao fator de risco $i$ e $f_i$ corresponde ao valor normalizado desse fator, com pesos definidos de forma que sua soma seja igual a 1. A Tabela~\ref{tab:distraction_risk_components} indica o peso atribuído a cada propriedade.
+
+\input{tables/distraction_risk_components.tex}
+
+A escolha dos pesos reflete a importância relativa de cada elemento observado durante a aula, privilegiando aqueles que apresentam maior correlação com episódios de perda de atenção. 
+
 % \lstinputlisting[
 %     language=python,
 %     caption={Cálculo do Risco de Distração},
@@ -66,7 +76,7 @@ Aqui, $w_i$ representa o peso atribuído ao fator de risco $i$ e $f_i$ correspon
 %     label={lst:calculate_distraction_risk}
 % ]{scripts/metricsCalc/scores.py}
 
-\input{tables/distraction_risk_components.tex}
+
 
 % \textbf{Funções auxiliares}:
 % \begin{itemize}

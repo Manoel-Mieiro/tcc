@@ -50,11 +50,9 @@ Ao final das aulas, os dados serão compilados em um relatório, que apresenta n
 
 \input{tables/metrics.tex}
 
-Essas métricas são construídas pelo processamento de \textit{snapshots} das guias, armazenadas em banco NoSQL, no \textit{backend} Flask.
+Essas métricas são obtidas a partir do processamento de \textit{snapshots} das guias, armazenados em um banco NoSQL e posteriormente tratados pelo \textit{backend} Flask, resultando em um relatório de aula em formato PDF, conforme ilustrado na Figura~\ref{fig:report}.
 
-A análise dos dados é realizada com base nos relatórios em PDF emitidos pelo ESPEON (Figura~\ref{fig:report}), que apresentam de forma objetiva métricas de estatística descritiva, bastando apenas sua visualização para interpretação inicial dos resultados.
-
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \begin{minipage}{0.8\textwidth}
         \centering
@@ -63,6 +61,10 @@ A análise dos dados é realizada com base nos relatórios em PDF emitidos pelo 
         \label{fig:report}
     \end{minipage}\hfill
 \end{figure}
+
+A análise dos dados baseia-se no conteúdo desse documento, que apresenta de forma objetiva as métricas de estatística descritiva. Dessa forma, sua simples visualização já permite uma primeira interpretação dos resultados.
+
+
 
 % Adicionalmente, será utilizado o Power BI para uma visualização mais intuitiva e interativa dos dados, de modo a compor uma análise de caráter macro sobre o conjunto coletado. A Figura~\ref{fig:dashboard} ilustra o \textit{dashboard} desenvolvido a partir do consumo da API de relatórios.
 
@@ -96,7 +98,7 @@ Alternativa à medidas afetadas por valores extremos (média e desvio-padrão), 
     \end{minipage}\hfill
 \end{figure}
 
-Na extensão, é utilizada para descrever o foco discente ao longo do período da aula, segemantando a sessão em quatro partes iguais e atribuindo um percentual de atenção ao longo dos intervalos.
+Na extensão, é utilizada para descrever o foco discente ao longo do período da aula, segmentando a sessão em quatro partes iguais e atribuindo um percentual de atenção ao longo dos intervalos.
 
 % \subsubsection{Medidas de Posição Relativa}
 % \begin{itemize}
@@ -188,11 +190,11 @@ Para centralizar e distribuir o \textit{software} ESPEON, mantendo o controle de
 \section{Critérios de Análise e Interpretação}\label{sec:analysis_and_interpretation_criteria}
 Visando obter conclusões válidas, deve-se interpretar os dados do experimento \cite{wohlinAnalysisInterpretation2000}. A interpretação dos dados deve ocorrer em três etapas, conforme ilustra a Figura \ref{fig:steps-data}.
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
-    \begin{minipage}{0.999\textwidth}
+    \begin{minipage}{0.9\textwidth}
         \centering
-        \includegraphics[width=.9\textwidth]{espeon/analise.dados.wohlin.png}
+        \includegraphics[width=.7\textwidth]{espeon/analise.dados.wohlin.png}
         \caption{Passos para interpretação quantitativa. \textbf{fonte:} \cite{wohlinAnalysisInterpretation2000}}
         \label{fig:steps-data}
     \end{minipage}\hfill
