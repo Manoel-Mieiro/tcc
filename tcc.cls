@@ -199,7 +199,7 @@
     
     \begin{flushleft}
         \normalfont \normalsize
-        Trabalho de Conclusão de Curso apresentado em 19 de dezembro de 2025 como requisito parcial para a obtenção do título de Bacharel em Sistemas de Informação. O candidato foi arguido pela banca examinadora composta pelos professores abaixo assinados. \\
+        Trabalho de Conclusão de Curso apresentado em 18 de dezembro de 2025 como requisito parcial para a obtenção do título de Bacharel em Sistemas de Informação. O candidato foi arguido pela banca examinadora composta pelos professores abaixo assinados. \\
         Após deliberação, a banca considerou o trabalho aprovado. \\
 		\vspace{1em}
 		

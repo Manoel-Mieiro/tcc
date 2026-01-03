@@ -37,7 +37,6 @@ A tabela \textbf{Login} tem como finalidade associar um usuário a um \textit{to
         \label{fig:pg_login}
     \end{minipage}\hfill
 \end{figure}
-\pagebreak
 
 \subsection{Tablea Subject}
 A tabela \textbf{Subject} reúne os registros de disciplinas cadastradas no sistema. Cada disciplina é identificada por seu nome e \textit{id}, servindo como entidade base para o vínculo com aulas e relatórios.
@@ -50,10 +49,10 @@ A tabela \textbf{Subject} reúne os registros de disciplinas cadastradas no sist
         \label{fig:pg_subject}
     \end{minipage}\hfill
 \end{figure}
-\pagebreak
+% \pagebreak
 
 \subsection{Tabela Lecture}
-A tabela \textbf{Lecture} registra cada aula individual ministrada dentro da plataforma. Cada entrada associa a aula a uma disciplina, a um usuário docente responsável e ao período de realização, especificado pelos campos de início e fim. Essa tabela é fundamental para relacionar eventos de monitoramento e para consolidar informações posteriormente utilizadas na geração dos relatórios de aula.
+A tabela \textbf{Lecture} registra cada aula individual ministrada dentro da plataforma. Cada entrada associa a aula a uma disciplina, a um usuário docente responsável e ao período de realização, especificado pelos campos de início e fim. 
 \begin{figure}[H]
     \centering
     \begin{minipage}{0.7\textwidth}
@@ -63,10 +62,13 @@ A tabela \textbf{Lecture} registra cada aula individual ministrada dentro da pla
         \label{fig:pg_lecture}
     \end{minipage}\hfill
 \end{figure}
-\pagebreak
+Essa tabela é fundamental para relacionar eventos de monitoramento e para consolidar informações posteriormente utilizadas na geração dos relatórios de aula.
+
+% \pagebreak
 
 \subsection{Tabela Reports}
-A tabela \textit{Reports} armazena as informações consolidadas de cada relatório gerado pelo sistema. Um relatório agrega métricas de engajamento, atenção e participação capturadas durante uma aula e processadas pelo mecanismo de análise de dados. Essa tabela funciona como o repositório central dos resultados analíticos, mantendo vínculo direto com a aula correspondente e servindo como base para consultas e visualizações posteriores.
+A tabela \textit{Reports} armazena as informações consolidadas de cada relatório gerado pelo sistema. Um relatório agrega métricas de engajamento, atenção e participação capturadas durante uma aula e processadas pelo mecanismo de análise de dados.
+
 \begin{figure}[H]
     \centering
     \begin{minipage}{0.9\textwidth}
@@ -76,7 +78,10 @@ A tabela \textit{Reports} armazena as informações consolidadas de cada relató
         \label{fig:pg_reports}
     \end{minipage}\hfill
 \end{figure}
-\pagebreak
+% \pagebreak
+
+Essa tabela funciona como o repositório central dos resultados analíticos, mantendo vínculo direto com a aula correspondente e servindo como base para consultas e visualizações posteriores.
+
 
 % \subsection{Report Student}
 % A tabela \textbf{Report Student} estabelece a relação entre um relatório e os estudantes participantes da aula correspondente. Cada registro vincula um relatório a um aluno específico, permitindo armazenar métricas individualizadas, como tempo de visualização, períodos de inatividade e indicadores de engajamento. Essa tabela possibilita análises detalhadas por aluno, fundamentais para acompanhar desempenho e identificar comportamentos relevantes.
