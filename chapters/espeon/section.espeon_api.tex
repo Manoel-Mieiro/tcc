@@ -1,4 +1,4 @@
-De forma a permitir o transporte de dados de aula entre diferentes clientes (Power BI, MongoDB e PostgreSQL), faz-se necessária a implementação de uma \textit{Application Programming Interface} (API), a qual chamaremos de ESPEON API. Essa API foi desenvolvida utilizando a linguagem de programação Python, em conjunto com o \textit{framework} Flask, apropriado para cenários de porte moderado. Para conferir organização ao projeto, adotou-se a arquitetura em camadas (Figura \ref{fig:espeon_api_layers}), o que facilita o diagnóstico do fluxo de dados e a manutenção do ambiente.
+De forma a permitir o transporte de dados de aula entre diferentes clientes (Power BI, MongoDB e PostgreSQL), faz-se necessária a implementação de uma \textit{Application Programming Interface} (API), a qual chamaremos de ESPEON API. Essa API foi desenvolvida utilizando a linguagem de programação Python, em conjunto com o \textit{framework} Flask, apropriado para cenários de porte moderado. Para conferir organização ao projeto, adotou-se a arquitetura em camadas (Figura \ref{fig:espeon_api_layers}).
 
 \begin{figure}[H]
     \centering
@@ -9,6 +9,22 @@ De forma a permitir o transporte de dados de aula entre diferentes clientes (Pow
         \label{fig:espeon_api_layers}
     \end{minipage}\hfill
 \end{figure}
+
+Essa organização modular facilita o diagnóstico de problemas, permite a evolução isolada de componentes e promove maior clareza na manutenção e expansão do ambiente, especialmente diante do suporte a múltiplos clientes e formatos de dados.
+
+É preciso também definir um modelo de integração, já que inúmeros serviços comunicam-se durante as operações performadas pelo ESPEON. Dessa forma, conforme ilustrado na Figura abaixo, foi construído o diagrama arquitetural c4.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.9\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{draw.io/c4.espeon.png}
+        \caption{Arquitetura de Integração - C4}
+        \label{fig:espeon_c4}
+    \end{minipage}\hfill
+\end{figure}
+
+Esse diagrama é particularmente útil porque dá uma visão macro do sistema, permitindo identificar cada componente com facilidade, isolando-o por ``fronteira''.
 
 \subsection{Camada Modelo}\label{espeon_api_model}
 A camada de modelo descreve as entidades do banco de dados relacional, bem como os atributos esperados na construção de um \textit{trace}. Nesta camada definem-se os esquemas de dados e as restrições essenciais (tipos, obrigatoriedade, relacionamentos) que representam a realidade do domínio.
