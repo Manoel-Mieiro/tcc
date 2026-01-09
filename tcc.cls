@@ -174,7 +174,7 @@
 		\end{minipage}\\
 	\end{flushright}
 	\vfill	
-	{\bfseries \large Rio de Janeiro,\\
+	{\bfseries \large Rio de Janeiro\\
 	 2025}
 }
 
@@ -227,7 +227,7 @@
     \end{center}
     
 	\vfill	
-	{\bfseries \large Rio de Janeiro,\\
+	{\bfseries \large Rio de Janeiro\\
 	 2025}
     
     \restoregeometry
@@ -265,7 +265,7 @@
 		\end{minipage}\\
 	\end{flushright}
 	\vfill	
-	{\bfseries \large Rio de Janeiro,\\
+	{\bfseries \large Rio de Janeiro\\
         2025 }
 	 % \DTMtoday}  
      
