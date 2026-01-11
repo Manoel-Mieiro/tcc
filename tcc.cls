@@ -5,8 +5,9 @@
 
 %% Load additional packages and commands.
 \RequirePackage[a4paper, left=3cm, right=2cm, top=3cm, bottom=2cm]{geometry} 
-\RequirePackage[utf8]{inputenc} 
-\RequirePackage[square,authoryear]{natbib}
+\RequirePackage[utf8]{inputenc}
+% \RequirePackage{abntex2}
+% \RequirePackage[square,authoryear]{natbib}
 \RequirePackage[dvipsnames,svgnames,table,xcdraw]{xcolor}
 \RequirePackage{amsmath}
 \RequirePackage{booktabs}
@@ -174,7 +175,7 @@
 		\end{minipage}\\
 	\end{flushright}
 	\vfill	
-	{\bfseries \large Rio de Janeiro,\\
+	{\bfseries \large Rio de Janeiro\\
 	 2025}
 }
 
@@ -227,7 +228,7 @@
     \end{center}
     
 	\vfill	
-	{\bfseries \large Rio de Janeiro,\\
+	{\bfseries \large Rio de Janeiro\\
 	 2025}
     
     \restoregeometry
@@ -265,7 +266,7 @@
 		\end{minipage}\\
 	\end{flushright}
 	\vfill	
-	{\bfseries \large Rio de Janeiro,\\
+	{\bfseries \large Rio de Janeiro\\
         2025 }
 	 % \DTMtoday}  
      

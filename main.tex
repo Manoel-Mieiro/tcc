@@ -15,7 +15,8 @@
 
 \dcover
 \dcoverback
-\dfolhaaprovacao
+% \dfolhaaprovacao
+\includepdf{FOLHA_APROVACAO_MANOEL_BIBLIOTECA.pdf}
 
 \ddedicatory{
     \input{pretext/dedicatory.tex}
@@ -34,11 +35,11 @@
     \input{pretext/abstract.tex}
 }{\input{pretext/keywords.tex}}
 
-\tableofcontents
-\newpage
 \listoffigures
 \newpage
 \listoftables
+\newpage
+\tableofcontents
 
 \pagenumbering{arabic}
 \justifying
@@ -53,7 +54,7 @@
 \label{bibpage}
 \addcontentsline{toc}{section}{Referências Bibliográficas}
 \bibliography{references}
-\bibliographystyle{plainnat}
+% \bibliographystyle{abntex2-alf}
 \label{bibfinalpage}
 \appendix
 \input{appendix/appendix.tex}
